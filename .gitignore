@@ -14,3 +14,8 @@ docker-cloud.yml
 docker-composeaws.yml
 rodar
 tomcat/code/src/main/java/br/com/assessmentsystem/assessmentsystem/connection/ConnectionFactory.java
+tomcat/AssessmentSystempegou
+tomcat/Dockerfile
+tomcat/DockerfileComJar
+tomcat/Dockerfilelocal
+
