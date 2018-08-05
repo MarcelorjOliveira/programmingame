@@ -5,6 +5,8 @@
  */
 package br.com.assessmentsystem.assessmentsystem.controller;
 
+import java.lang.reflect.Field;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -39,6 +41,7 @@ public class BasicExercisesController {
     
     @RequestMapping(Routes.basicExercisesNew)
     public String newExercise(HttpServletRequest request, Model model){
+    	String titulo = "";
     	HttpSession session = request.getSession();
     	
     	User user = (User)session.getAttribute("user");
@@ -46,6 +49,12 @@ public class BasicExercisesController {
     	exercise = chooser.chooseExercise(user.getId());
     	
     	model.addAttribute("title", exercise.getStatement() );
+    	/*Class classe = User.class;
+		for (Field atributo : classe.getDeclaredFields()) {
+		  titulo += atributo.getName()+"<br>";      
+		}
+		*/
+    	
         return Routes.basicExercisesNew;
     }
     

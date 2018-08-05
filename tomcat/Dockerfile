@@ -16,6 +16,8 @@ ADD code/target/AssessmentSystem /usr/local/tomcat/webapps/ROOT
 
 RUN mkdir -p /usr/local/tomcat/webapps/maven-archiver
 
+ADD config/server.xml /usr/local/tomcat/webapps/config
+
 ADD code/target/maven-archiver /usr/local/tomcat/webapps/maven-archiver
 
 ADD code/target/AssessmentSystem.war /usr/local/tomcat/webapps/ROOT.war

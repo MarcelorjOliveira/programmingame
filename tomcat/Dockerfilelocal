@@ -2,5 +2,7 @@ FROM tomcat:7.0
 
 RUN apt-get update && apt-get install -y gcc libcunit1 libcunit1-dev
 
+ADD config/server.xml /usr/local/tomcat/webapps/config
+
 RUN rm -rf /usr/local/tomcat/webapps/ROOT
 

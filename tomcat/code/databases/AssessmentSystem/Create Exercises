@@ -1,3 +1,4 @@
+
 insert into Exercise ( name, statement, modelResponse, tests) values ("Soma","Escreva uma função com o nome soma que tenha dois
 argumentos inteiros e retorne um número inteiro também. Exemplos : soma(5,7) = 12 . soma(2,9) = 11","int soma(int x, int y)\n {\n int z; \n z = x + y; \n return z; \n
                  }\n", "CU_ASSERT(5 == soma(2,3)); \n CU_ASSERT(7 == soma(4,3)); \n CU_ASSERT(87 == soma(43,44));\n");
@@ -118,7 +119,7 @@ insert into Exercise ( name, statement, modelResponse, tests) values ("Lanchonet
                 dois argumentos : O primeiro que diga o código do sanduíche.
                 O sanduíche de código 1 custa 2.00, o de código 2, 2.50, 
                 o de código 3, 5.00, o de código 4, 3.50 e o de código 5, 8.50 
-                O segundo parâmetro é a quantidade de sanduíches. Exempĺos : 
+                O segundo parâmetro é a quantidade de sanduíches. Exemplos : 
                 lanchonete(3,5) = 15.00 , lanchonete(4,7) = 14.00","float lanchonete(int codigo, int quantidade)
               {
             if(codigo == 1)
@@ -151,4 +152,5 @@ insert into Exercise ( name, statement, modelResponse, tests) values ("Lanchonet
                  CU_ASSERT(7.00 == lanchonete(4,2)); \n 
                  CU_ASSERT(8.50 == lanchonete(5,1)); \n 
                  CU_ASSERT(93.50 == lanchonete(5,11)); \n ");
-
+                 
+                 

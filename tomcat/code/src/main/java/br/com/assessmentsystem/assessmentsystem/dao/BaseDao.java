@@ -12,7 +12,7 @@ public class BaseDao {
 	public BaseDao() {
 		try {
 			connection = new ConnectionFactory().getConnection();
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
 	}

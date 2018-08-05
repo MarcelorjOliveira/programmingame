@@ -2,8 +2,9 @@ version: '2'
 
 services:
     halyentomcat:
-        image: businessnewapplication/halyentomcat
+        image: halyentomcat
         ports:
             - "80:8080"
         volumes:
-            - /usr/local/tomcat/webapps    
+            - ./tomcat/code/target/AssessmentSystem.war:/usr/local/tomcat/webapps/ROOT.war
+            - ./tomcat/code/target/AssessmentSystem:/usr/local/tomcat/webapps/ROOT    
