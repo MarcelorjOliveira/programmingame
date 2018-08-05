@@ -1,6 +1,0 @@
-halyentomcat:
-    image: businessnewapplication/halyentomcat
-    ports:
-        - "80:8080"
-    volumes:
-        - /usr/local/tomcat/webapps   
