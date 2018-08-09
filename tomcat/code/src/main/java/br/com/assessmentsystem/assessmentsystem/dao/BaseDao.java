@@ -7,11 +7,11 @@ import br.com.assessmentsystem.assessmentsystem.connection.ConnectionFactory;
 
 public class BaseDao {
 
-	protected Connection connection;
+	protected ConnectionFactory connectionFactory;
 	
 	public BaseDao() {
 		try {
-			connection = new ConnectionFactory().getConnection();
+			connectionFactory = new ConnectionFactory();
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}

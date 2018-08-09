@@ -11,7 +11,7 @@ public class MovementDao extends BaseDao {
 	
 	public boolean insert(Movement movement) {
 		try {
-		PreparedStatement stmt = this.connection.prepareStatement("insert into Movement (exerciseId, userId,"
+		PreparedStatement stmt = this.connectionFactory.getConnection().prepareStatement("insert into Movement (exerciseId, userId,"
 		+ "codeUsed, mark) values (?,?,?,?)  ");
 		
 		stmt.setInt(1, movement.getExerciseId());
@@ -23,6 +23,9 @@ public class MovementDao extends BaseDao {
 		stmt.close();
 		}
 		catch (SQLException e) {
+			throw new RuntimeException(e);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
 			throw new RuntimeException(e);
 		}
 		return true;

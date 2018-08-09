@@ -132,7 +132,7 @@ public class OOJavaExercise extends Exercise {
 	}
 
 	public void buildCodeTest() {
-		/*
+		
 		this.testCode = 
 "import org.junit.After;\n"+
 "import org.junit.AfterClass;\n"+
@@ -164,11 +164,11 @@ public class OOJavaExercise extends Exercise {
 "    }"+
 "}" 
 
-+ this.code
-Class classe = Conta.class;
-		for (Field atributo : classe.getDeclaredFields()) {
-		  System.out.println(atributo.getName());      
-		}
++ this.code + 
+	"Class classe = Conta.class; "+
+	"for (Field atributo : classe.getDeclaredFields()) { " +
+	" System.out.println(atributo.getName());      "+
+	" } "
 				+ "int init_suite(void) { \n" + "return 0; \n" + "} \n" + "int clean_suite(void) { \n" + "return 0; \n"
 				+ "} \n" + "void testa" + name + "() { \n" + this.tests + "} \n" + "int main() { \n"
 				+ "CU_pSuite pSuite = NULL; \n" + "    if (CUE_SUCCESS != CU_initialize_registry()) \n"
@@ -178,8 +178,8 @@ Class classe = Conta.class;
 				+ "if (NULL == CU_add_test(pSuite, \"testa" + name + "\", testa" + name + ")) { \n"
 				+ "CU_cleanup_registry(); \n" + "return CU_get_error(); \n" + "} \n"
 				+ "CU_basic_set_mode(CU_BRM_VERBOSE); \n" + "CU_automated_run_tests(); \n" + "CU_cleanup_registry(); \n"
-				+ "return CU_get_error(); \n" + "} \n";
-	*/
+				+ "return CU_get_error(); \n" 
+				+ "} \n"; 
 	}
 
 	public void writeFile(String code, File file) {

@@ -10,6 +10,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.StringReader;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -127,7 +129,7 @@ public class Exercise {
 		buildCodeTest();
 
 		writeFile(testCode, testFile);
-		
+
 		buildSourceCode();
 	}
 
@@ -182,7 +184,7 @@ public class Exercise {
 			assertProgram();
 			// javax.swing.JOptionPane.showMessageDialog(null, "Nota testes de unidade : " +
 			// testMark);
-			
+
 			// javax.swing.JOptionPane.showMessageDialog(null, "Nota Exercício : " +
 			// exerciseMark);
 			// javax.swing.JOptionPane.showMessageDialog(null, "Exercicio enviado com
@@ -199,6 +201,7 @@ public class Exercise {
 	}
 
 	private void assertProgram() {
+		List<String> wrongConditions = new ArrayList<String>();
 		File resultTests = null;
 		String everything;
 		try {
@@ -209,11 +212,12 @@ public class Exercise {
 		}
 
 		resultTests = new File("CUnitAutomated-Results.xml");
-		
+
 		// Porque dava problema de Exceção
-		/*FileEditor.removeLineFile("CUnitAutomated-Results.xml",
-				"<!DOCTYPE CUNIT_TEST_RUN_REPORT SYSTEM \"CUnit-Run.dtd\">");
-		*/
+		/*
+		 * FileEditor.removeLineFile("CUnitAutomated-Results.xml",
+		 * "<!DOCTYPE CUNIT_TEST_RUN_REPORT SYSTEM \"CUnit-Run.dtd\">");
+		 */
 
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		factory.setNamespaceAware(true);
@@ -221,34 +225,34 @@ public class Exercise {
 		try {
 			BufferedReader br = new BufferedReader(new FileReader("CUnitAutomated-Results.xml"));
 			try {
-			    StringBuilder sb = new StringBuilder();
-			    String line = br.readLine();
+				StringBuilder sb = new StringBuilder();
+				String line = br.readLine();
 
-			    while (line != null) {
-			        sb.append(line);
-			        sb.append(System.lineSeparator());
-			        line = br.readLine();
-			    }
-			    everything = sb.toString();
+				while (line != null) {
+					sb.append(line);
+					sb.append(System.lineSeparator());
+					line = br.readLine();
+				}
+				everything = sb.toString();
 			} finally {
-			    br.close();
+				br.close();
 			}
-			
+
 			everything = everything.replaceAll("<!DOCTYPE CUNIT_TEST_RUN_REPORT SYSTEM \"CUnit-Run.dtd\">", "");
-			
-			//System.out.println(everything);
-			
+
+			// System.out.println(everything);
+
 			InputSource source = new InputSource(new StringReader(everything));
-			
+
 			documentConstructor = factory.newDocumentBuilder();
 			Document doc = documentConstructor.parse(source);
 			XPath xpath = XPathFactory.newInstance().newXPath();
-			
-			testMark = markExercise(doc, xpath);
-			
+
+			testMark = markExercise(doc, xpath, wrongConditions);
+
 			String nameFile = "./" + nameTestFile;
 			File executable = new File(nameFile);
-			executable.delete();
+			// executable.delete();
 			resultTests.delete();
 
 		} catch (Exception ex) {
@@ -260,28 +264,54 @@ public class Exercise {
 		}
 	}
 
-	protected double markExercise(Document doc, XPath xpath) throws XPathExpressionException {
+	protected double markExercise(Document doc, XPath xpath, List<String> wrongConditions) throws XPathExpressionException {
+		
 		MovementDao dao = new MovementDao();
 		Movement movement = new Movement();
-
+		
+		wrongConditions = new ArrayList<String>();
 		XPathExpression expression = xpath
 				.compile("/CUNIT_TEST_RUN_REPORT/CUNIT_RUN_SUMMARY/CUNIT_RUN_SUMMARY_RECORD[3]/SUCCEEDED");
-		
-		double correct = (Double) expression.evaluate(doc, XPathConstants.NUMBER); 
-		
+
+		double correct = (Double) expression.evaluate(doc, XPathConstants.NUMBER);
+
+		expression = xpath.compile("/CUNIT_TEST_RUN_REPORT/CUNIT_RUN_SUMMARY/CUNIT_RUN_SUMMARY_RECORD[3]/FAILED");
+
+		double wrongs = (Double) expression.evaluate(doc, XPathConstants.NUMBER);
+
 		expression = xpath.compile("/CUNIT_TEST_RUN_REPORT/CUNIT_RUN_SUMMARY/CUNIT_RUN_SUMMARY_RECORD[3]/RUN");
 
-		
-		double total = (Double) expression.evaluate(doc, XPathConstants.NUMBER); 
-		this.testMark = (correct/total)*100; 
+		double total = (Double) expression.evaluate(doc, XPathConstants.NUMBER);
+		this.testMark = (correct / total) * 100;
 		this.testMark = Math.round(this.testMark);
-		this.testMark = this.testMark/10;
+		this.testMark = this.testMark / 10;
+
+		String condition = "";
+	
+		/* expression = xpath
+				.compile("/CUNIT_TEST_RUN_REPORT/CUNIT_RESULT_LISTING/CUNIT_RUN_SUITE/CUNIT_RUN_SUITE_SUCCESS/CUNIT_RUN_TEST_RECUNIT_RUN_TEST_FAILURECORD/CUNIT_RUN_TEST_FAILURE/CONDITION");
 		
-		System.out.println("Correct:"+correct);
-		System.out.println("Total:"+total);
+		condition = (String) expression.evaluate(doc, XPathConstants.STRING);
 		
-		//this.testMark = correct;
+		System.out.println("Condition "+condition);
 		
+		wrongConditions.add(condition);
+		*/
+		
+		for (int i = 0; i < wrongs; i++) {
+			int position = i+1;
+			expression = xpath
+					.compile("/CUNIT_TEST_RUN_REPORT/CUNIT_RESULT_LISTING/CUNIT_RUN_SUITE/CUNIT_RUN_SUITE_SUCCESS/CUNIT_RUN_TEST_RECORD["+position+"]/CUNIT_RUN_TEST_FAILURE/CONDITION");
+			
+			condition = (String) expression.evaluate(doc, XPathConstants.STRING);
+			
+			System.out.println("Condition "+condition);
+			
+			wrongConditions.add(condition);
+		}
+
+		// this.testMark = correct;
+
 		return this.testMark;
 	}
 

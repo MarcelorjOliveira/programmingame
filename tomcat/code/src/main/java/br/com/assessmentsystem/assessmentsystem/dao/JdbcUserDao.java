@@ -17,7 +17,7 @@ public class JdbcUserDao extends BaseDao {
 		}
 		
 		try {
-			PreparedStatement stmt = this.connection.prepareStatement("select * from Users where login = ? and password = ? limit 1");
+			PreparedStatement stmt = this.connectionFactory.getConnection().prepareStatement("select * from Users where login = ? and password = ? limit 1");
 			stmt.setString(1, usuario.getLogin());
 			stmt.setString(2, DigestUtils.md5Hex(usuario.getPassword()) );
 			ResultSet rs = stmt.executeQuery();
@@ -34,6 +34,9 @@ public class JdbcUserDao extends BaseDao {
 			return encontrado;
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			throw new RuntimeException(e);
 		}
 	}
 
@@ -44,7 +47,7 @@ public class JdbcUserDao extends BaseDao {
 		}
 		
 		try {
-			PreparedStatement stmt = this.connection.prepareStatement("insert into Users " +
+			PreparedStatement stmt = this.connectionFactory.getConnection().prepareStatement("insert into Users " +
                                 "(login, password) " +
                                 " values (?, ?)" );
 			stmt.setString(1, user.getLogin());
@@ -55,6 +58,9 @@ public class JdbcUserDao extends BaseDao {
                         
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
  }
 }

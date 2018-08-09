@@ -13,7 +13,7 @@ public class ExerciseChooserDao extends BaseDao {
 		try {
 		Exercise exercise = new Exercise();
 		
-		PreparedStatement stmt = this.connection.prepareStatement("SELECT * from Exercise e where e.id not in"+
+		PreparedStatement stmt = this.connectionFactory.getConnection().prepareStatement("SELECT * from Exercise e where e.id not in"+
 		        "(SELECT exerciseId from Movement m where m.userId = "+user+")");
 		
 		ResultSet rs = stmt.executeQuery();
@@ -30,7 +30,7 @@ public class ExerciseChooserDao extends BaseDao {
 		stmt.close();
 
 		return exercise;
-	} catch (SQLException e) {
+	} catch (Exception e) {
 		throw new RuntimeException(e);
 	}
 	}
