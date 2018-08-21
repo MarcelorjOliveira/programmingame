@@ -1,4 +1,6 @@
 <%@page import="br.com.assessmentsystem.assessmentsystem.controller.Routes"%>
+<%@page import="br.com.assessmentsystem.assessmentsystem.model.Solution"%>
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -17,7 +19,16 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <% if (request.getParameter("mark") != null) { %>
-		<script>alert('Nota : <%=request.getParameter("mark")%>');</script>
+		<script>alert('Nota : <%=request.getParameter("mark")%>');
+		var solutions = <%=request.getParameter("corrections")%> ;
+		for(var c=0; c < solutions.descriptions.length; c++){
+			var description = solutions.descriptions[c]; 			
+			if(description){
+				alert(description);			
+			}			
+		}
+		
+		</script>
 	<% } %>
 	<link rel="icon" type="image/jpg" href="/resources/images/icone.jpg"/>
 
@@ -79,7 +90,7 @@
     </div>
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
    			<div class="col-sm-auto">
-   				${title}
+   				${title}  
    			</div>
            <form action="<%= Routes.basicExercisesAct%>" name="formBasicExercises" method="post" onsubmit="putValue()">
                 <div name="resolution" id="editor">${resolutionParam}</div>

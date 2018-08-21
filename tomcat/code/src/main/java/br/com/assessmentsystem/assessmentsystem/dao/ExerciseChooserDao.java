@@ -16,6 +16,8 @@ public class ExerciseChooserDao extends BaseDao {
 		PreparedStatement stmt = this.connectionFactory.getConnection().prepareStatement("SELECT * from Exercise e where e.id not in"+
 		        "(SELECT exerciseId from Movement m where m.userId = "+user+")");
 		
+		//stmt = this.connectionFactory.getConnection().prepareStatement("SELECT * from Exercise e where e.id = 1");
+		        
 		ResultSet rs = stmt.executeQuery();
 
 		while (rs.next()) {

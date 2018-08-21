@@ -27,9 +27,22 @@ import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 
 import br.com.assessmentsystem.assessmentsystem.dao.MovementDao;
+import br.com.assessmentsystem.assessmentsystem.dao.SolutionDao;
 
 public class Exercise {
 
+	public List<Solution> solutions;
+	
+	public List<Solution> getSolutions(){
+		return solutions; 
+	}
+	
+	protected List<String> wrongConditions;
+	
+	public List<String> getWrongConditions(){
+		return wrongConditions; 
+	}
+	
 	protected File testFile;
 
 	// Criar um construtor
@@ -201,7 +214,6 @@ public class Exercise {
 	}
 
 	private void assertProgram() {
-		List<String> wrongConditions = new ArrayList<String>();
 		File resultTests = null;
 		String everything;
 		try {
@@ -248,11 +260,11 @@ public class Exercise {
 			Document doc = documentConstructor.parse(source);
 			XPath xpath = XPathFactory.newInstance().newXPath();
 
-			testMark = markExercise(doc, xpath, wrongConditions);
+			testMark = markExercise(doc, xpath);
 
 			String nameFile = "./" + nameTestFile;
 			File executable = new File(nameFile);
-			// executable.delete();
+			executable.delete();
 			resultTests.delete();
 
 		} catch (Exception ex) {
@@ -264,12 +276,13 @@ public class Exercise {
 		}
 	}
 
-	protected double markExercise(Document doc, XPath xpath, List<String> wrongConditions) throws XPathExpressionException {
+	protected double markExercise(Document doc, XPath xpath) throws XPathExpressionException {
 		
 		MovementDao dao = new MovementDao();
 		Movement movement = new Movement();
 		
 		wrongConditions = new ArrayList<String>();
+		
 		XPathExpression expression = xpath
 				.compile("/CUNIT_TEST_RUN_REPORT/CUNIT_RUN_SUMMARY/CUNIT_RUN_SUMMARY_RECORD[3]/SUCCEEDED");
 
@@ -287,16 +300,6 @@ public class Exercise {
 		this.testMark = this.testMark / 10;
 
 		String condition = "";
-	
-		/* expression = xpath
-				.compile("/CUNIT_TEST_RUN_REPORT/CUNIT_RESULT_LISTING/CUNIT_RUN_SUITE/CUNIT_RUN_SUITE_SUCCESS/CUNIT_RUN_TEST_RECUNIT_RUN_TEST_FAILURECORD/CUNIT_RUN_TEST_FAILURE/CONDITION");
-		
-		condition = (String) expression.evaluate(doc, XPathConstants.STRING);
-		
-		System.out.println("Condition "+condition);
-		
-		wrongConditions.add(condition);
-		*/
 		
 		for (int i = 0; i < wrongs; i++) {
 			int position = i+1;
@@ -305,11 +308,13 @@ public class Exercise {
 			
 			condition = (String) expression.evaluate(doc, XPathConstants.STRING);
 			
-			System.out.println("Condition "+condition);
-			
 			wrongConditions.add(condition);
 		}
+		
+		SolutionDao solutionDao = new SolutionDao();
 
+		solutions = solutionDao.getSolutions(wrongConditions);
+		
 		// this.testMark = correct;
 
 		return this.testMark;

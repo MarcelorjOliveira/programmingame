@@ -28,4 +28,11 @@ mark float,
 primary key (id)
 );
 
+create table Solution(
+	idSolution int(11) primary key auto_increment,
+	test varchar(255),
+    idExercise int(11),
+	description varchar(255)
+);
+
 

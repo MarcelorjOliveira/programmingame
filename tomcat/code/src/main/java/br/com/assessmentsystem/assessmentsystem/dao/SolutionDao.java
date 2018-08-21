@@ -12,35 +12,40 @@ import br.com.assessmentsystem.assessmentsystem.model.Solution;
 public class SolutionDao extends BaseDao {
 
 	public List<Solution> getSolutions(List<String> conditions) {
-		String conditionsString = "'"+conditions.get(0).trim()+"'";
-		
-		for(int i = 1; i < conditions.size(); i++) {
-			conditionsString += ",'"+conditions.get(i).trim()+"'";
-		}
-		
-		try {
-			ArrayList<Solution> solutions = new ArrayList<Solution>(); 
-			Solution solution = new Solution();
+		ArrayList<Solution> solutions = new ArrayList<Solution>();
 
-			PreparedStatement stmt = this.connectionFactory.getConnection().prepareStatement("SELECT * from Solution s where "
-					+ " s.condition in ("+conditionsString+")");
+		if (conditions.size() > 0) {
 
-			ResultSet rs = stmt.executeQuery();
+			String conditionsString = "'" + conditions.get(0).trim() + "'";
 
-			while (rs.next()) {
-				solution.setDescription(rs.getString("statement"));
-				solutions.add(solution);
+			for (int i = 1; i < conditions.size(); i++) {
+				conditionsString += ",'" + conditions.get(i).trim() + "'";
 			}
-			rs.close();
-			stmt.close();
 
-			return solutions;
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			throw new RuntimeException(e);
+			try {
+				Solution solution;
+				
+				String query = "SELECT * from Solution s where " + " s.test in (" + conditionsString + ")";
+
+				PreparedStatement stmt = this.connectionFactory.getConnection().prepareStatement(query);
+
+				ResultSet rs = stmt.executeQuery();
+
+				while (rs.next()) {
+					solution = new Solution();
+					solution.setDescription(rs.getString("description"));
+					solutions.add(solution);
+				}
+				rs.close();
+				stmt.close();
+			} catch (SQLException e) {
+				throw new RuntimeException(e);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				throw new RuntimeException(e);
+			}
 		}
+		return solutions;
 
 	}
 
