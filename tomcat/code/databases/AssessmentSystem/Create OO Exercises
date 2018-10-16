@@ -1,0 +1,3 @@
+insert into Exercise ( name, statement, modelResponse, tests) values ("Operacao","Escreva uma classe Operacao que tenha um método soma que some dois números.","public class Operacao { \n int soma(int x, int y)\n {\n int z; \n z = x + y; \n return z; \n
+                 }\n } \n", "CU_ASSERT(5 == soma(2,3)); \n CU_ASSERT(7 == soma(4,3)); \n CU_ASSERT(87 == soma(43,44));\n");
+

@@ -44,6 +44,17 @@ public class Exercise {
 	}
 	
 	protected File testFile;
+	
+	protected int userId;
+	
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
 
 	// Criar um construtor
 	int DEFAULT_BUFFER_SIZE = 255;
@@ -206,7 +217,7 @@ public class Exercise {
 
 			// }
 
-			// testFile.delete();
+			testFile.delete();
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -225,7 +236,7 @@ public class Exercise {
 
 		resultTests = new File("CUnitAutomated-Results.xml");
 
-		// Porque dava problema de Exceção
+		// Porque dava problemaExceção
 		/*
 		 * FileEditor.removeLineFile("CUnitAutomated-Results.xml",
 		 * "<!DOCTYPE CUNIT_TEST_RUN_REPORT SYSTEM \"CUnit-Run.dtd\">");
@@ -323,5 +334,20 @@ public class Exercise {
 	private void calcExerciseMark() {
 		exerciseMark += testMark;
 	}
+	
+	public void createDirectory(String nome) {
+		String everything, line;
+		try {
+			
+			String nameCommand = "mkdir students/"+nome;
+			//nameCommand = "pwd";
+			System.out.println(nameCommand);
+			Process process = Runtime.getRuntime().exec(nameCommand);
+			
+		} catch (IOException ex) {
+			Logger.getLogger(Exercise.class.getName()).log(Level.SEVERE, null, ex);
+		}
+	}
+
 
 }

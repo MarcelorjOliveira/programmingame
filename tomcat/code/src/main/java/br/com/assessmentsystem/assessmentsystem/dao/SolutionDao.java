@@ -24,7 +24,7 @@ public class SolutionDao extends BaseDao {
 
 			try {
 				Solution solution;
-				
+
 				String query = "SELECT * from Solution s where " + " s.test in (" + conditionsString + ")";
 
 				PreparedStatement stmt = this.connectionFactory.getConnection().prepareStatement(query);
@@ -68,6 +68,38 @@ public class SolutionDao extends BaseDao {
 			throw new RuntimeException(e);
 		}
 		return true;
+	}
+
+	public List<Solution> getByIdExercise(int idExercise) {
+		ArrayList<Solution> solutions = new ArrayList<Solution>();
+		
+		try {
+			Solution solution;
+
+			String query = "SELECT * from Solution s where " + " s.idExercise = "+Integer.toString(idExercise);
+
+			PreparedStatement stmt = this.connectionFactory.getConnection().prepareStatement(query);
+
+			ResultSet rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				solution = new Solution();
+				solution.setIdSolution(rs.getInt("idSolution"));
+				solution.setTest(rs.getString("test"));
+				solution.setIdExercise(rs.getInt("idExercise"));
+				solution.setDescription(rs.getString("description"));
+				solutions.add(solution);
+			}
+			rs.close();
+			stmt.close();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			throw new RuntimeException(e);
+		}
+		return solutions;
+
 	}
 
 }

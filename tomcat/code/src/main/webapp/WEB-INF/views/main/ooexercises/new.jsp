@@ -1,4 +1,6 @@
 <%@page import="br.com.assessmentsystem.assessmentsystem.controller.Routes"%>
+<%@page import="br.com.assessmentsystem.assessmentsystem.model.Solution"%>
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -16,9 +18,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    <% if (request.getParameter("mark") != null) { %>
+		<script>alert('Nota : <%=request.getParameter("mark")%>');
+		var solutions = <%=request.getParameter("corrections")%> ;
+		for(var c=0; c < solutions.descriptions.length; c++){
+			var description = solutions.descriptions[c]; 			
+			if(description){
+				alert(description);			
+			}			
+		}
+		
+		</script>
+	<% } %>
 	<link rel="icon" type="image/jpg" href="/resources/images/icone.jpg"/>
 
-    <title>Programming Game</title>
+    <title>OO Exercises</title>
+    
+   	<style type="text/css" media="screen">
+                    #editor { 
+                        position: relative;
+                        right: 0;   
+                        bottom: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 30em;
+                    }
+    </style>
 
     <!-- Bootstrap core CSS -->
     <link href="/resources/js/dashboard/bootstrap.css" rel="stylesheet">
@@ -53,28 +78,47 @@
               <li class="nav-item">
                 <a class="nav-link" href="<%= Routes.basicExercises %>">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline></svg>
-                  Exercícios básicos com linguagem C
+                 	Exercícios básicos com linguagem C 
                 </a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="<%= Routes.OOExercises %>">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline></svg>
-                  Programação Orientada a Objetos com Java
-                </a>
-              </li>
-              </ul>    
+               </ul>    
               </tbody>
             </table>
           </div>
         </main>
       </div>
     </div>
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+   			<div class="col-sm-auto">
+   				${title}  
+   			</div>
+           <form action="<%= Routes.OOExercisesAct%>" name="formOOExercises" method="post" onsubmit="putValue()">
+                <div name="resolution" id="editor">${resolutionParam}</div>
+                <script src="/resources/acebuilds/ace.js"></script>
+    			<script src="/resources/acebuilds/ext-statusbar.js"></script>
+                <p id ="buttonSubmit">
+                        <input type="hidden" name="resolution" id="resolution">
+                        <input type="submit" value="Enviar"/>
+                </p>
+   </main>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="/resources/js/dashboard/jquery-3.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script>window.jQuery || document.write('<script src="../../../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+  	<script>
+                    function putValue() {
+                        var inputHidden = document.getElementById("resolution");
+                        inputHidden.value = editor.getValue();
+                        return 0;
+                    }
+    </script>  
+    <script>
+    	var editor = ace.edit("editor");
+        editor.setTheme("ace/theme/eclipse");
+        editor.getSession().setMode("ace/mode/c_cpp");
+	</script>
     <script src="/resources/js/dashboard/popper.js"></script>
     <script src="/resources/js/dashboard/bootstrap.js"></script>
 

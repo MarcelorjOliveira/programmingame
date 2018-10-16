@@ -20,6 +20,7 @@ import br.com.assessmentsystem.assessmentsystem.dao.MovementDao;
 import br.com.assessmentsystem.assessmentsystem.model.Exercise;
 import br.com.assessmentsystem.assessmentsystem.model.ExerciseChooser;
 import br.com.assessmentsystem.assessmentsystem.model.Movement;
+import br.com.assessmentsystem.assessmentsystem.model.OOJavaExercise;
 import br.com.assessmentsystem.assessmentsystem.model.Solution;
 import br.com.assessmentsystem.assessmentsystem.model.User;
 
@@ -29,53 +30,67 @@ import br.com.assessmentsystem.assessmentsystem.model.User;
  */
 
 @Controller
-public class BasicExercisesController {
+public class OOExercisesController {
 
 	private String resolution;
 
 	private ExerciseChooser chooser;
 	private Exercise exercise;
 
-	@RequestMapping(Routes.basicExercises)
+	@RequestMapping(Routes.OOExercises)
 	public String exercise() {
 		chooser = new ExerciseChooser();
-		return "redirect:" + Routes.basicExercisesNew;
+		return "redirect:" + Routes.OOExercisesNew;
 	}
 
-	@RequestMapping(Routes.basicExercisesNew)
+	@RequestMapping(Routes.OOExercisesNew)
 	public String newExercise(HttpServletRequest request, Model model) {
 		String titulo = "";
 		HttpSession session = request.getSession();
 
 		User user = (User) session.getAttribute("user");
 
-		exercise = chooser.chooseExercise(user.getId());
-
-		model.addAttribute("title", exercise.getStatement());
+		//exercise = chooser.chooseExercise(user.getId());
+		
+		//ExerciseChooserDao ooExercises = new ExerciseChooserDao(); 
+		
+		model.addAttribute("title", "Escreva uma classe Soma que some dois números");
 		/*
 		 * Class classe = User.class; for (Field atributo : classe.getDeclaredFields())
 		 * { titulo += atributo.getName()+"<br>"; }
 		 */
 
-		return Routes.basicExercisesNew;
+		return Routes.OOExercisesNew;
 	}
 
-	@RequestMapping(Routes.basicExercisesUpdate)
+	@RequestMapping(Routes.OOExercisesUpdate)
 	public String updateExercise(HttpServletRequest request, Model model) {
 		model.addAttribute("title", exercise.getStatement());
+
 		model.addAttribute("resolutionParam", resolution);
 		return Routes.basicExercisesNew;
 	}
 
-	@RequestMapping(Routes.basicExercisesAct)
+	@RequestMapping(Routes.OOExercisesAct)
 	public String runExercise(HttpServletRequest request, Model model) {
 		Movement movement = new Movement();
 		MovementDao movementDao = new MovementDao();
+		
 		User user = (User) request.getSession().getAttribute("user");
 
 		resolution = request.getParameter("resolution");
+		
 		// javax.swing.JOptionPane.showMessageDialog(null, resolution);
-
+		
+		Exercise exercise = new OOJavaExercise();
+		
+		exercise.setUserId(user.getId());
+		exercise.setId(9);
+		exercise.setName("SumExercise");
+		exercise.setCode(resolution);
+		
+		//exercise.createDirectory();
+		
 		exercise.buildGrading(resolution);
 
 		movement.setExerciseId(exercise.getId());
@@ -103,11 +118,11 @@ public class BasicExercisesController {
 		System.out.println(jsonObject.toString());
 
 		model.addAttribute("corrections", jsonObject.toString());
-
+		
 		if (exercise.hasCompileErrors != true) {
 			// exercicio.salvarBancoDeDados(codigoUsuario, conexao);
 			if (chooser.canDoNextExercise() == true) {
-				return "redirect:" + Routes.basicExercisesNew;
+				return "redirect:" + Routes.OOExercisesNew;
 			} else {
 				// javax.swing.JOptionPane.showMessageDialog(null, "Parabéns. Você passou no
 				// teste!");
@@ -122,7 +137,7 @@ public class BasicExercisesController {
 					 * "quantidade de tentativas atingido. " +
 					 * "Por favor, fazer o próximo exercício");
 					 */
-					return "redirect:" + Routes.basicExercisesNew;
+					return "redirect:" + Routes.OOExercisesNew;
 
 				} else {
 					// javax.swing.JOptionPane.showMessageDialog(null, "Você foi reprovado no
@@ -130,7 +145,7 @@ public class BasicExercisesController {
 					return "redirect:" + Routes.main;
 				}
 			} else {
-				return "redirect:" + Routes.basicExercisesUpdate;
+				return "redirect:" + Routes.OOExercisesUpdate;
 			}
 		}
 	}

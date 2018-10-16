@@ -1,0 +1,18 @@
+javac -cp .:junit-4.10.jar student/SumExercise.java student/TestOOJava.java student/TestPunch.java
+java -cp .:junit-4.10.jar:hamcrest-core-1.3.jar student.TestPunch
+
+javac SumExercise/SumExercise.java SumExercise/SumExerciseTest.java SumExercise/SumExerciseRunner.java
+java SumExercise.SumExerciseRunner
+
+insert into Solution (test,idExercise, description)
+values ("expected:<5.0>",9, "Não atendeu a primeira condição da soma");
+
+insert into Solution (test,idExercise, description)
+values ("expected:<10.0>",9, "Não atendeu a primeira condição da soma")
+
+public class SumExercise{
+    public function soma(int x, int y){
+        return x + y;
+    }
+}
+
