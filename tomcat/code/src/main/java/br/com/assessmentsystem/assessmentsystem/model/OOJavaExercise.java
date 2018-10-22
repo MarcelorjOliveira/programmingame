@@ -24,6 +24,7 @@ import br.com.assessmentsystem.assessmentsystem.dao.SolutionDao;
 public class OOJavaExercise extends Exercise {
 
 	private String codeRunner;
+	protected String root;
 
 	public void initializeExercise() {
 		nameTestFile = "testMethod" + name;
@@ -32,21 +33,27 @@ public class OOJavaExercise extends Exercise {
 	}
 
 	public void buildGrading(String code) {
-		String root = Integer.toString(userId) + "/" + name;
+		root = Integer.toString(userId) + "/" + name;
 
-		String codeWorked = "package " + name + "\n" + this.code;
+		String codeWorked = "package " + name + "; \n" + this.code;
 
 		createDirectory(Integer.toString(userId));
 		
 		createDirectory(root);
 
-		File textFile = new File(root + "/" + name + ".java");
-
+		/*File dirFile = new File("./"+root + "/" );
+		
+		File textFile = new File(dirFile, name + ".java");
+		*/
+		
+		File textFile = new File(initialDirectory+root +"/" + name + ".java");
+		
+		
 		writeFile(codeWorked, textFile);
 
-		textFile = new File(root + "/" + name + "Test.java");
+		textFile = new File(initialDirectory+root + "/" + name + "Test.java");
 		  
-		String codeTestWorked = "package "+name+"\n\n"+ "import org.junit.After;\n"+
+		String codeTestWorked = "package "+name+";\n\n"+ "import org.junit.After;\n"+
 		 "import org.junit.AfterClass;\n"+ "import org.junit.Before;\n"+
 		  "import org.junit.BeforeClass;\n"+ "import org.junit.Test;\n"+
 		  "import static org.junit.Assert.*;\n"+ "import "+name+"."+name+";\n\n"+
@@ -68,7 +75,7 @@ public class OOJavaExercise extends Exercise {
 		//String codeTestWorked = "";
 		//this.testCode;
 
-		writeFile(codeTestWorked, testFile);
+		writeFile(codeTestWorked, textFile);
 		
 		String codeRunner = "package "+name+";\n" + 
 				"\n" + 
@@ -92,7 +99,7 @@ public class OOJavaExercise extends Exercise {
 		// Pegar do banco de dados
 		//String codeRunner = "";
 
-		textFile = new File(root + "/" + name + "Runner.java");
+		textFile = new File(initialDirectory+root + "/" + name + "Runner.java");
 
 		writeFile(codeRunner, textFile);
 
@@ -114,20 +121,21 @@ public class OOJavaExercise extends Exercise {
 			ee.printStackTrace();
 		}
 	}
-
+	
 	public void buildSourceCode() {
 		try {
 			// Compilação do código-fonte
-			String nameCommand = "javac " + name + "/" + name + ".java " + name + "/" + name + "Test.java " + name + "/"
-					+ name + "Runner.java";
+			String nameWithDirectory = initialDirectory + root + name + "/" + name;
+			String nameCommand = "javac " +nameWithDirectory + ".java " + nameWithDirectory + "Test.java " + nameWithDirectory + "Runner.java";
 			// java SumExercise.SumExerciseRunner
+			System.out.println(nameCommand);
 			Process process = Runtime.getRuntime().exec(nameCommand);
 
-			nameCommand = "java " + name + "." + name;
+			nameCommand = "java " + name + "." + name+"Runner";
 
 			process = Runtime.getRuntime().exec(nameCommand);
 
-			BufferedReader input = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+			BufferedReader input = new BufferedReader(new InputStreamReader(process.getInputStream()));
 			String result = "";
 			String line = null;
 			while ((line = input.readLine()) != null) {

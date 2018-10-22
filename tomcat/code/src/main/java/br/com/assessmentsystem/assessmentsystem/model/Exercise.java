@@ -30,6 +30,8 @@ import br.com.assessmentsystem.assessmentsystem.dao.MovementDao;
 import br.com.assessmentsystem.assessmentsystem.dao.SolutionDao;
 
 public class Exercise {
+	
+	protected String initialDirectory = "/usr/local/tomcat/students/"; 
 
 	public List<Solution> solutions;
 	
