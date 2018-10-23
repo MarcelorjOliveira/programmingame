@@ -1,4 +1,4 @@
-package SumExercise;
+package 1/SumExercise;
 
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
@@ -16,3 +16,4 @@ public class SumExerciseRunner{
       System.out.println(result.wasSuccessful());
    }
 }  
+	

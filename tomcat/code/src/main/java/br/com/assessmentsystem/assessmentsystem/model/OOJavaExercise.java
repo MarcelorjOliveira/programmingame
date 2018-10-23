@@ -16,6 +16,7 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 
+import org.apache.commons.io.FileUtils;
 import org.w3c.dom.Document;
 
 import br.com.assessmentsystem.assessmentsystem.dao.MovementDao;
@@ -35,75 +36,68 @@ public class OOJavaExercise extends Exercise {
 	public void buildGrading(String code) {
 		root = Integer.toString(userId) + "/" + name;
 
+		File fileDirectory = new File(initialDirectory + Integer.toString(userId));
+
+		fileDirectory.mkdir();
+
+		fileDirectory = new File(initialDirectory + root);
+
+		fileDirectory.mkdir();
+
 		String codeWorked = "package " + name + "; \n" + this.code;
 
-		createDirectory(Integer.toString(userId));
-		
-		createDirectory(root);
+		// createDirectory(Integer.toString(userId));
 
-		/*File dirFile = new File("./"+root + "/" );
-		
-		File textFile = new File(dirFile, name + ".java");
-		*/
-		
-		File textFile = new File(initialDirectory+root +"/" + name + ".java");
-		
-		
+		// createDirectory(root);
+
+		File textFile = new File(initialDirectory + root + "/" + name + ".java");
+
 		writeFile(codeWorked, textFile);
 
-		textFile = new File(initialDirectory+root + "/" + name + "Test.java");
-		  
-		String codeTestWorked = "package "+name+";\n\n"+ "import org.junit.After;\n"+
-		 "import org.junit.AfterClass;\n"+ "import org.junit.Before;\n"+
-		  "import org.junit.BeforeClass;\n"+ "import org.junit.Test;\n"+
-		  "import static org.junit.Assert.*;\n"+ "import "+name+"."+name+";\n\n"+
-		  
-		  "public class SumExerciseTest {\n"+	 
-		  "private SumExercise sumExercise = new SumExercise();\n"+
-		  "@Test\n"+
-		  "public void testMethods() {\n"+
-		  	"assertEquals(5.0f, sumExercise.soma(2,3), 0.0);\n"+
-    		"}\n"+
-   
-    		"@Test\n"+
-    		"public void testAttributes() {\n"+
-        "assertEquals(10.0f, sumExercise.soma(4,6), 0.0);\n"+
-    		"}\n"+
-			"}";
-		
+		textFile = new File(initialDirectory + root + "/" + name + "Test.java");
+
+		String codeTestWorked = "package " + name + ";\n\n" + "import org.junit.After;\n"
+				+ "import org.junit.AfterClass;\n" + "import org.junit.Before;\n" + "import org.junit.BeforeClass;\n"
+				+ "import org.junit.Test;\n" + "import static org.junit.Assert.*;\n" + "import " + name + "." + name
+				+ ";\n\n" +
+
+				"public class SumExerciseTest {\n" + "private SumExercise sumExercise = new SumExercise();\n"
+				+ "@Test\n" + "public void testMethods() {\n" + "assertEquals(5.0f, sumExercise.soma(2,3), 0.0);\n"
+				+ "}\n" +
+
+				"@Test\n" + "public void testAttributes() {\n" + "assertEquals(10.0f, sumExercise.soma(4,6), 0.0);\n"
+				+ "}\n" + "}";
+
 		// capturar do banco de dados
-		//String codeTestWorked = "";
-		//this.testCode;
+		// String codeTestWorked = "";
+		// this.testCode;
 
 		writeFile(codeTestWorked, textFile);
-		
-		String codeRunner = "package "+name+";\n" + 
-				"\n" + 
-				"import org.junit.runner.JUnitCore;\n" + 
-				"import org.junit.runner.Result;\n" + 
-				"import org.junit.runner.notification.Failure;\n" + 
-				"import SumExercise.SumExerciseTest;\n" + 
-				"\n" + 
-				"public class SumExerciseRunner{\n" + 
-				"   public static void main(String[] args){\n" + 
-				"      Result result = JUnitCore.runClasses(SumExerciseTest.class);\n" + 
-				"		\n" + 
-				"      for (Failure failure : result.getFailures()) {\n" + 
-				"         System.out.println(failure.getMessage());\n" + 
-				"      }\n" + 
-				"		\n" + 
-				"      System.out.println(result.wasSuccessful());\n" + 
-				"   }\n" + 
-				"}  \n";	
+
+		String codeRunner = "package " + name + ";\n" + "\n" + "import org.junit.runner.JUnitCore;\n"
+				+ "import org.junit.runner.Result;\n" + "import org.junit.runner.notification.Failure;\n"
+				+ "import SumExercise.SumExerciseTest;\n" + "\n" + "public class SumExerciseRunner{\n"
+				+ "   public static void main(String[] args){\n"
+				+ "      Result result = JUnitCore.runClasses(SumExerciseTest.class);\n" + "		\n"
+				+ "      for (Failure failure : result.getFailures()) {\n"
+				+ "         System.out.println(failure.getMessage());\n" + "      }\n" + "		\n"
+				+ "      System.out.println(result.wasSuccessful());\n" + "   }\n" + "}  \n";
 
 		// Pegar do banco de dados
-		//String codeRunner = "";
+		// String codeRunner = "";
 
-		textFile = new File(initialDirectory+root + "/" + name + "Runner.java");
+		textFile = new File(initialDirectory + root + "/" + name + "Runner.java");
 
 		writeFile(codeRunner, textFile);
 
 		buildSourceCode();
+
+		try {
+			FileUtils.deleteDirectory(new File(initialDirectory + Integer.toString(userId)));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block //e.printStackTrace();
+		}
+
 	}
 
 	public void buildCodeTest() {
@@ -121,34 +115,46 @@ public class OOJavaExercise extends Exercise {
 			ee.printStackTrace();
 		}
 	}
-	
+
 	public void buildSourceCode() {
 		try {
 			// Compilação do código-fonte
-			String nameWithDirectory = initialDirectory + root + name + "/" + name;
-			String nameCommand = "javac " +nameWithDirectory + ".java " + nameWithDirectory + "Test.java " + nameWithDirectory + "Runner.java";
+			String nameWithDirectory = initialDirectory + root + "/" + name;
+			String nameCommand = "javac " + nameWithDirectory + ".java " + nameWithDirectory + "Test.java "
+					+ nameWithDirectory + "Runner.java";
 			// java SumExercise.SumExerciseRunner
-			System.out.println(nameCommand);
+			// System.out.println(nameCommand);
 			Process process = Runtime.getRuntime().exec(nameCommand);
 
-			nameCommand = "java " + name + "." + name+"Runner";
+			String exerciseClassPath = initialDirectory + Integer.toString(userId);
 
-			process = Runtime.getRuntime().exec(nameCommand);
+			nameCommand = "java -cp " + exerciseClassPath + " " + name + "." + name + "Runner";
 
-			BufferedReader input = new BufferedReader(new InputStreamReader(process.getInputStream()));
+			System.out.println(nameCommand);
+
 			String result = "";
-			String line = null;
-			while ((line = input.readLine()) != null) {
-				result += line;
+
+			while (result.length() == 0) {
+				Process process2 = Runtime.getRuntime().exec(nameCommand);
+
+				BufferedReader input = new BufferedReader(new InputStreamReader(process2.getInputStream()));
+				result = "";
+				String line = null;
+				while ((line = input.readLine()) != null) {
+					result += line;
+				}
+				input.close();
+
 			}
-			input.close();
+
+			System.out.println(result);
 
 			SolutionDao solutionDao = new SolutionDao();
 
 			List<Solution> solutions = solutionDao.getByIdExercise(id);
 
 			List<Solution> solutionsStudentWrong = new ArrayList<Solution>();
-			
+
 			int failures = 0;
 
 			for (int c = 0; c < solutions.size(); c++) {
@@ -156,12 +162,12 @@ public class OOJavaExercise extends Exercise {
 					failures++;
 					solutionsStudentWrong.add(solutions.get(c));
 				}
-					
+
 			}
-			
+
 			this.solutions = solutionsStudentWrong;
 
-			this.testMark = ( (solutions.size() - failures) / solutions.size()) * 100;
+			this.testMark = ((solutions.size() - failures) / solutions.size()) * 100;
 			this.testMark = Math.round(this.testMark);
 			this.testMark = this.testMark / 10;
 

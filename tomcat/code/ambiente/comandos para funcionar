@@ -5,17 +5,24 @@ javac SumExercise/SumExercise.java SumExercise/SumExerciseTest.java SumExercise/
 java SumExercise.SumExerciseRunner
 
 javac /usr/local/tomcat/students/1/SumExercise/SumExercise.java /usr/local/tomcat/students/1/SumExercise/SumExerciseTest.java /usr/local/tomcat/students/1/SumExercise/SumExerciseRunner.java
-java SumExercise.SumExerciseRunner
+
+java -cp /usr/local/tomcat/students/1 SumExercise.SumExerciseRunner
 
 insert into Solution (test,idExercise, description)
 values ("expected:<5.0>",9, "Não atendeu a primeira condição da soma");
 
 insert into Solution (test,idExercise, description)
-values ("expected:<10.0>",9, "Não atendeu a primeira condição da soma")
+values ("expected:<10.0>",9, "Não atendeu a segunda condição da soma")
 
 public class SumExercise{
     public int soma(int x, int y){
         return x + y;
+    }
+}
+
+public class SumExercise{
+    public int soma(int x, int y){
+        return x - y;
     }
 }
 
