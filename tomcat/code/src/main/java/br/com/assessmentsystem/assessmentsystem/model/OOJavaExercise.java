@@ -56,18 +56,7 @@ public class OOJavaExercise extends Exercise {
 
 		textFile = new File(initialDirectory + root + "/" + name + "Test.java");
 
-		String codeTestWorked = "package " + name + ";\n\n" + "import org.junit.After;\n"
-				+ "import org.junit.AfterClass;\n" + "import org.junit.Before;\n" + "import org.junit.BeforeClass;\n"
-				+ "import org.junit.Test;\n" + "import static org.junit.Assert.*;\n" + "import " + name + "." + name
-				+ ";\n\n" +
-
-				"public class SumExerciseTest {\n" + "private SumExercise sumExercise = new SumExercise();\n"
-				+ "@Test\n" + "public void testMethods() {\n" + "assertEquals(5.0f, sumExercise.soma(2,3), 0.0);\n"
-				+ "}\n" +
-
-				"@Test\n" + "public void testAttributes() {\n" + "assertEquals(10.0f, sumExercise.soma(4,6), 0.0);\n"
-				+ "}\n" + "}";
-
+		String codeTestWorked = this.tests;
 		// capturar do banco de dados
 		// String codeTestWorked = "";
 		// this.testCode;
@@ -76,9 +65,9 @@ public class OOJavaExercise extends Exercise {
 
 		String codeRunner = "package " + name + ";\n" + "\n" + "import org.junit.runner.JUnitCore;\n"
 				+ "import org.junit.runner.Result;\n" + "import org.junit.runner.notification.Failure;\n"
-				+ "import SumExercise.SumExerciseTest;\n" + "\n" + "public class SumExerciseRunner{\n"
+				+ "import "+name+"."+name+"Test;\n" + "\n" + "public class "+name+"Runner{\n"
 				+ "   public static void main(String[] args){\n"
-				+ "      Result result = JUnitCore.runClasses(SumExerciseTest.class);\n" + "		\n"
+				+ "      Result result = JUnitCore.runClasses("+name+"Test.class);\n" + "		\n"
 				+ "      for (Failure failure : result.getFailures()) {\n"
 				+ "         System.out.println(failure.getMessage());\n" + "      }\n" + "		\n"
 				+ "      System.out.println(result.wasSuccessful());\n" + "   }\n" + "}  \n";
@@ -86,12 +75,12 @@ public class OOJavaExercise extends Exercise {
 		// Pegar do banco de dados
 		// String codeRunner = "";
 
-		textFile = new File(initialDirectory + root + "/" + name + "Runner.java");
+		textFile = new File(initialDirectory + root + "/"+name+"Runner.java");
 
 		writeFile(codeRunner, textFile);
 
 		buildSourceCode();
-
+		
 		try {
 			FileUtils.deleteDirectory(new File(initialDirectory + Integer.toString(userId)));
 		} catch (IOException e) {
@@ -155,7 +144,7 @@ public class OOJavaExercise extends Exercise {
 
 			List<Solution> solutionsStudentWrong = new ArrayList<Solution>();
 
-			int failures = 0;
+			double failures = 0;
 
 			for (int c = 0; c < solutions.size(); c++) {
 				if (result.indexOf(solutions.get(c).getTest()) != -1) {
@@ -166,11 +155,18 @@ public class OOJavaExercise extends Exercise {
 			}
 
 			this.solutions = solutionsStudentWrong;
+			
+			double solutionSize = solutions.size() ; 
 
-			this.testMark = ((solutions.size() - failures) / solutions.size()) * 100;
+			//System.out.println("SolutionsSize:"+solutions.size() );
+			//System.out.println("Failures:"+failures);
+			this.testMark = ((solutionSize - failures) / solutionSize) * 100;
+			//System.out.println("TestMark:"+String.valueOf(this.testMark));
 			this.testMark = Math.round(this.testMark);
+			//System.out.println("TestMark:"+String.valueOf(this.testMark));
 			this.testMark = this.testMark / 10;
-
+			//System.out.println("TestMark:"+String.valueOf(this.testMark));
+			
 			tries = 0;
 			// javax.swing.JOptionPane.showMessageDialog(null, "Nota testes de unidade : " +
 			// testMark);

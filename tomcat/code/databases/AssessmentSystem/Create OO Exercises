@@ -1,3 +1,215 @@
 insert into Exercise ( name, statement, modelResponse, tests) values ("Operacao","Escreva uma classe Operacao que tenha um método soma que some dois números.","public class Operacao { \n int soma(int x, int y)\n {\n int z; \n z = x + y; \n return z; \n
                  }\n } \n", "CU_ASSERT(5 == soma(2,3)); \n CU_ASSERT(7 == soma(4,3)); \n CU_ASSERT(87 == soma(43,44));\n");
 
+public class SumExercise{
+    public int soma(int x, int y){
+        return x + y;
+    }
+}
+
+use halyeninstance;
+
+select * from Movement;
+
+insert into Exercise ( name, statement, modelResponse, tests, course, module) values ("Conta", "Escreva uma classe Conta que possua os atributos
+ titular e saldo e os métodos saca que retira do saldo e deposita que acrescenta ao saldo", "
+class Conta {\n
+    String titular;\n
+    double saldo;\n
+\n
+    void saca(double quantidade) {\n
+        this.saldo -= quantidade;\n
+    }\n
+    void deposita(double quantidade) {\n
+        this.saldo += quantidade;\n
+    }\n
+}
+", "package Conta;\n
+\n
+import org.junit.After;\n
+import org.junit.AfterClass;\n
+import org.junit.Before;\n
+import org.junit.BeforeClass;\n
+import org.junit.Test;\n
+import static org.junit.Assert.*;\n
+import Conta.Conta;\n
+\n
+public class ContaTest {\n
+\n
+    @Test\n
+    public void testTitularAttribute() {\n
+	Conta conta = new Conta();\n
+\n
+	conta.titular = \"Thiago\";\n
+        assertEquals(\"Thiago\", conta.titular);\n
+    }\n
+\n
+    @Test\n
+    public void testSaldoAttribute() {\n
+	Conta conta = new Conta();\n
+\n
+	conta.saldo = 230.00;\n
+        assertEquals(230.00, conta.saldo, 0.0);\n
+    }\n
+\n
+    @Test\n
+    public void testMethodSaca() {\n
+	Conta conta = new Conta();\n
+\n
+	conta.saldo = 200.00;\n
+\n
+	conta.saca(20);\n
+\n
+	assertEquals(180.00, conta.saldo, 0.0);\n
+    }\n
+\n
+    @Test\n
+    public void testMethodDeposita() {\n
+	Conta conta = new Conta();\n
+\n
+	conta.saldo = 100.00;\n
+	conta.deposita(40);\n
+        assertEquals(140.00, conta.saldo, 0.0);\n
+    }\n
+}",2,1);
+
+insert into Exercise ( name, statement, modelResponse, tests, course, module) values ("Carro", "Escreva uma classe Carro que possua os atributos cor, modelo e velocidadeAtual, dois métodos acelera e desacelera ambos com o parametro quantidade e um método capturaVelocidadeAtual que retorne a velocidade atual", "
+class Carro {\n
+    String cor;\n
+    String modelo;\n
+    
+    double velocidadeAtual;\n
+\n
+    void acelera(double quantidade) {\n
+        this.velocidadeAtual += quantidade;\n
+    }\n
+    void desacelera(double quantidade) {\n
+        this.velocidadeAtual -= quantidade;\n
+    }\n
+    double capturaVelocidadeAtual() {\n
+        return this.velocidadeAtual;\n
+    }\n
+}
+", "package Carro;\n
+\n
+import org.junit.After;\n
+import org.junit.AfterClass;\n
+import org.junit.Before;\n
+import org.junit.BeforeClass;\n
+import org.junit.Test;\n
+import static org.junit.Assert.*;\n
+import Carro.Carro;\n
+\n
+public class CarroTest {\n
+\n
+    @Test\n
+    public void testCorAttribute() {\n
+	Carro carro = new Carro();\n
+\n
+	carro.cor = \"Azul\";\n
+        assertEquals(\"Azul\", carro.cor);\n
+    }\n
+    @Test\n
+    public void testModeloAttribute() {\n
+	Carro carro = new Carro();\n
+\n
+	carro.modelo = \"Corolla\";\n
+        assertEquals(\"Corolla\", carro.modelo);\n
+    }\n
+
+\n
+    @Test\n
+    public void testMethodAcelera() {\n
+	Carro carro = new Carro();\n
+\n
+	carro.velocidadeAtual = 10.00;\n
+\n
+	carro.acelera(20);\n
+\n
+	assertEquals(30.00, carro.velocidadeAtual, 0.0);\n
+    }\n
+\n
+    @Test\n
+    public void testMethodDesacelera() {\n
+	Carro conta = new Conta();\n
+\n
+	conta.saldo = 100.00;\n
+	conta.deposita(40);\n
+        assertEquals(140.00, conta.saldo, 0.0);\n
+    }\n
+}",2,1); 
+
+
+insert into Exercise ( name, statement, modelResponse, tests, course, module) values ("ContaComEncapsulamento", "Escreva uma classe ContaComEncapsulamento que adicione o modificador de visibilidade privado e getter e setter para cada atributo da classe Conta", "
+class ContaComEncapsulamento {\n
+    private String titular;\n
+    public void setTitular(String titular){\n
+    	this.titular = titular;\n
+    }\n
+    public String getTitular(){\n
+    	return this.titular;\n
+    }\n
+    double saldo;\n
+    public void setSaldo(double saldo){\n
+   	this.saldo = saldo;\n
+    }\n
+    public double getSaldo(){\n
+    	return this.saldo;\n
+    }\n
+\n
+    void saca(double quantidade) {\n
+        this.saldo -= quantidade;\n
+    }\n
+    void deposita(double quantidade) {\n
+        this.saldo += quantidade;\n
+    }\n
+}
+", "package ContaComEncapsulamento;\n
+\n
+import org.junit.After;\n
+import org.junit.AfterClass;\n
+import org.junit.Before;\n
+import org.junit.BeforeClass;\n
+import org.junit.Test;\n
+import static org.junit.Assert.*;\n
+import ContaComEncapsulamento.ContaComEncapsulamento;\n
+\n
+public class ContaComEncapsulamentoTest {\n
+\n
+    @Test\n
+    public void testSetAndGetTitular() {\n
+	ContaComEncapsulamento conta = new ContaComEncapsulamento();\n
+\n
+	conta.setTitular(\"Thiago\");\n
+        assertEquals(\"Thiago\", conta.getTitular());\n
+    }\n
+\n
+    @Test\n
+    public void testSetAndGetSaldo() {\n
+	ContaComEncapsulamento conta = new ContaComEncapsulamento();\n
+\n
+	conta.setSaldo(230.00);\n
+        assertEquals(230.00, conta.getSaldo(), 0.0);\n
+    }\n
+\n
+    @Test\n
+    public void testMethodSaca() {\n
+	ContaComEncapsulamento conta = new ContaComEncapsulamento();\n
+\n
+	conta.setSaldo(200.00);\n
+\n
+	conta.saca(20);\n
+\n
+	assertEquals(180.00, conta.getSaldo(), 0.0);\n
+    }\n
+\n
+    @Test\n
+    public void testMethodDeposita() {\n
+	ContaComEncapsulamento conta = new ContaComEncapsulamento();\n
+\n
+	conta.setSaldo(100.00);\n
+	conta.deposita(40);\n
+        assertEquals(140.00, conta.getSaldo(), 0.0);\n
+    }\n
+}",2,2);
+

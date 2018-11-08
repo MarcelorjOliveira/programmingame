@@ -98,6 +98,7 @@
     			<script src="/resources/acebuilds/ext-statusbar.js"></script>
                 <p id ="buttonSubmit">
                         <input type="hidden" name="resolution" id="resolution">
+                        <input type="hidden" name="exerciseId" id="exerciseId"/>
                         <input type="submit" value="Enviar"/>
                 </p>
    </main>
@@ -110,7 +111,12 @@
   	<script>
                     function putValue() {
                         var inputHidden = document.getElementById("resolution");
-                        inputHidden.value = editor.getValue();
+                     
+                      	inputHidden.value = editor.getValue();
+                        
+                        var inputHidden = document.getElementById("exerciseId");
+                        inputHidden.value = <%=request.getParameter("exerciseId")%>;
+                        
                         return 0;
                     }
     </script>  

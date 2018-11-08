@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import br.com.assessmentsystem.assessmentsystem.dao.ExerciseDao;
 import br.com.assessmentsystem.assessmentsystem.dao.MovementDao;
 import br.com.assessmentsystem.assessmentsystem.model.Exercise;
 import br.com.assessmentsystem.assessmentsystem.model.ExerciseChooser;
@@ -39,7 +40,6 @@ public class OOExercisesController {
 
 	@RequestMapping(Routes.OOExercises)
 	public String exercise() {
-		chooser = new ExerciseChooser();
 		return "redirect:" + Routes.OOExercisesNew;
 	}
 
@@ -50,11 +50,15 @@ public class OOExercisesController {
 
 		User user = (User) session.getAttribute("user");
 
-		//exercise = chooser.chooseExercise(user.getId());
+		ExerciseDao exerciseDao = new ExerciseDao();
 		
-		//ExerciseChooserDao ooExercises = new ExerciseChooserDao(); 
+		int id = Integer.parseInt(request.getParameter("exerciseId"));
 		
-		model.addAttribute("title", "Escreva uma classe Soma que some dois números");
+		Exercise exercise = exerciseDao.findById(id); 
+		
+		model.addAttribute("title", exercise.getStatement());
+		model.addAttribute("exerciseId", exercise.getId());
+		
 		/*
 		 * Class classe = User.class; for (Field atributo : classe.getDeclaredFields())
 		 * { titulo += atributo.getName()+"<br>"; }
@@ -82,13 +86,12 @@ public class OOExercisesController {
 		
 		// javax.swing.JOptionPane.showMessageDialog(null, resolution);
 		
-		Exercise exercise = new OOJavaExercise();
+		int id = Integer.parseInt(request.getParameter("exerciseId"));
 		
-		exercise.setUserId(user.getId());
-		exercise.setId(9);
-		exercise.setName("SumExercise");
+		Exercise exercise = new ExerciseDao().findById(id);
+		
 		exercise.setCode(resolution);
-		
+		//exercise.setUserId(user.getId());
 		//exercise.createDirectory();
 		
 		exercise.buildGrading(resolution);
@@ -118,16 +121,18 @@ public class OOExercisesController {
 		System.out.println(jsonObject.toString());
 
 		model.addAttribute("corrections", jsonObject.toString());
+		model.addAttribute("exerciseId",request.getParameter("exerciseId"));
+		
 		
 		if (exercise.hasCompileErrors != true) {
 			// exercicio.salvarBancoDeDados(codigoUsuario, conexao);
-			if (chooser.canDoNextExercise() == true) {
+			//if (chooser.canDoNextExercise() == true) {
 				return "redirect:" + Routes.OOExercisesNew;
-			} else {
+			//} else {
 				// javax.swing.JOptionPane.showMessageDialog(null, "Parabéns. Você passou no
 				// teste!");
-				return "redirect:" + Routes.main;
-			}
+				//return "redirect:" + Routes.main;
+			//}
 		} else {
 			// exercicio.salvarBancoErroDeCompilacao(codigoUsuario, conexao);
 			if (exercise.endOfAttempts == true) {

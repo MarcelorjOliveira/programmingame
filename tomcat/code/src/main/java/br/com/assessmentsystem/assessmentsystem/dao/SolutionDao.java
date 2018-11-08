@@ -76,7 +76,7 @@ public class SolutionDao extends BaseDao {
 		try {
 			Solution solution;
 
-			String query = "SELECT * from Solution s where " + " s.idExercise = "+Integer.toString(idExercise);
+			String query = "SELECT * from Solution s where s.idExercise = "+Integer.toString(idExercise);
 
 			PreparedStatement stmt = this.connectionFactory.getConnection().prepareStatement(query);
 
@@ -88,6 +88,7 @@ public class SolutionDao extends BaseDao {
 				solution.setTest(rs.getString("test"));
 				solution.setIdExercise(rs.getInt("idExercise"));
 				solution.setDescription(rs.getString("description"));
+				
 				solutions.add(solution);
 			}
 			rs.close();
