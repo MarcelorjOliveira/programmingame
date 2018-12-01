@@ -9,7 +9,6 @@ example_template/**
 exemplo/**
 tomcat/code/target/**
 tomcat/config/**
-docker-compose.yml
 docker-cloud.yml
 docker-composeaws.yml
 rodar
