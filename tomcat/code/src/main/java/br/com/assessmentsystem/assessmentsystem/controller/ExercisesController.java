@@ -46,6 +46,7 @@ public class ExercisesController {
 	@RequestMapping(Routes.exercisesNew)
 	public String newExercise(HttpServletRequest request, Model model) {
 		String titulo = "";
+		
 		HttpSession session = request.getSession();
 
 		User user = (User) session.getAttribute("user");
@@ -56,9 +57,18 @@ public class ExercisesController {
 		
 		Exercise exercise = exerciseDao.findById(id); 
 		
-		model.addAttribute("title", exercise.getStatement());
-		model.addAttribute("exerciseId", exercise.getId());
+		//System.out.println("ReqId"+request.getParameter("exerciseId"));
 		
+		//System.out.println("Title:"+exercise.getStatement());
+		//System.out.println("Id:"+exercise.getId());
+		
+		//model.addAttribute("title", exercise.getStatement());
+		//model.addAttribute("exerciseIdController", exercise.getId());
+		
+		session.setAttribute("title", exercise.getStatement());
+		session.setAttribute("exerciseId", exercise.getId());
+
+				
 		/*
 		 * Class classe = User.class; for (Field atributo : classe.getDeclaredFields())
 		 * { titulo += atributo.getName()+"<br>"; }

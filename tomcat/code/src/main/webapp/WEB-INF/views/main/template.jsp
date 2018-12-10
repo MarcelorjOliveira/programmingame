@@ -6,7 +6,8 @@
 	List<Course> courses = courseDao.courseWithExercises(); 
 	
 	pageContext.setAttribute("courses",courses);
-	%>
+	
+%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
@@ -132,11 +133,10 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-sm-flex justify-content-between align-items-center">
-                                    <h4 class="header-title mb-0">Market Value And Trends</h4>
-                            		${body}   	
-                              	</div>
-          			<div>
-				</div>  
+                                   <div id="template-body" style="white-space: nowrap; position: relative; height: 100%; width: 100%;">
+                            		<%=request.getParameter("templateBody")%>   
+                            	   </div>	
+                              	</div>  
                             </div>
                         </div>
                     </div>

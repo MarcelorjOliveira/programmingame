@@ -22,7 +22,7 @@ public class ExerciseDao extends BaseDao {
 
 			while (rs.next()) {
 				int course = rs.getInt("course");
-				System.out.println("course:"+course);
+				//System.out.println("course:"+course);
 				
 				exercise = createByType(course);
 				
