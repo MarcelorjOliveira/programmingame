@@ -66,7 +66,7 @@ public class ExercisesController {
 		//model.addAttribute("exerciseIdController", exercise.getId());
 		
 		session.setAttribute("title", exercise.getStatement());
-		session.setAttribute("exerciseId", exercise.getId());
+		session.setAttribute("exerciseId", Integer.toString(exercise.getId()) );
 
 				
 		/*
