@@ -1,0 +1,17 @@
+insert into Solution (test,idExercise, description) 
+values ("31350876461:false",14, "O cálculo do cpf está incorreto");
+
+insert into Solution (test,idExercise, description) 
+values ("11111111111:false",14, "O cálculo do cpf não pode permitir números iguais como 11111111111");
+
+insert into Solution (test,idExercise, description)
+values ("00000000000:false",14, "O cálculo do cpf não pode permitir números iguais como 00000000000")
+
+insert into Solution (test,idExercise, description) 
+values ("58845688518:false",14, "O cálculo do cpf está inválido");
+
+insert into Solution (test,idExercise, description)
+values ("44444444444:false",14, "O cálculo do cpf não pode permitir números iguais como 44444444444")
+
+
+
