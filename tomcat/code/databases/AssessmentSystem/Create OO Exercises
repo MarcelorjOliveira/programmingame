@@ -379,3 +379,78 @@ public class PessoaFisicaTest {\n
 
 }",2,3);
 
+insert into Exercise ( name, statement, modelResponse, tests, course, module) values ("Caneta", "Escreva uma classe Caneta que possua os atributos modelo e tampada e os métodos tampar e destampar dizendo se a caneta está tampada ou não", "
+class Caneta {\n
+    String modelo;\n
+    boolean tampada;\n
+    public boolean tampar(){\n
+    	this.tampada = true;\n
+        return this.tampada;\n
+    }\n
+    public boolean destampar(){\n
+    	this.tampada = false;\n
+        return this.tampada;\n
+    }\n
+}
+", "package Caneta;\n
+\n
+import org.junit.After;\n
+import org.junit.AfterClass;\n
+import org.junit.Before;\n
+import org.junit.BeforeClass;\n
+import org.junit.Test;\n
+import static org.junit.Assert.*;\n
+import Caneta.Caneta;\n
+\n
+public class CanetaTest {\n
+\n
+    @Test
+    public void testModelo() {\n
+	Caneta caneta = new Caneta();\n
+\n
+	caneta.modelo = \"Razor\" ; \n
+	System.out.println(caneta.modelo);\n
+        if(caneta.modelo.equals(\"Razor\") )
+        {System.out.println(\":true\");
+	}
+	else {
+	System.out.println(\":false\");
+	}
+
+        assertEquals(\"Razor\", caneta.modelo );\n
+    }\n
+\n
+    @Test
+    public void testTampar() {\n
+	Caneta caneta = new Caneta();\n
+        System.out.println(\"tampar\");
+	if(caneta.tampar() == true)
+        {System.out.println(\":true\");
+	}
+	else {
+	System.out.println(\":false\");
+	}
+
+\n
+        assertTrue(caneta.tampar());\n
+    }\n
+\n
+    @Test
+    public void testDestampar() {\n
+	Caneta caneta = new Caneta();\n
+	System.out.println(\"destampar\");
+        if(caneta.destampar() == false)
+        {System.out.println(\":true\");
+	}
+	else {
+	System.out.println(\":false\");
+	}
+
+\n
+	assertFalse(caneta.destampar());\n
+    }\n
+
+
+}",2,4);
+
+

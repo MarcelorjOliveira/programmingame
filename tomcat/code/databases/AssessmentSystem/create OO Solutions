@@ -11,7 +11,16 @@ insert into Solution (test,idExercise, description)
 values ("58845688518:false",14, "O cálculo do cpf está inválido");
 
 insert into Solution (test,idExercise, description)
-values ("44444444444:false",14, "O cálculo do cpf não pode permitir números iguais como 44444444444")
+values ("44444444444:false",14, "O cálculo do cpf não pode permitir números iguais como 44444444444");
 
 
+
+insert into Solution (test,idExercise, description) 
+values ("Razor:false",15, "Está faltando o atributo modelo");
+
+insert into Solution (test,idExercise, description) 
+values ("tampar:false",15, "O método tampar não está tampando a caneta");
+
+insert into Solution (test,idExercise, description)
+values ("destampar:false",15, "O método destampar não está destampando a caneta");
 

@@ -112,7 +112,7 @@ public class OOJavaExercise extends Exercise {
 			String nameCommand = "javac " + nameWithDirectory + ".java " + nameWithDirectory + "Test.java "
 					+ nameWithDirectory + "Runner.java";
 			// java SumExercise.SumExerciseRunner
-			// System.out.println(nameCommand);
+			System.out.println(nameCommand);
 			Process process = Runtime.getRuntime().exec(nameCommand);
 
 			String exerciseClassPath = initialDirectory + Integer.toString(userId);
