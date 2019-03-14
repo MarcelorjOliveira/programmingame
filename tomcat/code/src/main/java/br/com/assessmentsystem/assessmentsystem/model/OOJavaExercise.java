@@ -34,9 +34,9 @@ public class OOJavaExercise extends Exercise {
 	}
 
 	public void buildGrading(String code) {
-		root = Integer.toString(userId) + "/" + name;
+		root = Integer.toString(this.userId) + "/" + name;
 
-		File fileDirectory = new File(initialDirectory + Integer.toString(userId));
+		File fileDirectory = new File(initialDirectory + Integer.toString(this.userId));
 
 		fileDirectory.mkdir();
 
@@ -82,7 +82,7 @@ public class OOJavaExercise extends Exercise {
 		buildSourceCode();
 		
 		try {
-			FileUtils.deleteDirectory(new File(initialDirectory + Integer.toString(userId)));
+			FileUtils.deleteDirectory(new File(initialDirectory + Integer.toString(this.userId)));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block //e.printStackTrace();
 		}

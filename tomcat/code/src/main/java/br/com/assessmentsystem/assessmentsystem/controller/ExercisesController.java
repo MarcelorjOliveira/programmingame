@@ -100,8 +100,10 @@ public class ExercisesController {
 		
 		Exercise exercise = new ExerciseDao().findById(id);
 		
+		//System.out.println("Exercicio:"+Integer.toString(user.getId()) );
+		
 		exercise.setCode(resolution);
-		//exercise.setUserId(user.getId());
+		exercise.setUserId(user.getId());
 		//exercise.createDirectory();
 		
 		exercise.buildGrading(resolution);
