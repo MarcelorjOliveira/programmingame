@@ -302,6 +302,11 @@
     <!-- others plugins -->
     <script src="/resources/assets/js/plugins.js"></script>
     <script src="/resources/assets/js/scripts.js"></script>
+    
+    <script src="/resources/vendor/jstree/dist/jstree.min.js"></script>
+    <script>
+    	$(function () { $('#jstree_demo_div').jstree(); } );
+    </script>
 </body>
 
 </html>

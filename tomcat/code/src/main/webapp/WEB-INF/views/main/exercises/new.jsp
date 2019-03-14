@@ -46,6 +46,21 @@ scriptletExerciseBody +="   </style> ";
 scriptletExerciseBody +=" <div class='col-sm-auto'>";
 scriptletExerciseBody += title;
 scriptletExerciseBody +=" </div> ";
+
+//String useDirectoryTree = (String) request.getSession().getAttribute("resolutionParam");
+
+String useDirectoryTree = "1";
+
+if (useDirectoryTree.equals("1") ) {
+	scriptletExerciseBody += "<link rel='stylesheet' href='/resources/vendor/jstree/dist/themes/default/style.min.css' />";
+	scriptletExerciseBody += "<div id='jstree_demo_div'>";
+	scriptletExerciseBody += "<ul>";
+	scriptletExerciseBody += "<li>Root node 1</li>";
+	scriptletExerciseBody += "<li>Root node 2</li>";
+	scriptletExerciseBody += "</ul>";
+	scriptletExerciseBody += "</div>";
+}
+
 scriptletExerciseBody +=" <form action='"+Routes.exercisesAct+"' name='formExercises' method='post' onsubmit='putValue()'>";
 scriptletExerciseBody +="	<div name='resolutionDiv' id='editor'>"+resolutionParam+"</div>";
 scriptletExerciseBody +="			<p id ='buttonSubmit'>";

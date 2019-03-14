@@ -141,6 +141,16 @@ public class Exercise {
 	}
 
 	public String testCode;
+	
+	protected int useDirectoryTree;
+	
+	public void setUseDirectoryTree(int useDirectoryTree) {
+		this.useDirectoryTree = useDirectoryTree;
+	}
+
+	public int getUseDirectoryTree() {
+		return this.useDirectoryTree;
+	}
 
 	public void initializeExercise() {
 		nameTestFile = "testMethod" + name;
