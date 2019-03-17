@@ -32,6 +32,8 @@ import br.com.assessmentsystem.assessmentsystem.dao.SolutionDao;
 public class Exercise {
 	
 	protected String initialDirectory = "/usr/local/tomcat/students/"; 
+	
+	protected String rootDirectory = "";
 
 	public List<Solution> solutions;
 	

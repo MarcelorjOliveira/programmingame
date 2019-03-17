@@ -1,3 +1,9 @@
-<jsp:include page='template.jsp'>
-<jsp:param name="body" value="<h1>TesteCaso</h1>"/>
+<%
+
+String timeline = "Bem vindo ao programmingGame . Onde você aprende programação brincando.";
+
+%>
+
+<jsp:include page='/WEB-INF/views/main/template.jsp'>
+<jsp:param name="templateBody" value="<%=timeline%>"/>
 </jsp:include>

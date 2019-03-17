@@ -12,6 +12,8 @@ if (title == null){
 
 session.removeAttribute("title");
 
+String exerciseName = (String) session.getAttribute("exerciseName");
+
 String resolutionParam = (String) request.getSession().getAttribute("resolutionParam");
 
 if (resolutionParam == null){
@@ -55,10 +57,13 @@ if (useDirectoryTree.equals("1") ) {
 	scriptletExerciseBody += "<link rel='stylesheet' href='/resources/vendor/jstree/dist/themes/default/style.min.css' />";
 	scriptletExerciseBody += "<div id='jstree_demo_div'>";
 	scriptletExerciseBody += "<ul>";
-	scriptletExerciseBody += "<li>Root node 1</li>";
-	scriptletExerciseBody += "<li>Root node 2</li>";
+	scriptletExerciseBody += "<li>root</li>";
 	scriptletExerciseBody += "</ul>";
 	scriptletExerciseBody += "</div>";
+	scriptletExerciseBody += "<div id='create'>";
+	scriptletExerciseBody += "<span class ='glyphicon glyphicon-plus'></span>";
+	scriptletExerciseBody += "</div>";
+
 }
 
 scriptletExerciseBody +=" <form action='"+Routes.exercisesAct+"' name='formExercises' method='post' onsubmit='putValue()'>";

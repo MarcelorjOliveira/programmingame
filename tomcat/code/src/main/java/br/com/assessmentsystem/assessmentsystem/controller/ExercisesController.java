@@ -5,6 +5,7 @@
  */
 package br.com.assessmentsystem.assessmentsystem.controller;
 
+import java.io.File;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -43,6 +44,34 @@ public class ExercisesController {
 		return "redirect:" + Routes.exercisesNew;
 	}
 
+	@RequestMapping(Routes.exercisesCreateDirectory)
+	public void createDirectory(String path) {
+		//user
+		//exercise
+		
+		//criar
+		
+		// não deixar criar se tiver .. ou caracteres inválidos
+		
+		//File fileDirectory = new File(initialDirectory + Integer.toString(this.userId));
+
+		//fileDirectory.mkdir();
+
+		//fileDirectory = new File(initialDirectory + root);
+
+		//fileDirectory.mkdir();
+	}
+	
+	@RequestMapping(Routes.exercisesCreateFile)
+	public String createFile(String name) {
+		return "";
+	}
+
+	@RequestMapping(Routes.exercisesUpdateDirectoryTree)
+	public void updateDirectoryTree() {
+		
+	}
+	
 	@RequestMapping(Routes.exercisesNew)
 	public String newExercise(HttpServletRequest request, Model model) {
 		String titulo = "";
@@ -67,7 +96,7 @@ public class ExercisesController {
 		
 		session.setAttribute("title", exercise.getStatement());
 		session.setAttribute("exerciseId", Integer.toString(exercise.getId()) );
-
+		session.setAttribute("exerciseName", exercise.getName());
 				
 		/*
 		 * Class classe = User.class; for (Field atributo : classe.getDeclaredFields())

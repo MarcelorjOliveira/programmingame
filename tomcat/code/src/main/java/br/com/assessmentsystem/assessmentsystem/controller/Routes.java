@@ -24,13 +24,7 @@ public class Routes {
                                exercisesNew = exercises + "/new",
                                exercisesAct = exercises + "/act", 
                                exercisesUpdate = exercises + "/update",
-                               basicExercises = main + "/basicexercises",
-                               basicExercisesNew = basicExercises + "/new",
-                               basicExercisesAct = basicExercises + "/act", 
-                               basicExercisesUpdate = basicExercises + "/update",
-    						   OOExercises = main + "/ooexercises",
-    						   OOExercisesNew = OOExercises + "/new",
-    						   OOExercisesAct = OOExercises + "/act", 
-    						   OOExercisesUpdate = OOExercises + "/update";
-
+                               exercisesCreateFile = exercises + "/createFile",
+                               exercisesCreateDirectory = exercises + "/createDirectory",
+                               exercisesUpdateDirectoryTree = exercises+"/updateDirectoryTree";
 }
