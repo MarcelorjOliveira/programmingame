@@ -94,17 +94,6 @@ public class OOJavaExercise extends Exercise {
 		// teste
 	}
 
-	public void writeFile(String code, File file) {
-		try {
-			// Gravando no arquivo
-			FileOutputStream fos = new FileOutputStream(file);
-			fos.write(code.getBytes());
-			fos.close();
-		} catch (Exception ee) {
-			ee.printStackTrace();
-		}
-	}
-
 	public void buildSourceCode() {
 		try {
 			// Compilação do código-fonte

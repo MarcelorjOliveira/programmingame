@@ -2827,3 +2827,7 @@ table.dataTable thead td {
 }
 
 /*-------------------- END Offset Sidebar ------------------- */
+
+.modal-header {
+	background-color:#ddd;
+}

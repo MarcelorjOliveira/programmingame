@@ -45,9 +45,30 @@ public class ExercisesController {
 	}
 
 	@RequestMapping(Routes.exercisesCreateDirectory)
-	public void createDirectory(String path) {
+	public void createDirectory(HttpServletRequest request) {
 		//user
 		//exercise
+		
+		String path = request.getParameter("directory");
+		
+		HttpSession session = request.getSession();
+
+		User user = (User) session.getAttribute("user");
+		
+		String userId = Integer.toString(user.getId());
+
+		String exerciseId = (String) session.getAttribute("exerciseId");
+
+		File fileDirectory = new File("/usr/local/tomcat/students/"+userId+"/"+exerciseId+"/"+path);
+		
+		if (!path.contains("..")) {
+			fileDirectory.mkdirs();
+			Exercise.writeFile("", fileDirectory);
+		}
+		
+		if(path.contains("..") ) {
+			System.out.println("Não é");
+		}
 		
 		//criar
 		

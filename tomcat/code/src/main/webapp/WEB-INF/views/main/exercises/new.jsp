@@ -2,7 +2,7 @@
 <%
 
 String exerciseId = (String) request.getSession().getAttribute("exerciseId");
-String scriptletExerciseBody = "";
+String exerciseBody = "";
 
 String title = (String) session.getAttribute("title");
 
@@ -23,76 +23,95 @@ if (resolutionParam == null){
 session.removeAttribute("resolutionParam");
 
 if (request.getParameter("mark") != null) { 
-	scriptletExerciseBody +="<script>alert('Nota : "+request.getParameter("mark")+"');";
-	scriptletExerciseBody +=" var solutions = "+request.getParameter("corrections")+"; ";
-	scriptletExerciseBody +=" for(var c=0; c < solutions.descriptions.length; c++){ ";
-	scriptletExerciseBody +=" var description = solutions.descriptions[c]; "; 			
-	scriptletExerciseBody +=" if(description){ ";
-	scriptletExerciseBody +=" alert(description); ";			
-	scriptletExerciseBody +=" } ";			
-	scriptletExerciseBody +=" } ";
-	scriptletExerciseBody +=" </script> ";
+	exerciseBody +="<script>alert('Nota : "+request.getParameter("mark")+"');";
+	exerciseBody +=" var solutions = "+request.getParameter("corrections")+"; ";
+	exerciseBody +=" for(var c=0; c < solutions.descriptions.length; c++){ ";
+	exerciseBody +=" var description = solutions.descriptions[c]; "; 			
+	exerciseBody +=" if(description){ ";
+	exerciseBody +=" alert(description); ";			
+	exerciseBody +=" } ";			
+	exerciseBody +=" } ";
+	exerciseBody +=" </script> ";
 }
 
-scriptletExerciseBody +="  	<style type='text/css' media='screen'> ";
-scriptletExerciseBody +="	#editor { "; 
-scriptletExerciseBody +="		position: relative; ";
-scriptletExerciseBody +="		right: 0; ";   
-scriptletExerciseBody +="		bottom: 0; ";
-scriptletExerciseBody +="		left: 0; ";
-scriptletExerciseBody +="		width: 100%; ";
-scriptletExerciseBody +="		height: 30em; ";
-scriptletExerciseBody +="	} ";
-scriptletExerciseBody +="   </style> ";
+exerciseBody +="  	<style type='text/css' media='screen'> ";
+exerciseBody +="	#editor { "; 
+exerciseBody +="		position: relative; ";
+exerciseBody +="		right: 0; ";   
+exerciseBody +="		bottom: 0; ";
+exerciseBody +="		left: 0; ";
+exerciseBody +="		width: 100%; ";
+exerciseBody +="		height: 30em; ";
+exerciseBody +="	} ";
+exerciseBody +="   </style> ";
     
-scriptletExerciseBody +=" <div class='col-sm-auto'>";
-scriptletExerciseBody += title;
-scriptletExerciseBody +=" </div> ";
+exerciseBody +=" <div class='col-sm-auto'>";
+exerciseBody += title;
+exerciseBody +=" </div> ";
 
 //String useDirectoryTree = (String) request.getSession().getAttribute("resolutionParam");
 
 String useDirectoryTree = "1";
 
 if (useDirectoryTree.equals("1") ) {
-	scriptletExerciseBody += "<link rel='stylesheet' href='/resources/vendor/jstree/dist/themes/default/style.min.css' />";
-	scriptletExerciseBody += "<div id='jstree_demo_div'>";
-	scriptletExerciseBody += "<ul>";
-	scriptletExerciseBody += "<li>root</li>";
-	scriptletExerciseBody += "</ul>";
-	scriptletExerciseBody += "</div>";
-	scriptletExerciseBody += "<div id='create'>";
-	scriptletExerciseBody += "<span class ='glyphicon glyphicon-plus'></span>";
-	scriptletExerciseBody += "</div>";
+	exerciseBody += "<link rel='stylesheet' href='/resources/vendor/jstree/dist/themes/default/style.min.css' />";
+	exerciseBody += "<div id='jstree_demo_div'>";
+	exerciseBody += "<ul>";
+	exerciseBody += "<li>root</li>";
+	exerciseBody += "</ul>";
+	exerciseBody += "</div>";
+	exerciseBody += "<div id='create'>";
+	exerciseBody += "<a data-toggle='modal' href='#directoryModal'><span class ='ti-plus'></span></a>";
+	exerciseBody += "</div>";
+	exerciseBody += "<div class='modal fade' id='directoryModal' role='dialog'>";
+	exerciseBody += "<div class='modal-dialog'>";
+	exerciseBody += "  <!-- Modal content-->";
+	exerciseBody += "  <div class='modal-content'>";
+	exerciseBody += "   <div class='modal-header'>";
+	exerciseBody += "   Create Directory";
+	exerciseBody += "      <button type='button' class='close' data-dismiss='modal'>&times;</button>";
+	exerciseBody += "    </div>";
+	exerciseBody += "    <div class='modal-body'>";
+	exerciseBody += "<form role='form' name='createDirectory' action='"+Routes.exercisesCreateDirectory+"'>";
+	exerciseBody += "<div class='form-group'>";
+	exerciseBody += "              <input type='text' class='form-control' name='directory' id='directory' placeholder='E.g. /src/home or /src/user/cad.java'>";
+	exerciseBody += "            <button type='submit' class='btn btn-default btn-success btn-block'><span class='glyphicon glyphicon-off'></span>Create</button>";
+	exerciseBody += "            </div>";
+	exerciseBody += "          </form>";
+	exerciseBody += "        </div>";
+	exerciseBody += "      </div>";
+	exerciseBody += "  </div>";
+	exerciseBody += "</div>";
 
 }
 
-scriptletExerciseBody +=" <form action='"+Routes.exercisesAct+"' name='formExercises' method='post' onsubmit='putValue()'>";
-scriptletExerciseBody +="	<div name='resolutionDiv' id='editor'>"+resolutionParam+"</div>";
-scriptletExerciseBody +="			<p id ='buttonSubmit'>";
-scriptletExerciseBody +="				<input type='hidden' name='resolution' id='resolution'>";
-scriptletExerciseBody +="				<input type='hidden' name='exerciseId' value='"+exerciseId+"'>";
-scriptletExerciseBody +="               <input type='submit' value='Enviar'/> ";
-scriptletExerciseBody +="           </p> ";
-scriptletExerciseBody +=" </form>";
-scriptletExerciseBody +=" <br> ";      		
-scriptletExerciseBody +=" <script> ";
-scriptletExerciseBody +=" 	function putValue() { ";
-scriptletExerciseBody +="  		var inputHidden = document.getElementById('resolution');";
-scriptletExerciseBody +="		inputHidden.value = editor.getValue(); ";
-scriptletExerciseBody +="		return 0; ";
-scriptletExerciseBody +="	} ";                  
-scriptletExerciseBody +=" </script> ";
-scriptletExerciseBody +="		<script src='/resources/acebuilds/ace.js'></script>";
-scriptletExerciseBody +="		<script src='/resources/acebuilds/ext-statusbar.js'></script>";
-scriptletExerciseBody +=" <script>";
-scriptletExerciseBody +=" var editor = ace.edit('editor');";
-scriptletExerciseBody +=" editor.setTheme('ace/theme/eclipse');";
-scriptletExerciseBody +=" editor.getSession().setMode('ace/mode/c_cpp'); ";
-scriptletExerciseBody +=" </script>";
+exerciseBody +=" <form action='"+Routes.exercisesAct+"' name='formExercises' method='post' onsubmit='putValue()'>";
+exerciseBody +="	<div name='resolutionDiv' id='editor'>"+resolutionParam+"</div>";
+exerciseBody +="			<p id ='buttonSubmit'>";
+exerciseBody +="				<input type='hidden' name='resolution' id='resolution'>";
+exerciseBody +="				<input type='hidden' name='exerciseId' value='"+exerciseId+"'>";
+exerciseBody +="               <input type='submit' value='Enviar'/> ";
+exerciseBody +="           </p> ";
+exerciseBody +=" </form>";
+exerciseBody +=" <br> ";      		
+exerciseBody +=" <script> ";
+exerciseBody +=" 	function putValue() { ";
+exerciseBody +="  		var inputHidden = document.getElementById('resolution');";
+exerciseBody +="		inputHidden.value = editor.getValue(); ";
+exerciseBody +="		return 0; ";
+exerciseBody +="	} ";                  
+exerciseBody +=" </script> ";
+exerciseBody +="		<script src='/resources/acebuilds/ace.js'></script>";
+exerciseBody +="		<script src='/resources/acebuilds/ext-statusbar.js'></script>";
+exerciseBody +=" <script>";
+exerciseBody +=" var editor = ace.edit('editor');";
+exerciseBody +=" editor.setTheme('ace/theme/eclipse');";
+exerciseBody +=" editor.getSession().setMode('ace/mode/c_cpp'); ";
+exerciseBody +=" </script>";
 
 
 %>
 
 <jsp:include page='/WEB-INF/views/main/template.jsp'>
-<jsp:param name="templateBody" value="<%=scriptletExerciseBody%>"/>
+<jsp:param name="templateBody" value="<%=exerciseBody%>"/>
 </jsp:include>

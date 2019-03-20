@@ -34,7 +34,7 @@
     <!-- others css -->
     <link rel="stylesheet" href="/resources/assets/css/typography.css">
     <link rel="stylesheet" href="/resources/assets/css/default-css.css">
-    <link rel="stylesheet" href="/resources/assets/css/styles.css">
+    <link rel="stylesheet" href="/resources/assets/css/styles.css?v1">
     <link rel="stylesheet" href="/resources/assets/css/responsive.css">
     <!-- modernizr css -->
     <script src="/resources/assets/js/vendor/modernizr-2.8.3.min.js"></script>

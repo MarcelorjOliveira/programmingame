@@ -185,7 +185,7 @@ public class Exercise {
 				+ "return CU_get_error(); \n" + "} \n";
 	}
 
-	public void writeFile(String code, File file) {
+	public static void writeFile(String code, File file) {
 		try {
 			// Gravando no arquivo
 			FileOutputStream fos = new FileOutputStream(file);
