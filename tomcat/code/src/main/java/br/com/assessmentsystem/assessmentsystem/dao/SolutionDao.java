@@ -27,7 +27,9 @@ public class SolutionDao extends BaseDao {
 
 				String query = "SELECT * from Solution s where " + " s.test in (" + conditionsString + ")";
 
-				PreparedStatement stmt = this.connectionFactory.getConnection().prepareStatement(query);
+				getConnection();
+				
+				PreparedStatement stmt = connection.prepareStatement(query);
 
 				ResultSet rs = stmt.executeQuery();
 
@@ -38,6 +40,7 @@ public class SolutionDao extends BaseDao {
 				}
 				rs.close();
 				stmt.close();
+				connection.close();
 			} catch (SQLException e) {
 				throw new RuntimeException(e);
 			} catch (Exception e) {
@@ -51,7 +54,9 @@ public class SolutionDao extends BaseDao {
 
 	public boolean insert(Movement movement) {
 		try {
-			PreparedStatement stmt = this.connectionFactory.getConnection().prepareStatement(
+			getConnection();
+			
+			PreparedStatement stmt = connection.prepareStatement(
 					"insert into Movement (exerciseId, userId," + "codeUsed, mark) values (?,?,?,?)  ");
 
 			stmt.setInt(1, movement.getExerciseId());
@@ -61,6 +66,8 @@ public class SolutionDao extends BaseDao {
 
 			stmt.execute();
 			stmt.close();
+			connection.close();
+			
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		} catch (Exception e) {
@@ -76,9 +83,11 @@ public class SolutionDao extends BaseDao {
 		try {
 			Solution solution;
 
+			getConnection();
+			
 			String query = "SELECT * from Solution s where s.idExercise = "+Integer.toString(idExercise);
-
-			PreparedStatement stmt = this.connectionFactory.getConnection().prepareStatement(query);
+			
+			PreparedStatement stmt = connection.prepareStatement(query);
 
 			ResultSet rs = stmt.executeQuery();
 
@@ -93,6 +102,7 @@ public class SolutionDao extends BaseDao {
 			}
 			rs.close();
 			stmt.close();
+			connection.close();
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		} catch (Exception e) {

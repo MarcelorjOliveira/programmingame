@@ -4,9 +4,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import br.com.assessmentsystem.assessmentsystem.model.BasicExercise;
 import br.com.assessmentsystem.assessmentsystem.model.Exercise;
 import br.com.assessmentsystem.assessmentsystem.model.OOJavaExercise;
-import br.com.assessmentsystem.assessmentsystem.model.Solution;
 
 public class ExerciseDao extends BaseDao {
 	public Exercise findById(int id) {
@@ -16,7 +16,9 @@ public class ExerciseDao extends BaseDao {
 
 			String query = "SELECT * from Exercise e where e.id = " + id;
 
-			PreparedStatement stmt = this.connectionFactory.getConnection().prepareStatement(query);
+			getConnection();
+			
+			PreparedStatement stmt = connection.prepareStatement(query);
 
 			ResultSet rs = stmt.executeQuery();
 
@@ -36,6 +38,7 @@ public class ExerciseDao extends BaseDao {
 
 			rs.close();
 			stmt.close();
+			connection.close();
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		} catch (Exception e) {
@@ -49,7 +52,7 @@ public class ExerciseDao extends BaseDao {
 	public Exercise createByType(int tipo) {
 		Exercise exercise = new Exercise();
 		if(tipo == 1) {
-			exercise = new Exercise();
+			exercise = new BasicExercise();
 		}
 		if(tipo == 2) {
 			exercise = new OOJavaExercise();

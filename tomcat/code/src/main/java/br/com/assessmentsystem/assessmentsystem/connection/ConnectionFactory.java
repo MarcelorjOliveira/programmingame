@@ -1,4 +1,4 @@
-package br.com.assessmentsystem.assessmentsystem.dao;
+package br.com.assessmentsystem.assessmentsystem.connection;
 
 import java.io.File;
 import java.sql.Connection;
@@ -8,11 +8,9 @@ import java.util.Properties;
 
 import org.ini4j.Wini;
 
-public class BaseDao {
+public class ConnectionFactory {
 
-	protected Connection connection;
-	
-	public void getConnection() throws Exception {
+	public Connection getConnection() throws Exception {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
@@ -39,6 +37,8 @@ public class BaseDao {
 		System.out.println(dbName);
 */
 		
+		Connection connection;
+		
 		Properties properties = new Properties();
 
 		properties.setProperty("user", userName);
@@ -63,6 +63,8 @@ public class BaseDao {
 				else Thread.sleep(1000);
 			}
 		}
+		
+		return connection;
 	}
 
 }

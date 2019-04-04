@@ -1,4 +1,3 @@
-
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
@@ -8,13 +7,10 @@ banco/**
 example_template/**
 exemplo/**
 tomcat/code/target/**
-tomcat/config/**
 docker-cloud.yml
 docker-composeaws.yml
 rodar
-tomcat/code/src/main/java/br/com/assessmentsystem/assessmentsystem/connection/ConnectionFactory.java
 tomcat/AssessmentSystempegou
-tomcat/Dockerfile
-tomcat/DockerfileComJar
-tomcat/Dockerfilelocal
-
+tomcat/config/ini/amazon.ini
+tomcat/environment/package/java
+docker-composeAmazon.yml

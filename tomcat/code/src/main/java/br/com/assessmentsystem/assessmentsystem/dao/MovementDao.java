@@ -7,11 +7,12 @@ import java.sql.SQLException;
 import br.com.assessmentsystem.assessmentsystem.model.Movement;
 
 public class MovementDao extends BaseDao {
-
 	
 	public boolean insert(Movement movement) {
 		try {
-		PreparedStatement stmt = this.connectionFactory.getConnection().prepareStatement("insert into Movement (exerciseId, userId,"
+		getConnection();
+		
+		PreparedStatement stmt = connection.prepareStatement("insert into Movement (exerciseId, userId,"
 		+ "codeUsed, mark) values (?,?,?,?)  ");
 		
 		stmt.setInt(1, movement.getExerciseId());
@@ -21,6 +22,7 @@ public class MovementDao extends BaseDao {
 			
 		stmt.execute();
 		stmt.close();
+		connection.close();
 		}
 		catch (SQLException e) {
 			throw new RuntimeException(e);

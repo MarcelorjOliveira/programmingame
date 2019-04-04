@@ -51,7 +51,7 @@ exerciseBody +=" </div> ";
 
 //String useDirectoryTree = (String) request.getSession().getAttribute("resolutionParam");
 
-String useDirectoryTree = "1";
+String useDirectoryTree = "0";
 
 if (useDirectoryTree.equals("1") ) {
 	exerciseBody += "<link rel='stylesheet' href='/resources/vendor/jstree/dist/themes/default/style.min.css' />";

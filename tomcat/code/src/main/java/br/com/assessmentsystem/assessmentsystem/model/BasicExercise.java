@@ -22,7 +22,7 @@ import org.w3c.dom.Document;
 import br.com.assessmentsystem.assessmentsystem.dao.MovementDao;
 import br.com.assessmentsystem.assessmentsystem.dao.SolutionDao;
 
-public class OOJavaExercise extends Exercise {
+public class BasicExercise extends Exercise {
 
 	private String codeRunner;
 	protected String root;
@@ -35,16 +35,21 @@ public class OOJavaExercise extends Exercise {
 
 	public void buildGrading(String code) {
 		root = Integer.toString(this.userId) + "/" + name;
+		
+		//File fileDirectory = new File(initialDirectory + Integer.toString(this.userId));
+		
+		File fileDirectory = new File(initialDirectory + root);
 
-		File fileDirectory = new File(initialDirectory + Integer.toString(this.userId));
+		//fileDirectory.mkdir();
 
-		fileDirectory.mkdir();
+		//fileDirectory = new File(initialDirectory + root);
 
-		fileDirectory = new File(initialDirectory + root);
+		fileDirectory.mkdirs();
 
-		fileDirectory.mkdir();
-
-		String codeWorked = "package " + name + "; \n" + this.code;
+		String codeWorked = "package " + name + "; \n "
+				+ " class " + name + 
+				"{\n " + this.code + 
+				"}\n";
 
 		// createDirectory(Integer.toString(userId));
 

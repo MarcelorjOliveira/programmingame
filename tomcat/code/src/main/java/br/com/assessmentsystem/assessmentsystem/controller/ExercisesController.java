@@ -46,8 +46,8 @@ public class ExercisesController {
 
 	@RequestMapping(Routes.exercisesCreateDirectory)
 	public void createDirectory(HttpServletRequest request) {
-		//user
-		//exercise
+		
+		//too many connections 
 		
 		String path = request.getParameter("directory");
 		

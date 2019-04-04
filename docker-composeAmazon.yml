@@ -21,7 +21,7 @@ services:
             vpcbr:
                 ipv4_address: 10.5.0.5
     halyen:
-        image: halyentomcatlocal
+        image: businessnewapplication/halyentomcat
         ports:
             - "80:8080"
         volumes:
@@ -29,7 +29,6 @@ services:
             - ./tomcat/code/target/AssessmentSystem:/usr/local/tomcat/webapps/ROOT
             - ./tomcat/code/ambiente:/usr/local/tomcat/ambiente
             - ./tomcat/code/students:/usr/local/tomcat/students
-            - ./tomcat/config/ini:/usr/local/tomcat/ini
         networks:
             vpcbr:
                 ipv4_address: 10.5.0.6

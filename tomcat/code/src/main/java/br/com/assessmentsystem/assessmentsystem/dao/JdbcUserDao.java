@@ -11,25 +11,29 @@ import br.com.assessmentsystem.assessmentsystem.model.User;
 public class JdbcUserDao extends BaseDao {
 
 	public boolean existUser(User usuario) {
-		
-		if(usuario == null) {
+
+		if (usuario == null) {
 			throw new IllegalArgumentException("Usuário não deve ser nulo");
 		}
-		
+
 		try {
-			PreparedStatement stmt = this.connectionFactory.getConnection().prepareStatement("select * from Users where login = ? and password = ? limit 1");
+
+			getConnection();
+
+			PreparedStatement stmt = connection
+					.prepareStatement("select * from Users where login = ? and password = ? limit 1");
 			stmt.setString(1, usuario.getLogin());
-			stmt.setString(2, DigestUtils.md5Hex(usuario.getPassword()) );
+			stmt.setString(2, DigestUtils.md5Hex(usuario.getPassword()));
 			ResultSet rs = stmt.executeQuery();
-			
+
 			boolean encontrado = rs.next();
 			// TODO todos os dados do usuário com hibernate
-			if(encontrado == true)
+			if (encontrado == true)
 				usuario.setId(rs.getInt("id"));
-			
 
 			rs.close();
 			stmt.close();
+			connection.close();
 
 			return encontrado;
 		} catch (SQLException e) {
@@ -40,28 +44,27 @@ public class JdbcUserDao extends BaseDao {
 		}
 	}
 
-    public void createUser(User user) {
-   		
-		if(user == null) {
+	public void createUser(User user) {
+
+		if (user == null) {
 			throw new IllegalArgumentException("Usuário não deve ser nulo");
 		}
-		
+
 		try {
-			PreparedStatement stmt = this.connectionFactory.getConnection().prepareStatement("insert into Users " +
-                                "(login, password) " +
-                                " values (?, ?)" );
+			PreparedStatement stmt = connection
+					.prepareStatement("insert into Users " + "(login, password) " + " values (?, ?)");
 			stmt.setString(1, user.getLogin());
 			stmt.setString(2, DigestUtils.md5Hex(user.getPassword()));
-                        
-                        stmt.execute();
-                        stmt.close();
-                        
+
+			stmt.execute();
+			stmt.close();
+			connection.close();
+
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
- }
+	}
 }
-

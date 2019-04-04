@@ -13,13 +13,14 @@ public class CourseDao extends BaseDao {
 	public List<Course> courseWithExercises() {
 		List<Course> courses = new ArrayList<Course>(); 
 		ExerciseDao exerciseDao = new ExerciseDao();
-
 		try {
 
 			String query = "SELECT Course.id as Course_id, Exercise.id as Exercise_id, Course.name as Course_name"
 				+" from Course inner join Exercise on Course.id = Exercise.course order by Course.id";
 
-			PreparedStatement stmt = this.connectionFactory.getConnection().prepareStatement(query);
+			getConnection();
+			
+			PreparedStatement stmt = connection.prepareStatement(query);
 
 			ResultSet rs = stmt.executeQuery();
 
@@ -43,6 +44,7 @@ public class CourseDao extends BaseDao {
 
 			rs.close();
 			stmt.close();
+			connection.close();
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		} catch (Exception e) {

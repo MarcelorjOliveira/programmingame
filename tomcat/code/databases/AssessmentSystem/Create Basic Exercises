@@ -1,0 +1,296 @@
+update Exercise set tests =
+"package Soma;\n
+\n
+import org.junit.After;\n
+import org.junit.AfterClass;\n
+import org.junit.Before;\n
+import org.junit.BeforeClass;\n
+import org.junit.Test;\n
+import static org.junit.Assert.*;\n
+import Soma.Soma;\n
+\n
+public class SomaTest {\n
+\n
+    @Test\n
+    public void testSoma1() {\n
+	Soma soma = new Soma();\n
+\n
+        assertEquals(5, soma.soma(2,3));\n
+    }\n
+\n
+    @Test\n
+    public void testSoma2() {\n
+	Soma soma = new Soma();\n
+\n
+       assertEquals(7, soma.soma(4,3));\n
+    }\n
+\n
+    @Test\n
+    public void testSoma3() {\n
+	Soma soma = new Soma();\n
+\n
+ 	assertEquals(87, soma.soma(43,44));\n
+    }\n
+}\n " where id = 1;
+
+update Exercise set tests =
+"package Fatorial;\n
+\n
+import org.junit.After;\n
+import org.junit.AfterClass;\n
+import org.junit.Before;\n
+import org.junit.BeforeClass;\n
+import org.junit.Test;\n
+import static org.junit.Assert.*;\n
+import Fatorial.Fatorial;\n
+\n
+public class FatorialTest {\n
+\n
+    @Test\n
+    public void testFatorial1() {\n
+	Fatorial fatorial = new Fatorial();\n
+\n
+        assertEquals(1, fatorial.fatorial(1));\n
+    }\n
+\n
+    @Test\n
+    public void testFatorial2() {\n
+	Fatorial fatorial = new Fatorial();\n
+\n
+       assertEquals(120, fatorial.fatorial(5));\n
+    }\n
+\n
+    @Test\n
+    public void testFatorial3() {\n
+	Fatorial fatorial = new Fatorial();\n
+\n
+ 	assertEquals(40320, fatorial.fatorial(8));\n
+    }\n
+    @Test\n
+    public void testFatorial4() {\n
+	Fatorial fatorial = new Fatorial();\n
+\n
+ 	assertEquals(39916800, fatorial.fatorial(11));\n
+    }\n
+}\n " where id = 2;
+
+update Exercise set tests =
+"package Fibonnaci;\n
+\n
+import org.junit.After;\n
+import org.junit.AfterClass;\n
+import org.junit.Before;\n
+import org.junit.BeforeClass;\n
+import org.junit.Test;\n
+import static org.junit.Assert.*;\n
+import Fibonnaci.Fibonnaci;\n
+\n
+public class FibonnaciTest {\n
+\n
+    @Test\n
+    public void testFibonnaci1() {\n
+	Fibonnaci fibonnaci = new Fibonnaci();\n
+\n
+        assertEquals(1, fibonnaci.fibonnaci(1));\n
+    }\n
+\n
+    @Test\n
+    public void testFibonnaci2() {\n
+	Fibonnaci fibonnaci = new Fibonnaci();\n
+\n
+       assertEquals(120, fibonnaci.fibonnaci(5));\n
+    }\n
+\n
+    @Test\n
+    public void testFibonnaci3() {\n
+	Fibonnaci fibonnaci = new Fibonnaci();\n
+\n
+ 	assertEquals(40320, fibonnaci.fibonnaci(8));\n
+    }\n
+    @Test\n
+    public void testFibonnaci4() {\n
+	Fibonnaci fibonnaci = new Fibonnaci();\n
+\n
+ 	assertEquals(39916800, fibonnaci.fibonnaci(11));\n
+    }\n
+}\n " where id = 3;
+
+update Exercise set tests =
+"package Produtorio;\n
+\n
+import org.junit.After;\n
+import org.junit.AfterClass;\n
+import org.junit.Before;\n
+import org.junit.BeforeClass;\n
+import org.junit.Test;\n
+import static org.junit.Assert.*;\n
+import Produtorio.Produtorio;\n
+\n
+public class ProdutorioTest {\n
+\n
+    @Test\n
+    public void testProdutorio1() {\n
+	Produtorio produtorio = new Produtorio();\n
+\n
+        assertEquals(24, produtorio.produtorio(1,4));\n
+    }\n
+\n
+    @Test\n
+    public void testProdutorio2() {\n
+	Produtorio produtorio = new Produtorio();\n
+\n
+       assertEquals(60, produtorio.produtorio(3,5));\n
+    }\n
+\n
+    @Test\n
+    public void testProdutorio3() {\n
+	Produtorio produtorio = new Produtorio();\n
+\n
+ 	assertEquals(504, produtorio.produtorio(7,9));\n
+    }\n
+    @Test\n
+    public void testProdutorio4() {\n
+	Produtorio produtorio = new Produtorio();\n
+\n
+ 	assertEquals(2520, produtorio.produtorio(3,7));\n
+    }\n
+    @Test\n
+    public void testProdutorio5() {\n
+	Produtorio produtorio = new Produtorio();\n
+\n
+ 	assertEquals(0, produtorio.produtorio(0,10));\n
+    }\n
+
+}\n " where id = 5;
+
+update Exercise set tests =
+"package Multiplo;\n
+\n
+import org.junit.After;\n
+import org.junit.AfterClass;\n
+import org.junit.Before;\n
+import org.junit.BeforeClass;\n
+import org.junit.Test;\n
+import static org.junit.Assert.*;\n
+import Multiplo.Multiplo;\n
+\n
+public class MultiploTest {\n
+\n
+    @Test\n
+    public void testMultiplo1() {\n
+	Multiplo multiplo = new Multiplo();\n
+\n
+        assertEquals(0, multiplo.multiplo(1,1));\n
+    }\n
+\n
+    @Test\n
+    public void testMultiplo2() {\n
+	Multiplo multiplo = new Multiplo();\n
+\n
+       assertEquals(1, multiplo.multiplo(1,100));\n
+    }\n
+\n
+    @Test\n
+    public void testMultiplo3() {\n
+	Multiplo multiplo = new Multiplo();\n
+\n
+ 	assertEquals(0, multiplo.multiplo(8,4));\n
+    }\n
+    @Test\n
+    public void testMultiplo4() {\n
+	Multiplo multiplo = new Multiplo();\n
+\n
+ 	assertEquals(1, multiplo.multiplo(3,2));\n
+    }\n
+    @Test\n
+    public void testmultiplo5() {\n
+	Multiplo multiplo = new Multiplo();\n
+\n
+ 	assertEquals(0, multiplo.multiplo(80,20));\n
+    }\n
+
+}\n " where id = 6;
+
+update Exercise set tests =
+"package Lanchonete;\n
+\n
+import org.junit.After;\n
+import org.junit.AfterClass;\n
+import org.junit.Before;\n
+import org.junit.BeforeClass;\n
+import org.junit.Test;\n
+import static org.junit.Assert.*;\n
+import Lanchonete.Lanchonete;\n
+\n
+public class LanchoneteTest {\n
+\n
+    @Test\n
+    public void testLanchonete1() {\n
+	Lanchonete lanchonete = new Lanchonete();\n
+\n
+        assertEquals(2.00, lanchonete.lanchonete(1,1), 0.0);\n
+    }\n
+\n
+    @Test\n
+    public void testLanchonete2() {\n
+	Lanchonete lanchonete = new Lanchonete();\n
+\n
+       assertEquals(6.00, lanchonete.lanchonete(1,3), 0.0);\n
+    }\n
+\n
+    @Test\n
+    public void testlanchonete3() {\n
+	Lanchonete lanchonete = new Lanchonete();\n
+\n
+ 	assertEquals(2.50, lanchonete.lanchonete(2,1), 0.0);\n
+    }\n
+    @Test\n
+    public void testlanchonete4() {\n
+	lanchonete lanchonete = new lanchonete();\n
+\n
+ 	assertEquals(10.00, lanchonete.lanchonete(2,4), 0.0);\n
+    }\n
+    @Test\n
+    public void testlanchonete5() {\n
+	lanchonete lanchonete = new lanchonete();\n
+\n
+ 	assertEquals(5.00, lanchonete.lanchonete(3,1));\n
+    }\n
+    @Test\n
+    public void testLanchonete6() {\n
+	Lanchonete lanchonete = new Lanchonete();\n
+\n
+        assertEquals(25.00, lanchonete.lanchonete(3,5), 0.0);\n
+    }\n
+\n
+    @Test\n
+    public void testLanchonete7() {\n
+	Lanchonete lanchonete = new Lanchonete();\n
+\n
+       assertEquals(3.50, lanchonete.lanchonete(4,1),0.0);\n
+    }\n
+\n
+    @Test\n
+    public void testlanchonete8() {\n
+	lanchonete lanchonete = new lanchonete();\n
+\n
+ 	assertEquals(7.00, lanchonete.lanchonete(4,2), 0.0);\n
+    }\n
+    @Test\n
+    public void testlanchonete9() {\n
+	lanchonete lanchonete = new lanchonete();\n
+\n
+ 	assertEquals(8.50, lanchonete.lanchonete(5,1));\n
+    }\n
+    @Test\n
+    public void testlanchonete10() {\n
+	lanchonete lanchonete = new lanchonete();\n
+\n
+ 	assertEquals(93.50, lanchonete.lanchonete(5,11));\n
+    }\n
+
+
+}\n " where id = 8;
+
+delete from Exercise where id = 7;
+

@@ -1,16 +1,3 @@
-insert into Exercise ( name, statement, modelResponse, tests) values ("Operacao","Escreva uma classe Operacao que tenha um método soma que some dois números.","public class Operacao { \n int soma(int x, int y)\n {\n int z; \n z = x + y; \n return z; \n
-                 }\n } \n", "CU_ASSERT(5 == soma(2,3)); \n CU_ASSERT(7 == soma(4,3)); \n CU_ASSERT(87 == soma(43,44));\n");
-
-public class SumExercise{
-    public int soma(int x, int y){
-        return x + y;
-    }
-}
-
-use halyeninstance;
-
-select * from Movement;
-
 insert into Exercise ( name, statement, modelResponse, tests, course, module) values ("Conta", "Escreva uma classe Conta que possua os atributos
  titular e saldo e os métodos saca que retira do saldo e deposita que acrescenta ao saldo", "
 class Conta {\n
@@ -212,10 +199,6 @@ public class ContaComEncapsulamentoTest {\n
         assertEquals(140.00, conta.getSaldo(), 0.0);\n
     }\n
 }",2,2);
-
---contrutores
-
-use halyeninstance;
 
 insert into Exercise ( name, statement, modelResponse, tests, course, module) values (
 "PessoaFisica", 
