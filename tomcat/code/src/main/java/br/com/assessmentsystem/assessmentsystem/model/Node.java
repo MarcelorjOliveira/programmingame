@@ -1,11 +1,12 @@
 package br.com.assessmentsystem.assessmentsystem.model;
 
-public class DirectoryTree {
+import java.util.List;
+
+public class Node {
 	
-	String id;
-	String parent;      // required
-	String text;      // node text
-	String icon;       // string for custom
+	public String id;
+	public String text;      // node text
+	public String icon;       // string for custom
 	/*
 		state       : {
 		    opened    : boolean  // is the node open
@@ -13,4 +14,5 @@ public class DirectoryTree {
 		    selected  : boolean  // is the node selected
 		  }
 	*/
+	public List<Node> children;
 }

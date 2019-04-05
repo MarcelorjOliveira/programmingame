@@ -158,6 +158,27 @@
     
     <!-- jquery latest version -->
     <script src="/resources/assets/js/vendor/jquery-2.2.4.min.js"></script>
+    
+        <script>
+	function createDirectoryAjax() {
+	alert('hoho');
+	
+	var directory = document.getElementById('directory').value;
+		
+	$.ajax({
+	url: '<%=Routes.exercisesCreateDirectory%>',
+	type: 'POST', 
+	data: 'directory='+directory,
+	dataType: 'json', 
+		success: function(data) { 
+		alert('haha'); 
+		}, 
+		error: function() { 
+			$('#notification-bar').text('An error occurred'); 
+		} 
+		});  
+	} 
+	</script>	
     <!-- bootstrap 4 js -->
     <script src="/resources/assets/js/popper.min.js"></script>
     <script src="/resources/assets/js/bootstrap.min.js"></script>
@@ -188,6 +209,7 @@
     <script>
     	$(function () { $('#jstree_demo_div').jstree(); } );
     </script>
+    
 </body>
 
 </html>

@@ -36,13 +36,7 @@ public class BasicExercise extends Exercise {
 	public void buildGrading(String code) {
 		root = Integer.toString(this.userId) + "/" + name;
 		
-		//File fileDirectory = new File(initialDirectory + Integer.toString(this.userId));
-		
 		File fileDirectory = new File(initialDirectory + root);
-
-		//fileDirectory.mkdir();
-
-		//fileDirectory = new File(initialDirectory + root);
 
 		fileDirectory.mkdirs();
 

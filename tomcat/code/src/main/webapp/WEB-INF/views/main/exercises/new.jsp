@@ -51,9 +51,10 @@ exerciseBody +=" </div> ";
 
 //String useDirectoryTree = (String) request.getSession().getAttribute("resolutionParam");
 
-String useDirectoryTree = "0";
+String useDirectoryTree = "1";
 
 if (useDirectoryTree.equals("1") ) {
+
 	exerciseBody += "<link rel='stylesheet' href='/resources/vendor/jstree/dist/themes/default/style.min.css' />";
 	exerciseBody += "<div id='jstree_demo_div'>";
 	exerciseBody += "<ul>";
@@ -75,7 +76,7 @@ if (useDirectoryTree.equals("1") ) {
 	exerciseBody += "<form role='form' name='createDirectory' action='"+Routes.exercisesCreateDirectory+"'>";
 	exerciseBody += "<div class='form-group'>";
 	exerciseBody += "              <input type='text' class='form-control' name='directory' id='directory' placeholder='E.g. /src/home or /src/user/cad.java'>";
-	exerciseBody += "            <button type='submit' class='btn btn-default btn-success btn-block'><span class='glyphicon glyphicon-off'></span>Create</button>";
+	exerciseBody += "            <button type='button' onclick='createDirectoryAjax()' class='btn btn-default btn-success btn-block'><span class='glyphicon glyphicon-off'></span>Create</button>";
 	exerciseBody += "            </div>";
 	exerciseBody += "          </form>";
 	exerciseBody += "        </div>";
