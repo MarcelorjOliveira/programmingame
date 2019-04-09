@@ -1,6 +1,6 @@
 package br.com.assessmentsystem.assessmentsystem.model;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class Node {
 	
@@ -14,5 +14,5 @@ public class Node {
 		    selected  : boolean  // is the node selected
 		  }
 	*/
-	public List<Node> children;
+	public ArrayList<Node> children = null;
 }

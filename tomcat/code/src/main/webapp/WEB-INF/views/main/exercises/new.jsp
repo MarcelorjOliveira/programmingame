@@ -56,10 +56,10 @@ String useDirectoryTree = "1";
 if (useDirectoryTree.equals("1") ) {
 
 	exerciseBody += "<link rel='stylesheet' href='/resources/vendor/jstree/dist/themes/default/style.min.css' />";
-	exerciseBody += "<div id='jstree_demo_div'>";
-	exerciseBody += "<ul>";
-	exerciseBody += "<li>root</li>";
-	exerciseBody += "</ul>";
+	exerciseBody += "<div id='divTree'>";
+	//exerciseBody += "<ul>";
+	//exerciseBody += "<li>root</li>";
+	//exerciseBody += "</ul>";
 	exerciseBody += "</div>";
 	exerciseBody += "<div id='create'>";
 	exerciseBody += "<a data-toggle='modal' href='#directoryModal'><span class ='ti-plus'></span></a>";
@@ -73,10 +73,10 @@ if (useDirectoryTree.equals("1") ) {
 	exerciseBody += "      <button type='button' class='close' data-dismiss='modal'>&times;</button>";
 	exerciseBody += "    </div>";
 	exerciseBody += "    <div class='modal-body'>";
-	exerciseBody += "<form role='form' name='createDirectory' action='"+Routes.exercisesCreateDirectory+"'>";
+	exerciseBody += "<form role='form' name='createDirectory' >";
 	exerciseBody += "<div class='form-group'>";
 	exerciseBody += "              <input type='text' class='form-control' name='directory' id='directory' placeholder='E.g. /src/home or /src/user/cad.java'>";
-	exerciseBody += "            <button type='button' onclick='createDirectoryAjax()' class='btn btn-default btn-success btn-block'><span class='glyphicon glyphicon-off'></span>Create</button>";
+	exerciseBody += "            <button type='button' onclick='createDirectoryAjax(\""+Routes.exercisesCreateDirectory+"\")' class='btn btn-default btn-success btn-block'><span class='glyphicon glyphicon-off'></span>Create</button>";
 	exerciseBody += "            </div>";
 	exerciseBody += "          </form>";
 	exerciseBody += "        </div>";

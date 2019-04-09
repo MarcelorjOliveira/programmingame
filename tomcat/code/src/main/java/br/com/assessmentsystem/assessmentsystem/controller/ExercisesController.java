@@ -6,19 +6,24 @@
 package br.com.assessmentsystem.assessmentsystem.controller;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.codec.binary.StringUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import br.com.assessmentsystem.assessmentsystem.dao.ExerciseDao;
 import br.com.assessmentsystem.assessmentsystem.dao.MovementDao;
@@ -47,11 +52,9 @@ public class ExercisesController {
 		return "redirect:" + Routes.exercisesNew;
 	}
 
-	@RequestMapping(Routes.exercisesCreateDirectory)
-	public String createDirectory(HttpServletRequest request) {	
-
-		System.out.println("Create");
-		
+	@RequestMapping(value = Routes.exercisesCreateDirectory, produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public Node createDirectory(HttpServletRequest request) {
 		String path = request.getParameter("directory");
 
 		HttpSession session = request.getSession();
@@ -66,17 +69,25 @@ public class ExercisesController {
 
 		if (!path.contains("..")) {
 			fileDirectory.mkdirs();
-			if(path.contains(".")) {
+			if (path.contains(".")) {
 				fileDirectory.delete();
-				Exercise.writeFile("", fileDirectory);				
+				Exercise.writeFile("", fileDirectory);
 			}
 		}
 
 		if (path.contains("..")) {
 			System.out.println("Não é");
 		}
-		
-		return "redirect:"+Routes.exercisesUpdateDirectoryTree;
+
+		Node rootNode = updateDirectoryTree(request);
+
+		GsonBuilder builder = new GsonBuilder();
+		Gson gson = builder.create();
+		System.out.println(gson.toJson(rootNode));
+
+		//response.setStatus(HttpServletResponse.SC_OK);
+
+		return rootNode;
 	}
 
 	@RequestMapping(Routes.exercisesCreateFile)
@@ -84,32 +95,57 @@ public class ExercisesController {
 		return "";
 	}
 
-	public void directoryTree(File dir, Node node) {
-		try {
-			File[] files = dir.listFiles();
-			for (File file : files) {
-				if (file.isDirectory()) {
-					if (node.children == null) {
-						node.children = new ArrayList<Node>();
-					}
+	public void directoryTree(File parentNode, Node node) {
+		if (parentNode.isDirectory()) {
+
+			//if (!(node.id.isEmpty())) {
+				if (node.children == null) {
+					node.children = new ArrayList<Node>();
+				}
+
+				node.id = parentNode.getName();
+
+				node.text = parentNode.getName();
+
+				File childNodes[] = parentNode.listFiles();
+				for (File childNode : childNodes) {
 					Node child = new Node();
 
 					node.children.add(child);
 
-					directoryTree(file, child);
+					directoryTree(childNode, child);
 				}
-				node.id = file.getName();
-
-				node.text = file.getName();
-				System.out.println("     file:" + file.getCanonicalPath());
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
+			//}
+		} else {
+			node.id = parentNode.getName();
+			node.text = parentNode.getName();
 		}
 	}
 
-	@RequestMapping(Routes.exercisesUpdateDirectoryTree)
-	public @ResponseBody Node updateDirectoryTree(HttpServletRequest request) {
+	/*
+	 * public void directoryTree(File dir, Node node) { File[] files =
+	 * dir.listFiles(); for (File file : files) { if (file.isDirectory()) { if
+	 * (node.children == null) { node.children = new ArrayList<Node>(); } Node child
+	 * = new Node();
+	 * 
+	 * node.children.add(child);
+	 * 
+	 * directoryTree(file, child);
+	 * 
+	 * System.out.println("tFilho:"+node.children.size());
+	 * 
+	 * if(node.children.size() == 0) { node.children = null; }
+	 * 
+	 * }
+	 * 
+	 * node.id = file.getName();
+	 * 
+	 * node.text = file.getName(); System.out.println("NodeId:"+node.id);
+	 * 
+	 * if(node.id == null) { node = null; } //System.out.println("     file:" +
+	 * file.getCanonicalPath()); } }
+	 */
+	public Node updateDirectoryTree(HttpServletRequest request) {
 		System.out.println("La");
 
 		Node rootNode = new Node();
@@ -124,9 +160,15 @@ public class ExercisesController {
 
 		String exerciseId = (String) session.getAttribute("exerciseId");
 
-		File rootFile = new File("/usr/local/tomcat/students/" + userId + "/" + exerciseId + "/");
+		File rootFile = new File("/usr/local/tomcat/students/" + userId + "/" + exerciseId);
+
+		System.out.println("Antes");
 
 		directoryTree(rootFile, rootNode);
+
+		System.out.println("directoryTree");
+
+		System.out.println(rootNode);
 
 		return rootNode;
 	}
@@ -144,14 +186,6 @@ public class ExercisesController {
 		int id = Integer.parseInt(request.getParameter("exerciseId"));
 
 		Exercise exercise = exerciseDao.findById(id);
-
-		// System.out.println("ReqId"+request.getParameter("exerciseId"));
-
-		// System.out.println("Title:"+exercise.getStatement());
-		// System.out.println("Id:"+exercise.getId());
-
-		// model.addAttribute("title", exercise.getStatement());
-		// model.addAttribute("exerciseIdController", exercise.getId());
 
 		session.setAttribute("title", exercise.getStatement());
 		session.setAttribute("exerciseId", Integer.toString(exercise.getId()));
