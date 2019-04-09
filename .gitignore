@@ -14,3 +14,4 @@ tomcat/AssessmentSystempegou
 tomcat/config/ini/amazon.ini
 tomcat/environment/package/java
 docker-composeAmazon.yml
+tomcat/code/students/**

@@ -22,13 +22,6 @@ function dump(obj) {
     //document.body.appendChild(pre)
 }
 
-
-
-
-
-
-
-
 function createDirectoryAjax(pathPage) {
 		alert('hoho');
 		
@@ -42,24 +35,18 @@ function createDirectoryAjax(pathPage) {
 					dataType: 'json', 
 					cache: false,
 					processData: false,
-					success: function(data) { 
-						alert('haha');
-						dump(data);
-						alert(data); 
+					success: function(data) {  
 						 $('#divTree').jstree({ 'core' : {
 						    'data' : [data]
 						} });
 						
 					},
 					error : function (data) {
-						//JSON.stringfy(data);
-						alert('hihi'+data);
 						$('#divTree').jstree({ 'core' : {
 						    'data' : [data]
 						} });
 					},
 					done : function (data) {
-						alert('kkkkk'+data);
 					}
 				});  
 			
