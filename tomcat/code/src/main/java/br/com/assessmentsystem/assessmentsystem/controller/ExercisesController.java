@@ -81,11 +81,19 @@ public class ExercisesController {
 
 		Node rootNode = updateDirectoryTree(request);
 
-		GsonBuilder builder = new GsonBuilder();
-		Gson gson = builder.create();
-		System.out.println(gson.toJson(rootNode));
+		/*
+		 * GsonBuilder builder = new GsonBuilder(); Gson gson = builder.create();
+		 * System.out.println(gson.toJson(rootNode));
+		 */
+		// response.setStatus(HttpServletResponse.SC_OK);
 
-		//response.setStatus(HttpServletResponse.SC_OK);
+		return rootNode;
+	}
+
+	@RequestMapping(value = Routes.exercisesUpdateDirectoryTree, produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public Node updateDirectoryTreeHTML(HttpServletRequest request) {
+		Node rootNode = updateDirectoryTree(request);
 
 		return rootNode;
 	}
@@ -98,56 +106,32 @@ public class ExercisesController {
 	public void directoryTree(File parentNode, Node node) {
 		if (parentNode.isDirectory()) {
 
-			//if (!(node.id.isEmpty())) {
-				if (node.children == null) {
-					node.children = new ArrayList<Node>();
-				}
+			// if (!(node.id.isEmpty())) {
+			if (node.children == null) {
+				node.children = new ArrayList<Node>();
+			}
 
-				node.id = parentNode.getName();
+			node.id = parentNode.getName();
 
-				node.text = parentNode.getName();
+			node.text = parentNode.getName();
 
-				File childNodes[] = parentNode.listFiles();
-				for (File childNode : childNodes) {
-					Node child = new Node();
+			File childNodes[] = parentNode.listFiles();
+			for (File childNode : childNodes) {
+				Node child = new Node();
 
-					node.children.add(child);
+				node.children.add(child);
 
-					directoryTree(childNode, child);
-				}
-			//}
+				directoryTree(childNode, child);
+			}
+			// }
 		} else {
 			node.id = parentNode.getName();
 			node.text = parentNode.getName();
+			node.icon = "ti-file";
 		}
 	}
 
-	/*
-	 * public void directoryTree(File dir, Node node) { File[] files =
-	 * dir.listFiles(); for (File file : files) { if (file.isDirectory()) { if
-	 * (node.children == null) { node.children = new ArrayList<Node>(); } Node child
-	 * = new Node();
-	 * 
-	 * node.children.add(child);
-	 * 
-	 * directoryTree(file, child);
-	 * 
-	 * System.out.println("tFilho:"+node.children.size());
-	 * 
-	 * if(node.children.size() == 0) { node.children = null; }
-	 * 
-	 * }
-	 * 
-	 * node.id = file.getName();
-	 * 
-	 * node.text = file.getName(); System.out.println("NodeId:"+node.id);
-	 * 
-	 * if(node.id == null) { node = null; } //System.out.println("     file:" +
-	 * file.getCanonicalPath()); } }
-	 */
 	public Node updateDirectoryTree(HttpServletRequest request) {
-		System.out.println("La");
-
 		Node rootNode = new Node();
 
 		String path = request.getParameter("directory");
@@ -162,13 +146,7 @@ public class ExercisesController {
 
 		File rootFile = new File("/usr/local/tomcat/students/" + userId + "/" + exerciseId);
 
-		System.out.println("Antes");
-
 		directoryTree(rootFile, rootNode);
-
-		System.out.println("directoryTree");
-
-		System.out.println(rootNode);
 
 		return rootNode;
 	}

@@ -76,7 +76,7 @@ if (useDirectoryTree.equals("1") ) {
 	exerciseBody += "<form role='form' name='createDirectory' >";
 	exerciseBody += "<div class='form-group'>";
 	exerciseBody += "              <input type='text' class='form-control' name='directory' id='directory' placeholder='E.g. /src/home or /src/user/cad.java'>";
-	exerciseBody += "            <button type='button' onclick='createDirectoryAjax(\""+Routes.exercisesCreateDirectory+"\")' class='btn btn-default btn-success btn-block'><span class='glyphicon glyphicon-off'></span>Create</button>";
+	exerciseBody += "            <button type='button' onclick='directoryAjax(\""+Routes.exercisesCreateDirectory+"\")' class='btn btn-default btn-success btn-block'><span class='glyphicon glyphicon-off'></span>Create</button>";
 	exerciseBody += "            </div>";
 	exerciseBody += "          </form>";
 	exerciseBody += "        </div>";

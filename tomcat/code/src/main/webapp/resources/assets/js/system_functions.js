@@ -22,10 +22,8 @@ function dump(obj) {
     //document.body.appendChild(pre)
 }
 
-function createDirectoryAjax(pathPage) {
-		alert('hoho');
-		
-		var directory = document.getElementById('directory').value;
+function directoryAjax(pathPage) {
+	var directory = document.getElementById('directory').value;
 				
 		$(document).ready(function(){
 			$.ajax({
@@ -35,11 +33,11 @@ function createDirectoryAjax(pathPage) {
 					dataType: 'json', 
 					cache: false,
 					processData: false,
-					success: function(data) {  
-						 $('#divTree').jstree({ 'core' : {
+					success: function(data) { 
+						$('#divTree').jstree('destroy');
+						$('#divTree').jstree({ 'core' : {
 						    'data' : [data]
 						} });
-						
 					},
 					error : function (data) {
 						$('#divTree').jstree({ 'core' : {
@@ -51,5 +49,4 @@ function createDirectoryAjax(pathPage) {
 				});  
 			
 		});
-		
 } 

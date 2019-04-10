@@ -188,6 +188,10 @@
     <script src="/resources/vendor/jstree/dist/jstree.min.js"></script>
         
     <script src="/resources/assets/js/system_functions.js"></script>
+    
+    <script>
+    	directoryAjax('<%=Routes.exercisesUpdateDirectoryTree%>');
+    </script>
 </body>
 
 </html>
