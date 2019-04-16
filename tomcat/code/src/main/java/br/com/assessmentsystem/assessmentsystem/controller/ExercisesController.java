@@ -10,10 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.codec.binary.StringUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.http.MediaType;
@@ -21,9 +19,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import br.com.assessmentsystem.assessmentsystem.dao.ExerciseDao;
 import br.com.assessmentsystem.assessmentsystem.dao.MovementDao;
@@ -33,11 +28,6 @@ import br.com.assessmentsystem.assessmentsystem.model.Movement;
 import br.com.assessmentsystem.assessmentsystem.model.Node;
 import br.com.assessmentsystem.assessmentsystem.model.Solution;
 import br.com.assessmentsystem.assessmentsystem.model.User;
-
-/**
- *
- * @author marcelo
- */
 
 @Controller
 public class ExercisesController {
@@ -98,20 +88,14 @@ public class ExercisesController {
 		return rootNode;
 	}
 
-	@RequestMapping(Routes.exercisesCreateFile)
-	public String createFile(String name) {
-		return "";
-	}
-
-	public void directoryTree(File parentNode, Node node) {
+	public void directoryTree(File parentNode, Node node, String pathNode) {
 		if (parentNode.isDirectory()) {
 
-			// if (!(node.id.isEmpty())) {
 			if (node.children == null) {
 				node.children = new ArrayList<Node>();
 			}
 
-			node.id = parentNode.getName();
+			node.id = pathNode + "_" + parentNode.getName();
 
 			node.text = parentNode.getName();
 
@@ -121,14 +105,68 @@ public class ExercisesController {
 
 				node.children.add(child);
 
-				directoryTree(childNode, child);
+				directoryTree(childNode, child, node.id);
 			}
-			// }
 		} else {
-			node.id = parentNode.getName();
+			node.id = pathNode + "_" + parentNode.getName();
+
+			// System.out.println(node.id);
+
 			node.text = parentNode.getName();
 			node.icon = "ti-file";
 		}
+	}
+
+	@RequestMapping(Routes.exercisesSaveFile)
+	@ResponseBody
+	public String saveFile(HttpServletRequest request) {
+		String content = request.getParameter("content");
+
+		if (!(content == null || content.length() == 0)) {
+			HttpSession session = request.getSession();
+
+			User user = (User) session.getAttribute("user");
+
+			String userId = Integer.toString(user.getId());
+
+			String exerciseId = (String) session.getAttribute("exerciseId");
+
+			String fileName = request.getParameter("fileName");
+
+			fileName = fileName.replace("_", "/");
+
+			String path = "/usr/local/tomcat/students/" + userId + fileName;
+
+			File fileDirectory = new File(path);
+
+			Exercise.writeFile(content, fileDirectory);
+		}
+
+		return "saved";
+	}
+
+	@RequestMapping(Routes.exercisesOpenFile)
+	@ResponseBody
+	public String openFile(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+
+		User user = (User) session.getAttribute("user");
+
+		String userId = Integer.toString(user.getId());
+
+		String exerciseId = (String) session.getAttribute("exerciseId");
+
+		String fileName = request.getParameter("fileName");
+
+		fileName = fileName.replace("_", "/");
+
+		String path = "/usr/local/tomcat/students/" + userId + fileName;
+
+		System.out.println("path:" + path);
+
+		String content = Exercise.openFile(path);
+
+		return content;
 	}
 
 	public Node updateDirectoryTree(HttpServletRequest request) {
@@ -146,7 +184,7 @@ public class ExercisesController {
 
 		File rootFile = new File("/usr/local/tomcat/students/" + userId + "/" + exerciseId);
 
-		directoryTree(rootFile, rootNode);
+		directoryTree(rootFile, rootNode, "");
 
 		return rootNode;
 	}

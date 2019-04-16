@@ -102,14 +102,14 @@ exerciseBody +="		inputHidden.value = editor.getValue(); ";
 exerciseBody +="		return 0; ";
 exerciseBody +="	} ";                  
 exerciseBody +=" </script> ";
-exerciseBody +="		<script src='/resources/acebuilds/ace.js'></script>";
-exerciseBody +="		<script src='/resources/acebuilds/ext-statusbar.js'></script>";
-exerciseBody +=" <script>";
-exerciseBody +=" var editor = ace.edit('editor');";
-exerciseBody +=" editor.setTheme('ace/theme/eclipse');";
-exerciseBody +=" editor.getSession().setMode('ace/mode/c_cpp'); ";
-exerciseBody +=" </script>";
-
+exerciseBody +="		<script src='/resources/acebuildsMinNoconflict/ace.js'></script>";
+exerciseBody +="		<script src='/resources/acebuildsMinNoconflict/ext-statusbar.js'></script>";
+//exerciseBody +=" <script>";
+//exerciseBody +=" var editor = ace.edit('editor');";
+//exerciseBody +=" editor.setTheme('ace/theme/eclipse');";
+//exerciseBody +=" editor.getSession().setMode('ace/mode/java'); ";
+//exerciseBody +=" sessionStorage.setItem('aceEditor', editor); ";
+//exerciseBody +=" </script>";
 
 %>
 

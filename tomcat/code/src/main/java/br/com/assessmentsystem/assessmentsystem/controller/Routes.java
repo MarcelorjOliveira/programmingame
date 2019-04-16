@@ -26,5 +26,7 @@ public class Routes {
                                exercisesUpdate = exercises + "/update",
                                exercisesCreateFile = exercises + "/createFile",
                                exercisesCreateDirectory = exercises + "/createDirectory",
-                               exercisesUpdateDirectoryTree = exercises+"/updateDirectoryTree";
+                               exercisesUpdateDirectoryTree = exercises+"/updateDirectoryTree",
+                               exercisesOpenFile = exercises + "/openFile",
+    						   exercisesSaveFile = exercises + "/saveFile";
 }

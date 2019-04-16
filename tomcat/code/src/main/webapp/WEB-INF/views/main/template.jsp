@@ -187,11 +187,23 @@
     
     <script src="/resources/vendor/jstree/dist/jstree.min.js"></script>
         
-    <script src="/resources/assets/js/system_functions.js"></script>
-    
-    <script>
+	<script src="/resources/assets/js/system_functions.js"></script>
+	
+	<script>
     	directoryAjax('<%=Routes.exercisesUpdateDirectoryTree%>');
     </script>
+    
+    <script>
+		var editor = ace.edit('editor');
+		editor.setTheme('ace/theme/eclipse');
+		editor.session.setMode('ace/mode/java'); 
+		editor.on('blur', function() {
+			saveAjax();
+		});
+
+		//sessionStorage.setItem('aceEditor', editor); 
+	</script>
+	
 </body>
 
 </html>

@@ -30,27 +30,27 @@ import br.com.assessmentsystem.assessmentsystem.dao.MovementDao;
 import br.com.assessmentsystem.assessmentsystem.dao.SolutionDao;
 
 public class Exercise {
-	
-	protected String initialDirectory = "/usr/local/tomcat/students/"; 
-	
+
+	protected String initialDirectory = "/usr/local/tomcat/students/";
+
 	protected String rootDirectory = "";
 
 	public List<Solution> solutions;
-	
-	public List<Solution> getSolutions(){
-		return solutions; 
+
+	public List<Solution> getSolutions() {
+		return solutions;
 	}
-	
+
 	protected List<String> wrongConditions;
-	
-	public List<String> getWrongConditions(){
-		return wrongConditions; 
+
+	public List<String> getWrongConditions() {
+		return wrongConditions;
 	}
-	
+
 	protected File testFile;
-	
+
 	protected int userId;
-	
+
 	public int getUserId() {
 		return userId;
 	}
@@ -58,7 +58,6 @@ public class Exercise {
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
-
 
 	// Criar um construtor
 	int DEFAULT_BUFFER_SIZE = 255;
@@ -143,9 +142,9 @@ public class Exercise {
 	}
 
 	public String testCode;
-	
+
 	protected int useDirectoryTree;
-	
+
 	public void setUseDirectoryTree(int useDirectoryTree) {
 		this.useDirectoryTree = useDirectoryTree;
 	}
@@ -194,6 +193,26 @@ public class Exercise {
 		} catch (Exception ee) {
 			ee.printStackTrace();
 		}
+	}
+
+	public static String openFile(String path) {
+		String content = null;
+
+		try {
+			FileReader reader = new FileReader(path);
+			BufferedReader br = new BufferedReader(reader);
+
+			// read line by line
+			String line;
+			while ((line = br.readLine()) != null) {
+				content += line;
+			}
+
+		} catch (IOException e) {
+			System.err.format("IOException: %s%n", e);
+		}
+
+		return content;
 	}
 
 	public void buildSourceCode() {
@@ -302,12 +321,12 @@ public class Exercise {
 	}
 
 	protected double markExercise(Document doc, XPath xpath) throws XPathExpressionException {
-		
+
 		MovementDao dao = new MovementDao();
 		Movement movement = new Movement();
-		
+
 		wrongConditions = new ArrayList<String>();
-		
+
 		XPathExpression expression = xpath
 				.compile("/CUNIT_TEST_RUN_REPORT/CUNIT_RUN_SUMMARY/CUNIT_RUN_SUMMARY_RECORD[3]/SUCCEEDED");
 
@@ -325,21 +344,22 @@ public class Exercise {
 		this.testMark = this.testMark / 10;
 
 		String condition = "";
-		
+
 		for (int i = 0; i < wrongs; i++) {
-			int position = i+1;
-			expression = xpath
-					.compile("/CUNIT_TEST_RUN_REPORT/CUNIT_RESULT_LISTING/CUNIT_RUN_SUITE/CUNIT_RUN_SUITE_SUCCESS/CUNIT_RUN_TEST_RECORD["+position+"]/CUNIT_RUN_TEST_FAILURE/CONDITION");
-			
+			int position = i + 1;
+			expression = xpath.compile(
+					"/CUNIT_TEST_RUN_REPORT/CUNIT_RESULT_LISTING/CUNIT_RUN_SUITE/CUNIT_RUN_SUITE_SUCCESS/CUNIT_RUN_TEST_RECORD["
+							+ position + "]/CUNIT_RUN_TEST_FAILURE/CONDITION");
+
 			condition = (String) expression.evaluate(doc, XPathConstants.STRING);
-			
+
 			wrongConditions.add(condition);
 		}
-		
+
 		SolutionDao solutionDao = new SolutionDao();
 
 		solutions = solutionDao.getSolutions(wrongConditions);
-		
+
 		// this.testMark = correct;
 
 		return this.testMark;
@@ -348,20 +368,19 @@ public class Exercise {
 	private void calcExerciseMark() {
 		exerciseMark += testMark;
 	}
-	
+
 	public void createDirectory(String nome) {
 		String everything, line;
 		try {
-			
-			String nameCommand = "mkdir students/"+nome;
-			//nameCommand = "pwd";
+
+			String nameCommand = "mkdir students/" + nome;
+			// nameCommand = "pwd";
 			System.out.println(nameCommand);
 			Process process = Runtime.getRuntime().exec(nameCommand);
-			
+
 		} catch (IOException ex) {
 			Logger.getLogger(Exercise.class.getName()).log(Level.SEVERE, null, ex);
 		}
 	}
-
 
 }
