@@ -6,6 +6,7 @@ import java.sql.SQLException;
 
 import br.com.assessmentsystem.assessmentsystem.model.BasicExercise;
 import br.com.assessmentsystem.assessmentsystem.model.Exercise;
+import br.com.assessmentsystem.assessmentsystem.model.OOJavaDirectory;
 import br.com.assessmentsystem.assessmentsystem.model.OOJavaExercise;
 
 public class ExerciseDao extends BaseDao {
@@ -13,7 +14,6 @@ public class ExerciseDao extends BaseDao {
 		Exercise exercise = new Exercise();
 
 		try {
-
 			String query = "SELECT * from Exercise e where e.id = " + id;
 
 			getConnection();
@@ -25,8 +25,9 @@ public class ExerciseDao extends BaseDao {
 			while (rs.next()) {
 				int course = rs.getInt("course");
 				//System.out.println("course:"+course);
+				int useDirectoryTree = rs.getInt("useDirectoryTree");
 				
-				exercise = createByType(course);
+				exercise = createByType(course, useDirectoryTree);
 				
 				exercise.setId(rs.getInt("id"));
 				exercise.setName(rs.getString("name"));
@@ -34,6 +35,7 @@ public class ExerciseDao extends BaseDao {
 				exercise.setStatement(rs.getString("statement"));
 				exercise.setModelResponse(rs.getString("modelResponse"));
 				exercise.setTests(rs.getString("tests"));
+				exercise.setUseDirectoryTree(rs.getInt("useDirectoryTree"));
 			}
 
 			rs.close();
@@ -49,13 +51,17 @@ public class ExerciseDao extends BaseDao {
 
 	}
 	
-	public Exercise createByType(int tipo) {
+	public Exercise createByType(int tipo, int useDirectoryTree) {
 		Exercise exercise = new Exercise();
 		if(tipo == 1) {
 			exercise = new BasicExercise();
 		}
 		if(tipo == 2) {
 			exercise = new OOJavaExercise();
+		}
+		
+		if (useDirectoryTree == 1) { 
+			exercise = new OOJavaDirectory();
 		}
 		return exercise;
 	}

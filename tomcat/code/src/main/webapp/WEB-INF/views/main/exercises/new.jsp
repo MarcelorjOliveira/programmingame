@@ -49,9 +49,7 @@ exerciseBody +=" <div class='col-sm-auto'>";
 exerciseBody += title;
 exerciseBody +=" </div> ";
 
-//String useDirectoryTree = (String) request.getSession().getAttribute("resolutionParam");
-
-String useDirectoryTree = "1";
+String useDirectoryTree = (String) request.getSession().getAttribute("useDirectoryTree");
 
 if (useDirectoryTree.equals("1") ) {
 

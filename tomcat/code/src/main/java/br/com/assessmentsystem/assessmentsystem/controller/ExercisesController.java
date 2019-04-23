@@ -6,12 +6,14 @@
 package br.com.assessmentsystem.assessmentsystem.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.FileUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.http.MediaType;
@@ -55,8 +57,14 @@ public class ExercisesController {
 
 		String exerciseId = (String) session.getAttribute("exerciseId");
 
-		File fileDirectory = new File("/usr/local/tomcat/students/" + userId + "/" + exerciseId + "/" + path);
+		String exerciseName = (String) session.getAttribute("exerciseName");	
 
+		String createDir = Exercise.initialDirectory + userId + "/" + exerciseId + "/" + exerciseName + "/" + path;
+		
+		System.out.println("createDirectory:"+createDir);
+		
+		File fileDirectory = new File(createDir);
+		
 		if (!path.contains("..")) {
 			fileDirectory.mkdirs();
 			if (path.contains(".")) {
@@ -131,12 +139,16 @@ public class ExercisesController {
 
 			String exerciseId = (String) session.getAttribute("exerciseId");
 
+			String exerciseName = (String) session.getAttribute("exerciseName");	
+			
 			String fileName = request.getParameter("fileName");
 
 			fileName = fileName.replace("_", "/");
 
-			String path = "/usr/local/tomcat/students/" + userId + fileName;
+			String path = Exercise.initialDirectory + userId + "/"+ exerciseId + fileName;
 
+			System.out.println("save:"+path);
+			
 			File fileDirectory = new File(path);
 
 			Exercise.writeFile(content, fileDirectory);
@@ -156,13 +168,15 @@ public class ExercisesController {
 
 		String exerciseId = (String) session.getAttribute("exerciseId");
 
+		String exerciseName = (String) session.getAttribute("exerciseName");	
+		
 		String fileName = request.getParameter("fileName");
 
 		fileName = fileName.replace("_", "/");
 
-		String path = "/usr/local/tomcat/students/" + userId + fileName;
+		String path = Exercise.initialDirectory + userId + "/"+ exerciseId + fileName;
 
-		System.out.println("path:" + path);
+		System.out.println("open:" + path);
 
 		String content = Exercise.openFile(path);
 
@@ -181,8 +195,10 @@ public class ExercisesController {
 		String userId = Integer.toString(user.getId());
 
 		String exerciseId = (String) session.getAttribute("exerciseId");
-
-		File rootFile = new File("/usr/local/tomcat/students/" + userId + "/" + exerciseId);
+		
+		String exerciseName = (String) session.getAttribute("exerciseName");
+		
+		File rootFile = new File(Exercise.initialDirectory + userId + "/" + exerciseId + "/" + exerciseName);
 
 		directoryTree(rootFile, rootNode, "");
 
@@ -196,6 +212,12 @@ public class ExercisesController {
 		HttpSession session = request.getSession();
 
 		User user = (User) session.getAttribute("user");
+		
+		try {
+			FileUtils.deleteDirectory(new File(Exercise.initialDirectory + Integer.toString(user.getId())));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block //e.printStackTrace();
+		}
 
 		ExerciseDao exerciseDao = new ExerciseDao();
 
@@ -206,7 +228,9 @@ public class ExercisesController {
 		session.setAttribute("title", exercise.getStatement());
 		session.setAttribute("exerciseId", Integer.toString(exercise.getId()));
 		session.setAttribute("exerciseName", exercise.getName());
+		session.setAttribute("useDirectoryTree", Integer.toString(exercise.getUseDirectoryTree()));
 
+		
 		/*
 		 * Class classe = User.class; for (Field atributo : classe.getDeclaredFields())
 		 * { titulo += atributo.getName()+"<br>"; }
