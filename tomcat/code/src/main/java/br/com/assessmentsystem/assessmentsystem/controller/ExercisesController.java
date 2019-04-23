@@ -132,6 +132,8 @@ public class ExercisesController {
 
 		if (!(content == null || content.length() == 0)) {
 			HttpSession session = request.getSession();
+			
+			System.out.println("content:"+content);
 
 			User user = (User) session.getAttribute("user");
 

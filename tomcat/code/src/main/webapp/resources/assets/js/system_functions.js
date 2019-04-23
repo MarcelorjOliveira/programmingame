@@ -47,7 +47,9 @@ function saveAjax() {
 	var fileName = sessionStorage.getItem('fileName');
 
 	var editor = ace.edit('editor');
-	var content = editor.session.getValue();
+	var content = encodeURIComponent(editor.session.getValue());
+	
+	alert(content);
 
 	if (content) {
 		$(document).ready(function() {
@@ -57,7 +59,6 @@ function saveAjax() {
 				data : 'fileName=' + fileName + '&content=' + content,
 				dataType : 'json',
 				cache : false,
-				processData : false,
 				success : function(data) {
 					alert('salvou');
 					// alert(JSON.stringify(data));
