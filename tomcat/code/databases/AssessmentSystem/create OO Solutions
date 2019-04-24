@@ -28,3 +28,16 @@ update Solution set idExercise = 19 where idExercise = 14;
 update Solution set idExercise = 20 where idExercise = 15;
 
 
+insert into Solution (test,idExercise, description) 
+values ("1:false",14, "A televisão não está trocando de canal");
+
+insert into Solution (test,idExercise, description) 
+values ("10:false",14, "A televisão não muda de canal");
+
+insert into Solution (test,idExercise, description) 
+values ("aumentarCanal:false",14, "O controle não aumenta o canal");
+
+insert into Solution (test,idExercise, description) 
+values ("diminuirCanal:false",14, "O controle não diminui o canal");
+
+

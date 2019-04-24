@@ -159,7 +159,7 @@ public class OOJavaDirectory extends Exercise {
 
 				System.out.println(nameCommand);
 
-				nameCommand = "javaExercises -cp " + root + " " + "testGame." + name + "Runner";
+				nameCommand = "javaExercises -cp " + root + " " + "testGame.Runner"+ name ;
 
 				process = Runtime.getRuntime().exec(nameCommand);
 

@@ -62,6 +62,8 @@ if (useDirectoryTree.equals("1") ) {
 	exerciseBody += "<div id='create'>";
 	exerciseBody += "<a data-toggle='modal' href='#directoryModal'><span class ='ti-plus'></span></a>";
 	exerciseBody += "</div>";
+	exerciseBody += "<div id='fileNameTemplate'>";
+	exerciseBody += "</div>";
 	exerciseBody += "<div class='modal fade' id='directoryModal' role='dialog'>";
 	exerciseBody += "<div class='modal-dialog'>";
 	exerciseBody += "  <!-- Modal content-->";

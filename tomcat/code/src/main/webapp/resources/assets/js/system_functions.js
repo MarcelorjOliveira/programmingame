@@ -22,7 +22,6 @@ function openAjax(fileName) {
 				data : 'fileName=' + fileName,
 				dataType : 'json',
 				cache : false,
-				processData : false,
 				success : function(data) {
 					// alert(data);
 					// alert(JSON.stringify(data));
@@ -33,6 +32,8 @@ function openAjax(fileName) {
 					//alert('errei');
 					var editor = ace.edit('editor');
 					editor.session.setValue(data.responseText);
+					var fileNameExposed = fileName.replace(/_/g,'/');
+					$('#fileNameTemplate').text(fileNameExposed);
 				},
 				done : function(data) {
 					// alert('haha');
@@ -49,7 +50,7 @@ function saveAjax() {
 	var editor = ace.edit('editor');
 	var content = encodeURIComponent(editor.session.getValue());
 	
-	alert(content);
+	//alert(content);
 
 	if (content) {
 		$(document).ready(function() {
