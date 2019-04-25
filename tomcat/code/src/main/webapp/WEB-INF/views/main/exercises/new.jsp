@@ -45,7 +45,7 @@ exerciseBody +="		height: 30em; ";
 exerciseBody +="	} ";
 exerciseBody +="   </style> ";
     
-exerciseBody +=" <div class='col-sm-auto'>";
+exerciseBody +=" <div class='d-flex col-sm-auto' width='100%'>";
 exerciseBody += title;
 exerciseBody +=" </div> ";
 

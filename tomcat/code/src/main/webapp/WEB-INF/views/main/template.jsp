@@ -135,7 +135,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-sm-flex justify-content-between align-items-center">
-                                   <div id="template-body" style="white-space: nowrap; position: relative; height: 100%; width: 100%;">
+                                   <div id="template-body" style="position: relative; height: 100%; width: 100%;">
                             		<%=request.getParameter("templateBody")%>   
                             	   </div>	
                               	</div>  
