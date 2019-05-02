@@ -30,12 +30,12 @@ public class ConnectionFactory {
 		String userName = instanceIni.get("instance", "userName");
 		String password = instanceIni.get("instance", "password");
 		String dbName = instanceIni.get("instance", "dbName");
-/*		
+		
+		
 		System.out.println(url);
 		System.out.println(userName);
 		System.out.println(password);
 		System.out.println(dbName);
-*/
 		
 		Connection connection;
 		

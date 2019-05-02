@@ -35,7 +35,7 @@ if (request.getParameter("mark") != null) {
 }
 
 exerciseBody +="  	<style type='text/css' media='screen'> ";
-exerciseBody +="	#editor { "; 
+exerciseBody +="	#halyenEditor { "; 
 exerciseBody +="		position: relative; ";
 exerciseBody +="		right: 0; ";   
 exerciseBody +="		bottom: 0; ";
@@ -45,9 +45,9 @@ exerciseBody +="		height: 30em; ";
 exerciseBody +="	} ";
 exerciseBody +="   </style> ";
     
-exerciseBody +=" <div class='d-flex col-sm-auto' width='100%'>";
-exerciseBody += title;
-exerciseBody +=" </div> ";
+//exerciseBody +=" <div class='d-flex col-sm-auto' width='100%'>";
+//exerciseBody += title;
+//exerciseBody +=" </div> ";
 
 String useDirectoryTree = (String) request.getSession().getAttribute("useDirectoryTree");
 
@@ -86,8 +86,19 @@ if (useDirectoryTree.equals("1") ) {
 
 }
 
+exerciseBody += "<div id='tabs'>"
++"<ul>"
++"<li><a href='#problema'>Problema</a></li>"
++"<li><a href='#solucao'>Solução</a></li>"
++"</ul>"
++"<div id='problema'>"
++ title
++"</div>"
++"<div id='solucao'>";
+
+
 exerciseBody +=" <form action='"+Routes.exercisesAct+"' name='formExercises' method='post' onsubmit='putValue()'>";
-exerciseBody +="	<div name='resolutionDiv' id='editor'>"+resolutionParam+"</div>";
+exerciseBody +="	<div name='resolutionDiv' id='halyenEditor'>"+resolutionParam+"</div>";
 exerciseBody +="			<p id ='buttonSubmit'>";
 exerciseBody +="				<input type='hidden' name='resolution' id='resolution'>";
 exerciseBody +="				<input type='hidden' name='exerciseId' value='"+exerciseId+"'>";
@@ -104,6 +115,10 @@ exerciseBody +="	} ";
 exerciseBody +=" </script> ";
 exerciseBody +="		<script src='/resources/acebuildsMinNoconflict/ace.js'></script>";
 exerciseBody +="		<script src='/resources/acebuildsMinNoconflict/ext-statusbar.js'></script>";
+
+exerciseBody += "</div>"
+		+"</div>";
+
 //exerciseBody +=" <script>";
 //exerciseBody +=" var editor = ace.edit('editor');";
 //exerciseBody +=" editor.setTheme('ace/theme/eclipse');";

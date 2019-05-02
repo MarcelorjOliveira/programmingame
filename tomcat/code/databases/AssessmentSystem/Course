@@ -8,5 +8,5 @@ INSERT INTO `halyeninstance`.`Course`
 VALUES
 ('OO Programming Java');
 
-
+insert into Course (name) values ('Maratona de Programação');
 

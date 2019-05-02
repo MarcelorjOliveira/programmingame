@@ -2,6 +2,8 @@ FROM tomcat:7.0
 
 RUN mkdir -p /usr/local/java
 
+ADD config/ini /usr/local/tomcat/ini
+
 ADD environment/package/java /usr/local/java 
 
 RUN ln -s /usr/local/java/jdk-7u80-linux-x64/jdk1.7.0_80/bin/javac /usr/bin/javacExercises 
@@ -27,9 +29,4 @@ ADD config/server.xml /usr/local/tomcat/webapps/config
 ADD code/target/maven-archiver /usr/local/tomcat/webapps/maven-archiver
 
 ADD code/target/AssessmentSystem.war /usr/local/tomcat/webapps/ROOT.war
-
-
-
-
-
 
