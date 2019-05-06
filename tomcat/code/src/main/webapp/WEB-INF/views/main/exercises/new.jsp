@@ -49,6 +49,16 @@ exerciseBody +="   </style> ";
 //exerciseBody += title;
 //exerciseBody +=" </div> ";
 
+exerciseBody += "<div id='tabs'>"
++"<ul>"
++"<li><a href='#problema'>Problema</a></li>"
++"<li><a href='#solucao'>Solução</a></li>"
++"</ul>"
++"<div id='problema'>"
++ title
++"</div>"
++"<div id='solucao'>";
+
 String useDirectoryTree = (String) request.getSession().getAttribute("useDirectoryTree");
 
 if (useDirectoryTree.equals("1") ) {
@@ -86,17 +96,6 @@ if (useDirectoryTree.equals("1") ) {
 
 }
 
-exerciseBody += "<div id='tabs'>"
-+"<ul>"
-+"<li><a href='#problema'>Problema</a></li>"
-+"<li><a href='#solucao'>Solução</a></li>"
-+"</ul>"
-+"<div id='problema'>"
-+ title
-+"</div>"
-+"<div id='solucao'>";
-
-
 exerciseBody +=" <form action='"+Routes.exercisesAct+"' name='formExercises' method='post' onsubmit='putValue()'>";
 exerciseBody +="	<div name='resolutionDiv' id='halyenEditor'>"+resolutionParam+"</div>";
 exerciseBody +="			<p id ='buttonSubmit'>";
@@ -113,8 +112,6 @@ exerciseBody +="		inputHidden.value = editor.getValue(); ";
 exerciseBody +="		return 0; ";
 exerciseBody +="	} ";                  
 exerciseBody +=" </script> ";
-exerciseBody +="		<script src='/resources/acebuildsMinNoconflict/ace.js'></script>";
-exerciseBody +="		<script src='/resources/acebuildsMinNoconflict/ext-statusbar.js'></script>";
 
 exerciseBody += "</div>"
 		+"</div>";

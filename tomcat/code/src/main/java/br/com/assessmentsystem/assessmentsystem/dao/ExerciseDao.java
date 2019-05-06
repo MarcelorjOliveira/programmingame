@@ -53,7 +53,7 @@ public class ExerciseDao extends BaseDao {
 	
 	public Exercise createByType(int tipo, int useDirectoryTree) {
 		Exercise exercise = new Exercise();
-		if(tipo == 1) {
+		if(tipo == 1 || tipo == 3) {
 			exercise = new BasicExercise();
 		}
 		if(tipo == 2) {

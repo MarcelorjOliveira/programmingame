@@ -200,28 +200,35 @@
 	<script src="/resources/vendor/jstree/dist/jstree.min.js"></script>
 
 	<script src="/resources/assets/js/system_functions.js"></script>
-
-	<script>
-    	directoryAjax('<%=Routes.exercisesUpdateDirectoryTree%>
-		');
-	</script>
-
-	<script>
-		var editor = ace.edit('editor');
-		editor.setTheme('ace/theme/eclipse');
-		editor.session.setMode('ace/mode/java');
-		editor.on('blur', function() {
-			saveAjax();
-		});
-
-		//sessionStorage.setItem('aceEditor', editor);
-	</script>
+		
+	<script src='/resources/acebuildsMinNoconflict/ace.js'></script>
+	<script src='/resources/acebuildsMinNoconflict/ext-statusbar.js'></script>
 	<script>
 		$(function() {
 			$("#tabs").tabs();
 		});
 	</script>
 
+	<script>
+		var editor = ace.edit('halyenEditor');
+		editor.setTheme('ace/theme/eclipse');
+		editor.session.setMode('ace/mode/java');	
+	<%	
+	String useDirectoryTree = (String) request.getSession().getAttribute("useDirectoryTree");
+	if(useDirectoryTree.equals("1")) {
+	%>	
+		editor.on('blur', function() {
+			saveAjax();
+		});
+
+    	directoryAjax('<%=Routes.exercisesUpdateDirectoryTree%>');
+	<%	
+	}
+	session.removeAttribute("useDirectoryTree");
+	%>
+
+		//sessionStorage.setItem('aceEditor', editor);
+	</script>
 </body>
 
 </html>

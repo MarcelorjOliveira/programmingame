@@ -30,7 +30,7 @@ function openAjax(fileName) {
 				},
 				error : function(data) {
 					//alert('errei');
-					var editor = ace.edit('editor');
+					var editor = ace.edit('halyenEditor');
 					editor.session.setValue(data.responseText);
 					var fileNameExposed = fileName.replace(/_/g,'/');
 					$('#fileNameTemplate').text(fileNameExposed);
@@ -47,7 +47,7 @@ function saveAjax() {
 	//alert('saveAjax');
 	var fileName = sessionStorage.getItem('fileName');
 
-	var editor = ace.edit('editor');
+	var editor = ace.edit('halyenEditor');
 	var content = encodeURIComponent(editor.session.getValue());
 	
 	//alert(content);

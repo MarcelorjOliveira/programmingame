@@ -1,46 +1,77 @@
-insert into Exercise ( name, statement, modelResponse, tests, course, module) values ("Curso","<p>Curso Universitário
+insert into Exercise ( name, statement, modelResponse, tests, course, module) values ("AreaCirculo","<p>Dadas as coordenadas do plano cartesiano para o centro de um círculo (x1, y1) e um ponto no círculo
+circunferência (x2, y2), calcule a área do círculo.</p>
+<p>
+Lembre-se que a fórmula para a área do círculo é <img src='/resources/images/exercises/3/1/1.png'>.</p>
+<p>
+Lembre-se também a fórmula para a distância entre dois pontos é <img src='/resources/images/exercises/3/1/2.png'></p>
+<p>Para este programa em particular, assuma <img src='/resources/images/exercises/3/1/3.png'> = 3,14159.
 </p>
-<p>Há alguns anos atrás, a Universidade de Pinguinhos introduziu um novo sistema flexível de créditos para os alunos ingressantes de cursos de graduação. No novo sistema os alunos podem escolher as disciplinas que desejam cursar em um semestre, com a única restrição de não poderem cursar uma dada disciplina A sem antes terem cursado todas as disciplinas que tiverem sido estabelecidas como pré-requisitos de A. Após alguns semestres o reitor notou que muitos estudantes estavam sendo reprovados em muitas disciplinas, simplesmente porque os estudantes estavam cursando muitas disciplinas por semestre – alguns estudantes chegavam a se matricular em até quinze disciplinas em um semestre. Sendo muito sábio, este ano o reitor introduziu uma regra adicional limitando o número de disciplinas que cada estudante pode cursar por semestre a um certo valor N. Essa regra adicional, no entanto, fez com que os alunos ficassem muito confusos na hora de escolher as disciplinas a serem cursadas em cada semestre.
-É aí que você entra na estória. O reitor resolveu disponibilizar um programa de computador para ajudar os alunos a fazerem suas escolhas de disciplinas, e solicitou sua ajuda. Mais precisamente, o reitor quer que o programa sugira as disciplinas a serem cursadas durante o curso da seguinte forma. A cada disciplina é atribuída uma prioridade. Se mais do que N disciplinas podem ser cursadas em um determinado semestre (obedecendo ao sistema de pré-requisitos), o programa deve sugerir que o aluno matricule-se nas N disciplinas de maior prioridade. Se N ou menos disciplinas podem ser cursadas em um determinado semestre, o programa deve sugerir que o aluno matricule-se em todas as disciplinas disponíveis.
-Portanto, dadas a descrição de pré-requisitos para cada disciplina, a prioridade de cada disciplina, e o número máximo de disciplinas por semestre, seu programa deve calcular o número necessário de semestres para concluir o curso, segundo a sugestão do reitor, e a lista de disciplinas que o aluno deve matricular-se em cada semestre.
-</p><p>Entrada
-</p><p>A entrada contém vários casos de teste. Se uma disciplina não tem qualquer pré-requisito ela é denominada básica; caso contrário ela é denominada avançada. A primeira linha de um caso de teste contém dois inteiros 1 • N • 100 e 1 • M • 10 indicando respectivamente o número de disciplinas avançadas do curso e o número máximo de disciplinas que podem ser cursadas por semestre. Cada uma das N linhas seguintes tem o formato
-</p><p>STR0 K STR1 STR2 ... STRK
-</p><p>onde STR0 é o nome de uma disciplina avançada, 1 • K • 15 é o número de disciplinas que são pré-requisitos de STR0, e STR1, STR2, . . . STRK são os nomes das disciplinas que são pré-requisitos de STR0. O nome de uma disciplina é uma cadeia com no mínimo um e no máximo sete caracteres alfanuméricos maiúsculos (‘A’-‘Z’ e ‘0’-‘9’). Note que as disciplinas básicas são aquelas que aparecem apenas como pré-requisito de alguma disciplina avançada. Para concluir o curso, um aluno deve cursar (e passar!) todas as disciplinas básicas e avançadas. A prioridade das disciplinas é determinada pela ordem em que elas aparecem pela primeira vez na entrada: a que aparece primeiro tem maior prioridade, e a que aparece por último tem a menor prioridade. Não há circularidade nos pré-requisitos (ou seja, se a disciplina B tem como pré-requisito a disciplina A então A não tem B como pré-requisito, direta ou indiretamente). O número total de disciplinas é no máximo igual a 200. O final da entrada é indicado por N = M = 0.
-</p><p>A entrada deve ser lida da entrada padrão.
-</p><p>Saída
-</p><p>Para cada caso de teste da entrada seu programa deve produzir a saída na seguinte forma.
-A primeira linha deve conter a frase ‘Formatura em S semestres’, onde S e o número de semestres necessários para concluir o curso segundo a sugestão do reitor. As S linhas seguintes devem conter a descrição das disciplinas a serem cursadas em cada semestre, um semestre por linha, no formato mostrado no exemplo de saída abaixo. Para cada semestre, a lista das disciplinas deve ser dada em ordem lexicográfica.
-</p><p>Definição: considere as cadeias de caracteres Sa = a1a2...am e Sb = b1b2 . . . bn. Sa precede Sb em ordem lexicográfica se e apenas se Sb é não-vazia e uma das seguintes condições é verdadeira:
-• Sa é uma cadeia vazia;
-• a1 &lt; b1 na ordem ‘0’ &lt; ‘1’ &lt; ‘2’ &lt; . . . &lt; ‘9’ &lt; ‘A’ &lt; ‘B’ &lt; . . . &lt; ‘Z’;
-• a1 = b1 e a cadeia a2a3 . . . am precede a cadeia b2b3 . . . bn.
-</p><p>A saída deve ser escrita na saída padrão.
-</p><p><br> 
-</p><p><br> 
-Apresentado o problema agora vamos a descrição do método de resolução.
-</p>", 
-"int fibonnaci(int termo)
-                {
-                int resultado,anterior,i;
-                if((termo == 1) || (termo == 2))
-                {
-                return 1;
-                }
-                else
-                {
-                resultado = 1;
-                anterior = 1;
-                for(i = 3 ; i <= termo; i++)
-                {
-                resultado = resultado + anterior;
-                anterior = resultado - anterior;
-                }
-                return resultado;
-                }
-                }","CU_ASSERT(1 == fibonnaci(1)); \n 
-		CU_ASSERT(1 == fibonnaci(2)); \n
-                CU_ASSERT(5 == fibonnaci(5)); \n
-                CU_ASSERT(13 == fibonnaci(7)); \n
-                CU_ASSERT(34 == fibonnaci(9)); \n ", 3,1);
+<p>
+-10000 <= x1, y1, x2, y2 <= 10000
+</p>
+<p>
+A saída deverá ser arredondada para três casas decimais.</p> 
+<p>
+exemplo de entrada</p>
+<table border='1'>
+<tr><td>areaCirculo(2,4,4,8)</td><td>62.832</td></tr>
+<tr><td>areaCirculo(1,1,1,2)</td><td>3.142</td></tr>
+<tr><td>areaCirculo(10.25,10.5,100,75.8)</td><td>38701.726</td></tr>
+</table>", 
+"double areaCirculo(double x1,y1,x2,y2){
+double resultado = 3.14159 * ((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
+return resultado;
+}",
+"
+package AreaCirculo;
+
+import org.junit.After;
+
+import org.junit.AfterClass;
+
+import org.junit.Before;
+
+import org.junit.BeforeClass;
+
+import org.junit.Test;
+
+import static org.junit.Assert.*;
+
+import AreaCirculo.AreaCirculo;
+
+public class AreaCirculoTest {
+
+    @Test
+
+    public void testAreaCirculo1() {
+
+	AreaCirculo areaCirculo = new AreaCirculo();
+
+        assertEquals(62.832, areaCirculo.areaCirculo(2,4,4,8) );
+
+    }
+
+    @Test
+
+    public void testAreaCirculo2() {
+
+	AreaCirculo areaCirculo = new AreaCirculo();
+
+       	assertEquals(3.142, areaCirculo.areaCirculo(1,1,1,2));
+
+    }
+
+    @Test
+
+    public void testAreaCirculo3() {
+
+	AreaCirculo areaCirculo = new AreaCirculo();
+
+ 	assertEquals(38701.726, areaCirculo.areaCirculo(10.25,10.5,100,75.8));
+
+    }
+
+}
+"
+, 3,1);
 
