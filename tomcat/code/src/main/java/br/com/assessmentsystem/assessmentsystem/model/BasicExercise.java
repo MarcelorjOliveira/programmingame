@@ -41,7 +41,8 @@ public class BasicExercise extends Exercise {
 		fileDirectory.mkdirs();
 
 		String codeWorked = "package " + name + "; \n "
-				+ " class " + name + 
+				+ " import java.math.BigDecimal;\n" + 
+				"import java.math.RoundingMode; \n  class " + name + 
 				"{\n " + this.code + 
 				"}\n";
 
@@ -85,7 +86,6 @@ public class BasicExercise extends Exercise {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block //e.printStackTrace();
 		}
-
 	}
 
 	public void buildCodeTest() {
@@ -143,6 +143,8 @@ public class BasicExercise extends Exercise {
 			}
 
 			this.solutions = solutionsStudentWrong;
+			
+			System.out.println("Errors exercicicio"+solutions.size());
 			
 			double solutionSize = solutions.size() ; 
 

@@ -38,7 +38,7 @@
 <!-- others css -->
 <link rel="stylesheet" href="/resources/assets/css/typography.css">
 <link rel="stylesheet" href="/resources/assets/css/default-css.css">
-<link rel="stylesheet" href="/resources/assets/css/styles.css?v1">
+<link rel="stylesheet" href="/resources/assets/css/styles.css">
 <link rel="stylesheet" href="/resources/assets/css/responsive.css">
 <link rel="stylesheet" href="/resources/js/jquery-ui-1.12.1/jquery-ui.css">
 
@@ -62,7 +62,7 @@
 		<div class="sidebar-menu">
 			<div class="sidebar-header">
 				<div class="logo" align="left">
-					<a href="index.html"><h4>ProgramminGame</h4></a>
+					<a href="#"><h4>ProgramminGame</h4></a>
 				</div>
 			</div>
 			<div class="main-menu">
