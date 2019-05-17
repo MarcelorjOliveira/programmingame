@@ -7,4 +7,10 @@ values ("areaCirculo2:false",16, "Não passou no segundo teste");
 insert into Solution (test,idExercise, description) 
 values ("areaCirculo3:false",16, "Não passou no terceiro teste");
 
+insert into Solution (test,idExercise, description) 
+values ("pessoaMaisAlta1:false",16, "Não passou no primeiro teste");
+
+insert into Solution (test,idExercise, description) 
+values ("pessoaMaisAlta2:false",16, "Não passou no segundo teste");
+
 

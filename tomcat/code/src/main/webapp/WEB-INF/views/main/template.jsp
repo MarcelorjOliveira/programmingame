@@ -158,9 +158,11 @@
 		</div>
 		<!-- main content area end -->
 		<!-- footer area start-->
+		<!-- 
 		<footer>
-			<div class="footer-area"></div>
+			<div class="footer-area"></div> 
 		</footer>
+		-->
 		<!-- footer area end-->
 	</div>
 

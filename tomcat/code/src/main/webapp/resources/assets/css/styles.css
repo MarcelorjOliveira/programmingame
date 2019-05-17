@@ -61,6 +61,8 @@
     padding-left: 280px;
     -webkit-transition: padding-left 0.3s ease 0s;
     transition: padding-left 0.3s ease 0s;
+	background: #F3F8FB;
+
 }
 
 .sbar_collapsed.page-container {
@@ -2830,4 +2832,8 @@ table.dataTable thead td {
 
 .modal-header {
 	background-color:#ddd;
+}
+
+#problema {
+	text-align: justify;
 }

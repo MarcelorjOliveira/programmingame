@@ -220,7 +220,7 @@ public class ExercisesController {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block //e.printStackTrace();
 		}
-
+		
 		ExerciseDao exerciseDao = new ExerciseDao();
 
 		int id = Integer.parseInt(request.getParameter("exerciseId"));
