@@ -1,0 +1,10 @@
+version: '2'
+
+services:
+    b2wclient:
+        image: client
+        ports:
+            - "80:8080"
+        volumes:
+            - ./tomcat/code/target/Client.war:/usr/local/tomcat/webapps/ROOT.war
+            - ./tomcat/code/target/Client:/usr/local/tomcat/webapps/ROOT
