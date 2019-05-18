@@ -1,3 +1,0 @@
-students/28/testGame/TestTelevisao.java
-students/28/pacote/br/com/programmingame/input/ControleRemoto.java
-students/28/pacote/br/com/programmingame/output/Televisao.java
