@@ -1,0 +1,754 @@
+"id";"name";"statement";"modelResponse";"tests";"code";"course";"module";"link";"useDirectoryTree"
+1;"Soma";"Escreva uma função com o nome soma que tenha dois
+argumentos inteiros e retorne um número inteiro também. Exemplos : soma(5,7) = 12 . soma(2,9) = 11";"int soma(int x, int y)
+ {
+ int z; 
+ z = x + y; 
+ return z; 
+
+                 }
+";"CU_ASSERT(-5 == soma(-2,-3)); 
+ CU_ASSERT(0 == soma(0,0)); 
+ CU_ASSERT(7 == soma(4,3));
+";"";1;1;"";0
+2;"Fatorial";"Escreva uma função com o nome fatorial que tenha um argumento
+que retorne o fatorial desse número. Exemplos : fatorial(4) = 24, fatorial(6) =  720";"int fatorial(int n)
+{
+     int fat, i;
+     fat = 1;
+     for (i = 1; i <= n; i = i + 1)
+     {
+         fat = fat * i;
+     }
+     return fat;
+}";"CU_ASSERT(1 == fatorial(0)); 
+ CU_ASSERT(1 == fatorial(1)); 
+ CU_ASSERT(120 == fatorial(5)); 
+ CU_ASSERT(40320 == fatorial(8)); 
+
+              CU_ASSERT(39916800 == fatorial(11));";"";1;1;"";0
+3;"Fibonnaci";"Escreva uma função com o nome fibonnaci com um parâmetro que 
+retorne o valor do termo na posição do parâmetro. Exemplos : fibonnaci(3) = 2, fibonnaci(8) = 21";"int fibonnaci(int termo)
+                {
+                int resultado,anterior,i;
+                if((termo == 1) || (termo == 2))
+                {
+                return 1;
+                }
+                else
+                {
+                resultado = 1;
+                anterior = 1;
+                for(i = 3 ; i <= termo; i++)
+                {
+                resultado = resultado + anterior;
+                anterior = resultado - anterior;
+                }
+                return resultado;
+                }
+                }";"CU_ASSERT(1 == fibonnaci(1)); 
+ 
+		CU_ASSERT(1 == fibonnaci(2)); 
+
+                CU_ASSERT(5 == fibonnaci(5)); 
+
+                CU_ASSERT(13 == fibonnaci(7)); 
+
+                CU_ASSERT(34 == fibonnaci(9)); 
+ ";"";1;1;"";0
+5;"Produtorio";"Escreva uma função com o nome produtorio com dois
+                   parâmetros que retorne o produto de todos os números entre o  
+                   primeiro e o segundo. Exemplos : produtorio(4,7) = 840, 
+                   produtorio(3,8) = 20160";"int produtorio(int parametro1, int parametro2)
+         {
+           int produto, int contador; 
+           produto = 1;
+           for(contador = parametro1 ; contador <= parametro2 ; contador++)
+            {
+               produto *= contador;
+            }
+            return produto;
+         }";"CU_ASSERT(24 == produtorio(1,4)); 
+ 
+              CU_ASSERT(60 == produtorio(3,5)); 
+
+              CU_ASSERT(504 == produtorio(7,9)); 
+ 
+              CU_ASSERT(2520 == produtorio(3,7)); 
+ 
+              CU_ASSERT(0 == produtorio(0,10)); 
+ ";"";1;1;"";0
+6;"Multiplo";"Escreva uma função com o nome multiplo com dois 
+                argumentos que retorne 0 se um número é múltiplo do outro e
+                 1 senão. Exemplos : multiplo(12,6) = 0 , multiplo(11,5) = 1, 
+                 multiplo(40,5) = 0 , multiplo(10,9) = 1";"int multiplo(int divisor, int dividendo) 
+              {
+        if(divisor % dividendo == 0)
+        {
+        return 0;
+        }
+        else
+        {
+         return 1 ;
+        }
+        }";"CU_ASSERT(0 == multiplo(1,1)); 
+
+                CU_ASSERT(1 == multiplo(1,100)); 
+
+                CU_ASSERT(0 == multiplo(8,4)); 
+
+                CU_ASSERT(1 == multiplo(3,2)); 
+ 
+                CU_ASSERT(0 == multiplo(80,20)); 
+ ";"";1;1;"";0
+7;"Somatorio";"Escreva uma função com o nome somatorio com dois 
+                 parâmetros que retorne a soma de todos os nùmeros entre o 
+                 primeiro e o segundo. Exemplos : somatorio(3,7) = 25 , 
+                 somatorio(2,8) = 35 ";"int somatorio(int parametro1, int parametro2)
+          {
+             int soma=0;
+  	     int contador; 
+             for(contador = parametro1 ; contador <= parametro2 ; contador++)
+             {
+                soma += contador;
+             }
+             return soma;
+          }";"CU_ASSERT(10 == somatorio(1,4)); 
+ 
+                 CU_ASSERT(27 == somatorio(8,10)); 
+ 
+                 CU_ASSERT(44 == somatorio(2,9)); 
+ 
+                 CU_ASSERT(6 == somatorio(0,3)); 
+ 
+                 CU_ASSERT(300 == somatorio(13,27)); 
+ ";"";1;1;"";0
+8;"Lanchonete";"Escreva uma função com o nome lanchonete que tenha 
+                dois argumentos : O primeiro que diga o código do sanduíche.
+                O sanduíche de código 1 custa 2.00, o de código 2, 2.50, 
+                o de código 3, 5.00, o de código 4, 3.50 e o de código 5, 8.50 
+                O segundo parâmetro é a quantidade de sanduíches. Exemplos : 
+                lanchonete(3,5) = 15.00 , lanchonete(4,7) = 14.00";"float lanchonete(int codigo, int quantidade)
+              {
+            if(codigo == 1)
+            {
+            return 2 * quantidade;
+            }
+            if(codigo == 2)                          
+            {
+            return 2.50 * quantidade;
+            }
+            if(codigo == 3)
+            {
+            return 5 * quantidade;
+            }
+            if(codigo == 4)
+            {
+            return 3.50 * quantidade;
+            }
+            if(codigo == 5)
+            {
+            return 8.50 * quantidade;
+            }
+            }";"CU_ASSERT(2.00 == lanchonete(1,1)); 
+
+                 CU_ASSERT(6.00 == lanchonete(1,3)); 
+
+                 CU_ASSERT(2.50 == lanchonete(2,1)); 
+
+                 CU_ASSERT(10.00 == lanchonete(2,4)); 
+
+                 CU_ASSERT(5.00 == lanchonete(3,1)); 
+ 
+                 CU_ASSERT(25.00 == lanchonete(3,5)); 
+
+                 CU_ASSERT(3.50 == lanchonete(4,1)); 
+
+                 CU_ASSERT(7.00 == lanchonete(4,2)); 
+ 
+                 CU_ASSERT(8.50 == lanchonete(5,1)); 
+ 
+                 CU_ASSERT(93.50 == lanchonete(5,11)); 
+ ";"";1;1;"";0
+11;"Conta";"Escreva uma classe Conta que possua os atributos
+ titular e saldo e os métodos saca que retira do saldo e deposita que acrescenta ao saldo";"
+class Conta {
+
+    String titular;
+
+    double saldo;
+
+
+
+    void saca(double quantidade) {
+
+        this.saldo -= quantidade;
+
+    }
+
+    void deposita(double quantidade) {
+
+        this.saldo += quantidade;
+
+    }
+
+}
+";"package Conta;
+
+
+
+import org.junit.After;
+
+import org.junit.AfterClass;
+
+import org.junit.Before;
+
+import org.junit.BeforeClass;
+
+import org.junit.Test;
+
+import static org.junit.Assert.*;
+
+import Conta.Conta;
+
+
+
+public class ContaTest {
+
+
+
+    @Test
+
+    public void testTitularAttribute() {
+
+	Conta conta = new Conta();
+
+
+
+	conta.titular = ""Thiago"";
+
+        assertEquals(""Thiago"", conta.titular);
+
+    }
+
+
+
+    @Test
+
+    public void testSaldoAttribute() {
+
+	Conta conta = new Conta();
+
+
+
+	conta.saldo = 230.00;
+
+        assertEquals(230.00, conta.saldo, 0.0);
+
+    }
+
+
+
+    @Test
+
+    public void testMethodSaca() {
+
+	Conta conta = new Conta();
+
+
+
+	conta.saldo = 200.00;
+
+
+
+	conta.saca(20);
+
+
+
+	assertEquals(180.00, conta.saldo, 0.0);
+
+    }
+
+
+
+    @Test
+
+    public void testMethodDeposita() {
+
+	Conta conta = new Conta();
+
+
+
+	conta.saldo = 100.00;
+
+	conta.deposita(40);
+
+        assertEquals(140.00, conta.saldo, 0.0);
+
+    }
+
+}";"";2;1;"";0
+12;"ContaComEncapsulamento";"Escreva uma classe ContaComEncapsulamento que adicione o modificador de visibilidade privado e getter e setter para cada atributo da classe Conta";"
+class ContaComEncapsulamento {
+
+    private String titular;
+
+    public void setTitular(String titular){
+
+    	this.titular = titular;
+
+    }
+
+    public String getTitular(){
+
+    	return this.titular;
+
+    }
+
+    double saldo;
+
+    public void setSaldo(double saldo){
+
+   	this.saldo = saldo;
+
+    }
+
+    public double getSaldo(){
+
+    	return this.saldo;
+
+    }
+
+
+
+    void saca(double quantidade) {
+
+        this.saldo -= quantidade;
+
+    }
+
+    void deposita(double quantidade) {
+
+        this.saldo += quantidade;
+
+    }
+
+}
+";"package ContaComEncapsulamento;
+
+
+
+import org.junit.After;
+
+import org.junit.AfterClass;
+
+import org.junit.Before;
+
+import org.junit.BeforeClass;
+
+import org.junit.Test;
+
+import static org.junit.Assert.*;
+
+import ContaComEncapsulamento.ContaComEncapsulamento;
+
+
+
+public class ContaComEncapsulamentoTest {
+
+
+
+    @Test
+
+    public void testSetAndGetTitular() {
+
+	ContaComEncapsulamento conta = new ContaComEncapsulamento();
+
+
+
+	conta.setTitular(""Thiago"");
+
+	String titular = conta.getTitular();
+ 
+        assertEquals(""Thiago"", titular );
+
+    }
+
+
+
+    @Test
+
+    public void testSetAndGetSaldo() {
+
+	ContaComEncapsulamento conta = new ContaComEncapsulamento();
+
+
+
+	conta.setSaldo(230.00);
+
+        assertEquals(230.00, conta.getSaldo(), 0.0);
+
+    }
+
+
+
+    @Test
+
+    public void testMethodSaca() {
+
+	ContaComEncapsulamento conta = new ContaComEncapsulamento();
+
+
+
+	conta.setSaldo(200.00);
+
+
+
+	conta.saca(20);
+
+
+
+	assertEquals(180.00, conta.getSaldo(), 0.0);
+
+    }
+
+
+
+    @Test
+
+    public void testMethodDeposita() {
+
+	ContaComEncapsulamento conta = new ContaComEncapsulamento();
+
+
+
+	conta.setSaldo(100.00);
+
+	conta.deposita(40);
+
+        assertEquals(140.00, conta.getSaldo(), 0.0);
+
+    }
+
+}";"";2;2;"";0
+14;"PessoaFisica";"Crie uma classe PessoaFisica que tem um atributo String cpf e desenvolva um método valida com o cpf como parâmetro e garanta que a pessoa não tenha cpf inválido nem nem cpf inicial vazio";"class PessoaFisica {
+
+    private String CPF;
+
+    PessoaFisica(String CPF){
+	valida(CPF);
+    }
+    public boolean valida(String CPF){
+
+    	        // considera-se erro CPF's formados por uma sequencia de numeros iguais
+        if (CPF.equals(""00000000000"") ||
+            CPF.equals(""11111111111"") ||
+            CPF.equals(""22222222222"") || CPF.equals(""33333333333"") ||
+            CPF.equals(""44444444444"") || CPF.equals(""55555555555"") ||
+            CPF.equals(""66666666666"") || CPF.equals(""77777777777"") ||
+            CPF.equals(""88888888888"") || CPF.equals(""99999999999"") ||
+            (CPF.length() != 11))
+            return(false);
+          
+        char dig10, dig11;
+        int sm, i, r, num, peso;
+          
+        // ""try"" - protege o codigo para eventuais erros de conversao de tipo (int)
+        try {
+        // Calculo do 1o. Digito Verificador
+            sm = 0;
+            peso = 10;
+            for (i=0; i<9; i++) {              
+        // converte o i-esimo caractere do CPF em um numero:
+        // por exemplo, transforma o caractere '0' no inteiro 0         
+        // (48 eh a posicao de '0' na tabela ASCII)         
+            num = (int)(CPF.charAt(i) - 48); 
+            sm = sm + (num * peso);
+            peso = peso - 1;
+            }
+          
+            r = 11 - (sm % 11);
+            if ((r == 10) || (r == 11))
+                dig10 = '0';
+            else dig10 = (char)(r + 48); // converte no respectivo caractere numerico
+          
+        // Calculo do 2o. Digito Verificador
+            sm = 0;
+            peso = 11;
+            for(i=0; i<10; i++) {
+            num = (int)(CPF.charAt(i) - 48);
+            sm = sm + (num * peso);
+            peso = peso - 1;
+            }
+          
+            r = 11 - (sm % 11);
+            if ((r == 10) || (r == 11))
+                 dig11 = '0';
+            else dig11 = (char)(r + 48);
+          
+        // Verifica se os digitos calculados conferem com os digitos informados.
+            if ((dig10 == CPF.charAt(9)) && (dig11 == CPF.charAt(10))){
+		this.CPF = CPF;
+               	return(true);
+	    }
+            else return(false);
+                } catch (InputMismatchException erro) {
+                return(false);
+            }
+        }
+    }
+
+    public String getCPF(){
+
+    	return this.CPF;
+
+    }
+
+    
+}
+";"package PessoaFisica;
+
+
+
+import org.junit.After;
+
+import org.junit.AfterClass;
+
+import org.junit.Before;
+
+import org.junit.BeforeClass;
+
+import org.junit.Test;
+
+import static org.junit.Assert.*;
+
+import PessoaFisica.PessoaFisica;
+
+
+
+public class PessoaFisicaTest {
+
+
+
+    @Test
+
+    public void testHipotese1() {
+
+	String parametro = ""31350876461"";
+	PessoaFisica pessoa = new PessoaFisica(parametro);
+
+
+
+	System.out.println(parametro);
+        if(pessoa.valida(parametro) == true)
+        {System.out.println("":true"");
+	}
+	else {
+	System.out.println("":false"");
+	}
+        assertTrue(pessoa.valida(parametro) );
+
+    }
+
+
+
+    @Test
+
+    public void testHipotese2() {
+
+	String parametro = ""00000000000"";
+	PessoaFisica pessoa = new PessoaFisica(parametro);
+
+
+
+	System.out.println(parametro);
+        if(pessoa.valida(parametro) == false)
+        {System.out.println("":true"");
+	}
+	else {
+	System.out.println("":false"");
+	}
+        assertFalse(pessoa.valida(parametro) );
+
+    }
+
+
+
+    @Test
+
+    public void testHipotese3() {
+
+	String parametro = ""11111111111"";
+	PessoaFisica pessoa = new PessoaFisica(parametro);
+
+
+
+	System.out.println(parametro);
+        if(pessoa.valida(parametro) == false)
+        {System.out.println("":true"");
+	}
+	else {
+	System.out.println("":false"");
+	}
+        assertFalse(pessoa.valida(parametro) );
+
+    }
+
+
+        @Test
+
+    public void testHipotese4() {
+
+	String parametro = ""58845688518"";
+	PessoaFisica pessoa = new PessoaFisica(parametro);
+
+
+
+	System.out.println(parametro);
+        if(pessoa.valida(parametro) == true)
+        {System.out.println("":true"");
+	}
+	else {
+	System.out.println("":false"");
+	}
+        assertTrue(pessoa.valida(parametro) );
+
+    }
+
+    @Test
+
+    public void testHipotese5() {
+
+	String parametro = ""44444444444"";
+	PessoaFisica pessoa = new PessoaFisica(parametro);
+
+
+
+	System.out.println(parametro);
+        if(pessoa.valida(parametro) == false)
+        {System.out.println("":true"");
+	}
+	else {
+	System.out.println("":false"");
+	}
+        assertFalse(pessoa.valida(parametro) );
+
+    }
+
+
+}";"";2;3;"";0
+15;"Caneta";"Escreva uma classe Caneta que possua os atributos modelo e tampada e os métodos tampar e destampar dizendo se a caneta está tampada ou não";"
+class Caneta {
+
+    String modelo;
+
+    boolean tampada;
+
+    public boolean tampar(){
+
+    	this.tampada = true;
+
+        return this.tampada;
+
+    }
+
+    public boolean destampar(){
+
+    	this.tampada = false;
+
+        return this.tampada;
+
+    }
+
+}
+";"package Caneta;
+
+
+
+import org.junit.After;
+
+import org.junit.AfterClass;
+
+import org.junit.Before;
+
+import org.junit.BeforeClass;
+
+import org.junit.Test;
+
+import static org.junit.Assert.*;
+
+import Caneta.Caneta;
+
+
+
+public class CanetaTest {
+
+
+
+    @Test
+    public void testModelo() {
+
+	Caneta caneta = new Caneta();
+
+
+
+	caneta.modelo = ""Razor"" ; 
+
+	System.out.println(caneta.modelo);
+
+        if(caneta.modelo.equals(""Razor"") )
+        {System.out.println("":true"");
+	}
+	else {
+	System.out.println("":false"");
+	}
+
+        assertEquals(""Razor"", caneta.modelo );
+
+    }
+
+
+
+    @Test
+    public void testTampar() {
+
+	Caneta caneta = new Caneta();
+
+        System.out.println(""tampar"");
+	if(caneta.tampar() == true)
+        {System.out.println("":true"");
+	}
+	else {
+	System.out.println("":false"");
+	}
+
+
+
+        assertTrue(caneta.tampar());
+
+    }
+
+
+
+    @Test
+    public void testDestampar() {
+
+	Caneta caneta = new Caneta();
+
+	System.out.println(""destampar"");
+        if(caneta.destampar() == false)
+        {System.out.println("":true"");
+	}
+	else {
+	System.out.println("":false"");
+	}
+
+
+
+	assertFalse(caneta.destampar());
+
+    }
+
+
+
+}";"";2;4;"";0

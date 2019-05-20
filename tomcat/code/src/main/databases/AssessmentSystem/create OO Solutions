@@ -1,0 +1,43 @@
+insert into Solution (test,idExercise, description) 
+values ("31350876461:false",14, "O cálculo do cpf está incorreto");
+
+insert into Solution (test,idExercise, description) 
+values ("11111111111:false",14, "O cálculo do cpf não pode permitir números iguais como 11111111111");
+
+insert into Solution (test,idExercise, description)
+values ("00000000000:false",14, "O cálculo do cpf não pode permitir números iguais como 00000000000")
+
+insert into Solution (test,idExercise, description) 
+values ("58845688518:false",14, "O cálculo do cpf está inválido");
+
+insert into Solution (test,idExercise, description)
+values ("44444444444:false",14, "O cálculo do cpf não pode permitir números iguais como 44444444444");
+
+insert into Solution (test,idExercise, description) 
+values ("Razor:false",15, "Está faltando o atributo modelo");
+
+insert into Solution (test,idExercise, description) 
+values ("tampar:false",15, "O método tampar não está tampando a caneta");
+
+insert into Solution (test,idExercise, description)
+values ("destampar:false",15, "O método destampar não está destampando a caneta");
+
+update Solution set idExercise = 16 where idExercise = 11;
+update Solution set idExercise = 18 where idExercise = 12;
+update Solution set idExercise = 19 where idExercise = 14;
+update Solution set idExercise = 20 where idExercise = 15;
+
+
+insert into Solution (test,idExercise, description) 
+values ("1:false",14, "A televisão não está trocando de canal");
+
+insert into Solution (test,idExercise, description) 
+values ("10:false",14, "A televisão não muda de canal");
+
+insert into Solution (test,idExercise, description) 
+values ("aumentarCanal:false",14, "O controle não aumenta o canal");
+
+insert into Solution (test,idExercise, description) 
+values ("diminuirCanal:false",14, "O controle não diminui o canal");
+
+

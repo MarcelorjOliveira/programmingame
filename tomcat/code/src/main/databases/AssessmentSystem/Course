@@ -1,0 +1,12 @@
+INSERT INTO `halyeninstance`.`Course`
+(`name`)
+VALUES
+('Basic Exercises');
+
+INSERT INTO `halyeninstance`.`Course`
+(`name`)
+VALUES
+('OO Programming Java');
+
+insert into Course (name) values ('Maratona de Programação');
+
