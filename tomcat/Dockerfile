@@ -1,6 +1,4 @@
-FROM tomcat:7.0
-
-ADD config/server.xml /usr/local/tomcat/webapps/config
+FROM tomcat:7.0.94-jre8
 
 ADD config/ini /usr/local/tomcat/ini
 
@@ -13,5 +11,3 @@ RUN ln -s /usr/local/java/jdk-7u80-linux-x64/jdk1.7.0_80/bin/javac /usr/bin/java
 RUN ln -s /usr/local/java/jdk-7u80-linux-x64/jdk1.7.0_80/bin/java /usr/bin/javaExercises
 
 RUN rm -rf /usr/local/tomcat/webapps/ROOT
-
-

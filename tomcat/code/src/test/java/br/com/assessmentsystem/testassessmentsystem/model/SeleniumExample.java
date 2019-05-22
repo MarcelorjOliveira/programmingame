@@ -8,8 +8,10 @@ import org.openqa.selenium.interactions.Actions;
 
 public class SeleniumExample {
     private SeleniumConfig config;
-    private String url = "http://localhost/";
- 
+
+    private String url = "http://www.programmingame.com";
+
+//private String url = "http://localhost/";
     public SeleniumExample() {
         config = new SeleniumConfig();
         config.getDriver().get(url);
