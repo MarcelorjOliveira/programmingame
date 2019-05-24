@@ -1,4 +1,4 @@
-FROM tomcat:7.0
+FROM tomcat:7.0.94-jre8
 
 RUN mkdir -p /usr/local/java
 

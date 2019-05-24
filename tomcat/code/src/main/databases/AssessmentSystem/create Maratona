@@ -134,7 +134,7 @@ Roger
 ", 
 '	public String pessoaMaisAlta(String parametro) {
 		// Read input
-		String[] linhas = parametro.split("\n");
+		String[] linhas = parametro.split("\\n");
 		int n = Integer.parseInt(linhas[0]);
 		Student[] students = new Student[n];
 		for (int i = 0; i < n; i++) {
@@ -150,7 +150,7 @@ Roger
 		Arrays.sort(students);
 		String result = "";
 		for (int i = 0; i < 5 && i < students.length; i++)
-			result += students[i].name + "\n";
+			result += students[i].name + "\\n";
 		return result;
 	}
 	
@@ -206,30 +206,35 @@ public class PessoaMaisAltaTest {
 
     public void testPessoaMaisAlta1() {
 
-		String parametro = "12\n"
-				+"Jim 1.45 m\n"
-				+"Sally 187 cm\n"
-				+"Joey 1064 mm\n"
-				+"Roel 15.23 dm\n"
-				+"Karl 134 cm\n"
-				+"Melanie 18.9 dm\n"
-				+"Jill 1.54 m\n"
-				+"Sam 133 cm\n"
-				+"Joel 1877 mm\n"
-				+"Roger 17.83 dm\n"
-				+"Karen 178 cm\n"
+		String parametro = "12\\n"
+				+"Jim 1.45 m\\n"
+				+"Sally 187 cm\\n"
+				+"Joey 1064 mm\\n"
+				+"Roel 15.23 dm\\n"
+				+"Karl 134 cm\\n"
+				+"Melanie 18.9 dm\\n"
+				+"Jill 1.54 m\\n"
+				+"Sam 133 cm\\n"
+				+"Joel 1877 mm\\n"
+				+"Roger 17.83 dm\\n"
+				+"Karen 178 cm\\n"
 				+"Marnie 17.9 dm";
 
 	PessoaMaisAlta pessoaMaisAlta = new PessoaMaisAlta();
 
-	String resultado = "Melanie"
-+"Joel\n"
-+"Sally\n"
-+"Marnie\n"
-+"Roger"; 
+	String resultado = "Melanie\\n"
++"Joel\\n"
++"Sally\\n"
++"Marnie\\n"
++"Roger\\n"; 
+
+	String resultadoFuncao = pessoaMaisAlta.pessoaMaisAlta(parametro);
+
+//System.out.println("Resultado:"+resultado);
+//System.out.println("ResultadoFuncao:"+resultadoFuncao);
 
 	System.out.println("pessoaMaisAlta1");
-	if(pessoaMaisAlta.pessoaMaisAlta(parametro) == resultado ){
+	if(resultadoFuncao.equals(resultado) ){
 		System.out.println(":true");
 	} else {
 		System.out.println(":false");	
@@ -242,27 +247,32 @@ public class PessoaMaisAltaTest {
 
     public void testPessoaMaisAlta2() {
 
-		String parametro = "9\n"
-				+"Sara 1.70 m\n"
-				+"Marcelo 169 cm\n"
-				+"Barack 1568 mm\n"
-				+"Bill 19.23 dm\n"
-				+"Morgan 134 cm\n"
-				+"James 18.9 dm\n"
-				+"Cath 1.54 m\n"
-				+"Amanda 133 cm\n"
+		String parametro = "9\\n"
+				+"Sara 1.70 m\\n"
+				+"Marcelo 169 cm\\n"
+				+"Barack 1568 mm\\n"
+				+"Bill 19.23 dm\\n"
+				+"Morgan 134 cm\\n"
+				+"James 18.9 dm\\n"
+				+"Cath 1.54 m\\n"
+				+"Amanda 133 cm\\n"
 				+"Bianca 1877 mm";
 
 	PessoaMaisAlta pessoaMaisAlta = new PessoaMaisAlta();
 
-	String resultado = "Bill\n
-+"James\n"
-+"Bianca\n"
-+"Sara\n"
-+"Marcelo";
+	String resultado = "Bill\\n"
++"James\\n"
++"Bianca\\n"
++"Sara\\n"
++"Marcelo\\n";
 
-	System.out.println("pessoaMaisAlta1");
-	if(pessoaMaisAlta.pessoaMaisAlta(parametro) == resultado ){
+	String resultadoFuncao = pessoaMaisAlta.pessoaMaisAlta(parametro);
+
+//System.out.println("Resultado:"+resultado);
+//System.out.println("ResultadoFuncao:"+resultadoFuncao);
+
+	System.out.println("pessoaMaisAlta2");
+	if(resultadoFuncao.equals(resultado) ){
 		System.out.println(":true");
 	} else {
 		System.out.println(":false");	
@@ -272,7 +282,7 @@ public class PessoaMaisAltaTest {
     }
 
 }
-'
+' 
 , 3,2);
 
 

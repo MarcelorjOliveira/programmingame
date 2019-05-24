@@ -9,7 +9,7 @@ import org.openqa.selenium.interactions.Actions;
 public class SeleniumExample {
     private SeleniumConfig config;
 
-    private String url = "http://www.programmingame.com";
+    private String url = "http://127.0.0.1/";
 
 //private String url = "http://localhost/";
     public SeleniumExample() {
